@@ -1,0 +1,154 @@
+THE CRONULLA DENTISTS — FRESH REPO SETUP
+Packaged 17 September 2026  (rebuild — GA4 inlined, notify email added)
+========================================
+
+Everything in this folder IS the repo. package.json must end up at the top
+level of the new repo, not inside another folder.
+
+You can delete this file once you are set up. It is notes, not code.
+
+
+STEP 1 — CREATE THE REPO AND GET THE FILES IN
+---------------------------------------------
+On github.com: New repository. Consider making it PRIVATE this time. The old
+one was public, which is why the SMTP2GO key has always had to live in Vercel
+rather than in the code.
+
+Then either:
+
+  Terminal (most reliable)
+    git clone <new repo url>
+    (copy the CONTENTS of this folder into the clone)
+    git add -A && git commit -m "Initial commit" && git push
+
+  Or drag and drop
+    Add file -> Upload files, drag the CONTENTS in. There are roughly 390
+    files, over GitHub's 100-per-upload limit, so you will need a few passes.
+    Do public/images/ in its own pass. This is why the terminal route is
+    easier for a first import.
+
+
+STEP 2 — CONNECT VERCEL  (read the warning, this cost us a whole round)
+-----------------------------------------------------------------------
+Vercel -> Add New -> Project -> IMPORT the repo from GitHub. Framework preset:
+Next.js, everything else default.
+
+IMPORT IT, do not upload files to Vercel directly. A project created by
+uploading has no Git connection, so commits never trigger a build and every
+file you push appears to do nothing.
+
+PRIVATE REPO PERMISSION. Private repos are fine on Vercel, including on the
+free plan, but Vercel reaches GitHub through the Vercel GitHub App and that
+app has to be granted access to THIS repo. If it is not, Vercel never sees
+your pushes, no deployment is created, and the site sits on an old build while
+you upload file after file wondering why nothing changes.
+
+  GitHub -> your Settings -> Applications -> Vercel -> Configure
+  If repository access is "Only select repositories", add this repo,
+  or switch to "All repositories".
+
+HOW TO TELL IT IS WORKING: after any commit, a NEW entry should appear in
+Vercel -> Deployments within a few seconds, timestamped to match. If no new
+entry appears, the connection is the problem, not the code.
+
+
+STEP 3 — ENVIRONMENT VARIABLES  (do this BEFORE the first successful build)
+--------------------------------------------------------------------------
+Settings -> Environment Variables. Tick Production for all four.
+
+  SMTP2GO_API_KEY
+  <the key is NOT written here on purpose — it is in the chat message that
+   came with this zip, and in the SMTP2GO dashboard under Settings -> API
+   Keys. Never put it in a file that goes into the repo.>
+
+  SMTP2GO_SENDER
+  website@thecronulladentists.com.au
+
+  SMILEOX_INTAKE_EMAIL
+  the-cronulla-dentists+94b89dce-1b48-4cff-b239-d600e865094b@intake.smileox.com.au
+
+  NOTIFY_EMAIL
+  reception@thecronulladentists.com.au, rowayne@gyaclients.com
+
+NOTIFY_EMAIL takes SEVERAL addresses, separated by commas. Everyone on it gets
+a readable copy of every submission from both forms. Add or remove people by
+editing this one value. The other three are what get leads into SmileOx.
+
+PASTE CAREFULLY. Click into the value box and type or paste with no trailing
+space or line break. An invisible newline on the end of the API key will break
+it while looking completely correct on screen. This is a real possibility for
+what went wrong on the old project.
+
+Variables are baked into a deployment AT BUILD TIME. If a build already ran
+before you saved these, Deployments -> top one -> "..." -> Redeploy.
+
+
+STEP 4 — DOMAIN
+---------------
+The new project will not serve www.thecronulladentists.com.au until you move
+it. Settings -> Domains on the NEW project, add both:
+
+  thecronulladentists.com.au
+  www.thecronulladentists.com.au
+
+Vercel will tell you it is in use by the old project and offer to move it.
+Remove it from the OLD project first if it does not offer.
+
+Until this is done, test on the *.vercel.app URL the new project gives you.
+The forms work there too.
+
+
+STEP 5 — CHECK THE FORMS
+------------------------
+Once deployed, open this in a browser:
+
+  <your-site>/api/relay-check/?token=cronulla-check-2026
+
+It prints what the live function can actually see for each variable (and
+flags stray whitespace), then does one real send through SMTP2GO and shows
+SMTP2GO's reply word for word. That tells us immediately whether the problem
+was ever in this project or is at the SMTP2GO end.
+
+Then submit a real test on /register/ and /contact/ and confirm both land in
+SmileOx.
+
+DELETE app/api/relay-check/route.ts once the forms are confirmed working. It
+is a diagnostic, not part of the site.
+
+
+WHAT IS IN THIS BUILD
+---------------------
+- Google Analytics 4, G-XDZHHZLVYL, on every page. The ID lives in
+  site.config.ts as ga4Id, and the tag itself is written directly into
+  app/layout.tsx rather than imported from another file. That is deliberate:
+  the earlier version imported it from components/Gtm.tsx, and if those two
+  files ever went up in separate uploads the build failed, which left Vercel
+  serving the previous deployment. Verified: renders on 30 of 30 pages,
+  exactly once per page.
+- Image cache-busting, so replacing a photo at the same filename is no longer
+  served from Vercel's old cache
+- Mobile menu fix: tapping the page you are already on no longer leaves the
+  menu stuck open with the page scroll locked
+- Bigger tap targets for phone and email in the mobile menu
+- All the photo swaps to date
+- Better relay logging: the Vercel function log now names SMTP2GO's own reason
+  for a rejected send instead of staying silent
+- NOTIFY_EMAIL accepts a list, so reception and rowayne@gyaclients.com both
+  get a readable copy of every submission
+- The temporary relay-check diagnostic from step 5
+
+Verified before packaging: 30 pages build clean, copy check passes, full
+audit of 28 pages across three screen widths with 0 issues, and the contact
+endpoint tested end to end returning the exact payload SmileOx expects.
+
+
+STILL OUTSTANDING
+-----------------
+- bookingUrl in site.config.ts, needed when the site flips to open
+- Facebook and Instagram URLs for the schema
+- AHPRA registration numbers for Dr Ram and Dr Lorna
+- Exact opening day, which restores the countdown on the home page
+- Submit the sitemap in Google Search Console
+- Two photos worth a look before launch, both noted in IMAGES-NEEDED.md:
+  Mouth & Night Guards shows clear aligners rather than guards, and Wisdom
+  Teeth uses an OK gesture that reads as a patient endorsing the result
