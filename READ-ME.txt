@@ -1,0 +1,14 @@
+ONE FILE — app/layout.tsx
+=========================
+
+Upload so it lands at  app/layout.tsx  in the repo, replacing the one there.
+Nothing else goes with it.
+
+The Google Analytics tag is written directly inside this file. It needs only
+SITE_CONFIG.ga4Id, which is already in your repo at site.config.ts line 56.
+No other file has to be up to date for it to work.
+
+After it deploys: view source on any page and search for G-XDZHHZLVYL, or open
+GA4 -> Reports -> Realtime and load the site on your phone.
+
+Verified: builds clean, tag renders on 30 of 30 pages, exactly once per page.
