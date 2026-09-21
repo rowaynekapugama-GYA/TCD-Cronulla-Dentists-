@@ -8,6 +8,7 @@ import { Nodes, Sections, sectionVisible } from '@/components/Inline';
 import { Hours } from '@/components/Hours';
 import { MapEmbed } from '@/components/MapEmbed';
 import { CtaButtons, CtaBand } from '@/components/Cta';
+import { bookingOpen } from '@/lib/cta';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
@@ -117,8 +118,15 @@ export default function Contact() {
             <p className="lede" style={{ marginTop: '1rem' }}>
               {isOpen()
                 ? 'Use the form for general enquiries. For appointments, booking online or calling is quicker.'
-                : `We open ${openingWhen()}. Use the form for general enquiries, or register your interest to be first in line for appointments.`}
+                : bookingOpen()
+                  ? `We open ${openingWhen()}. For appointments, booking online or calling is quickest. Use the form for anything else and we will reply.`
+                  : `We open ${openingWhen()}. Use the form for general enquiries, or register your interest to be first in line for appointments.`}
             </p>
+            {bookingOpen() && (
+              <div style={{ marginTop: '1.6rem' }}>
+                <CtaButtons />
+              </div>
+            )}
           </div>
           <div className="glass-card">
             <ContactForm />

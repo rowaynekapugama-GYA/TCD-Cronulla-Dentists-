@@ -5,7 +5,7 @@ import { getPage } from '@/lib/content';
 import { pageMetadata } from '@/lib/meta';
 import type { HomePage, Card } from '@/content/types';
 import { SITE_CONFIG, featureOn, isOpen, fullAddress, openingWhen } from '@/site.config';
-import { heroBadge, primaryCta } from '@/lib/cta';
+import { heroBadge, primaryCta, bookingOpen } from '@/lib/cta';
 import { Inline } from '@/components/Inline';
 import HeroSlider from '@/components/HeroSlider';
 import Countdown from '@/components/Countdown';
@@ -87,6 +87,15 @@ export default function Home() {
               </p>
               <CtaButtons />
             </div>
+          ) : bookingOpen() ? (
+            <div>
+              <span className="card-tag">Opening {SITE_CONFIG.openingDateLabel}</span>
+              <h2>Book your first visit</h2>
+              <p>
+                You can already book for our first weeks. {SITE_CONFIG.hooks.lateMonday}. {SITE_CONFIG.hooks.earlyFriday}. Nervous patients are always welcome.
+              </p>
+              <CtaButtons />
+            </div>
           ) : (
             <EoiForm compact openingLabel={openingWhen().replace(' 2026', '')} />
           )}
@@ -125,19 +134,6 @@ export default function Home() {
       {/* BLOCK 5: CTA band */}
       <CtaBand text={page.ctaBand} />
 
-      {/* BLOCK 6: team image */}
-      <section className="section section-white" style={{ paddingBottom: 0 }} aria-label="Our team">
-        <div className="wrap">
-          <div className="photo photo-wide reveal">
-            <Image src="/images/team.jpg" alt="The team behind The Cronulla Dentists" fill sizes="(max-width: 1160px) 100vw, 1160px" style={{ objectFit: 'cover' }} />
-            <div className="photo-caption">
-              <span className="photo-caption-label">{SITE_CONFIG.name} by {SITE_CONFIG.sister.name}</span>
-              <span className="photo-caption-sub">{SITE_CONFIG.sister.heritage}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* BLOCK 7: welcome */}
       <section className="section section-white" aria-labelledby="welcome">
         <div className="split">
@@ -156,7 +152,7 @@ export default function Home() {
             <CtaButtons />
           </div>
           <div className="photo reveal">
-            <Image src="/images/welcome.jpg" alt="A young patient in the chair with her parent beside her, talking with the dentist before a check-up" fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
+            <Image src="/images/welcome.jpg" alt="Aerial view of Cronulla Beach and the Cronulla peninsula, a short walk from the practice on Cronulla Street" fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
           </div>
         </div>
       </section>
@@ -269,7 +265,7 @@ export default function Home() {
       <section className="section section-white" aria-labelledby="note">
         <div className="split">
           <div className="photo reveal">
-            <Image src="/images/team.jpg" alt="The team at The Cronulla Dentists" fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
+            <Image src="/images/dentists.jpg" alt="Dr Ram Nathwani and Dr Lorna Gladwin, the dentists at The Cronulla Dentists" fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
           </div>
           <div>
             <span className="kicker">{page.note.h3}</span>

@@ -32,9 +32,13 @@ export function e164(phone: string) {
 }
 
 export async function relay(subject: string, lead: Record<string, string>, source: string): Promise<RelayResult> {
-  const apiKey = process.env.SMTP2GO_API_KEY;
-  const sender = process.env.SMTP2GO_SENDER || 'website@thecronulladentists.com.au';
-  const intake = process.env.SMILEOX_INTAKE_EMAIL;
+  // Trim every value. A key pasted into a hosting dashboard very often picks up
+  // a trailing newline, which is invisible on screen and rejected by the API —
+  // diagnosed exactly that on 17 Sep 2026, where the key measured 38 characters
+  // instead of 36. Trimming here means the same paste cannot break it again.
+  const apiKey = process.env.SMTP2GO_API_KEY?.trim();
+  const sender = process.env.SMTP2GO_SENDER?.trim() || 'website@thecronulladentists.com.au';
+  const intake = process.env.SMILEOX_INTAKE_EMAIL?.trim();
 
   /**
    * NOTIFY_EMAIL takes one address or several, separated by commas or
@@ -63,6 +67,8 @@ export async function relay(subject: string, lead: Record<string, string>, sourc
     try {
       res = await fetch('https://api.smtp2go.com/v3/email/send', {
         method: 'POST',
+        // A lead must never be answered from a cache.
+        cache: 'no-store',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });

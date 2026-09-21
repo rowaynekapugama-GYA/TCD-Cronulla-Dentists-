@@ -10,6 +10,13 @@
   },
   "slides": [
     {
+      "headline": "NO-GAP KIDS’ CHECK-UP & CLEAN",
+      "sub": "For eligible children under the Child Dental Benefits Schedule. Bulk billed, so there is nothing to pay on the day.",
+      "linkText": "Check eligibility",
+      "linkHref": "/kids-gap-free-dentistry-cronulla/",
+      "gate": "cdbs"
+    },
+    {
       "headline": "FAMILY DENTISTRY",
       "sub": "First teeth, teenage check-ups, and everything after. One practice for the whole household."
     },

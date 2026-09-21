@@ -17,6 +17,8 @@ interface Props {
   aboutCards: FeaturedService[];
   serviceCount: number;
   cta: { label: string; short: string; href: string; external: boolean };
+  /** Secondary action shown beside the CTA once bookings are open. */
+  call?: { label: string; short: string; href: string } | null;
   phone: string;
   telHref: string;
   email: string;
@@ -25,7 +27,7 @@ interface Props {
 
 type OpenMenu = 'services' | 'about' | null;
 
-export default function Nav({ primary, groups, featured, aboutCards, serviceCount, cta, phone, telHref, email, address }: Props) {
+export default function Nav({ primary, groups, featured, aboutCards, serviceCount, cta, call, phone, telHref, email, address }: Props) {
   const [open, setOpen] = useState<OpenMenu>(null);
   const [drawer, setDrawer] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -138,6 +140,13 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
             );
           })}
 
+          {call && (
+            <a href={call.href} className="nav-call" onMouseEnter={closeSoon} aria-label={call.label}>
+              <I name="phone" />
+              <span>{phone}</span>
+            </a>
+          )}
+
           {cta.external ? (
             <a href={cta.href} className="nav-cta" target="_blank" rel="noopener" onMouseEnter={closeSoon}>
               <span className="cta-long">{cta.label}</span>
@@ -230,6 +239,11 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
           <Link href={cta.href} className="mnav-cta">
             {cta.label}
           </Link>
+        )}
+        {call && (
+          <a href={call.href} className="mnav-cta mnav-call">
+            {call.label}
+          </a>
         )}
         <p className="mnav-meta">
           {address}

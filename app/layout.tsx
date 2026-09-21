@@ -10,7 +10,8 @@ import Script from 'next/script';
 import { GtmBody, GtmHead } from '@/components/Gtm';
 import { dentistSchema } from '@/lib/schema';
 import { primaryNav, aboutFeatured, serviceGroups, featuredServices, serviceCount } from '@/lib/nav';
-import { primaryCta } from '@/lib/cta';
+import { primaryCta, secondaryCta } from '@/lib/cta';
+import MobileBar from '@/components/MobileBar';
 import { OG_IMAGE } from '@/lib/meta';
 
 // Self-hosted Poppins + Inter (Google Fonts files) via next/font → display:swap, zero third-party requests, no CLS.
@@ -83,6 +84,7 @@ gtag('config', '${SITE_CONFIG.ga4Id}');`}
           aboutCards={aboutFeatured()}
           serviceCount={serviceCount()}
           cta={primaryCta()}
+          call={secondaryCta()}
           phone={SITE_CONFIG.phone}
           telHref={telHref()}
           email={SITE_CONFIG.email}
@@ -94,6 +96,7 @@ gtag('config', '${SITE_CONFIG.ga4Id}');`}
         </noscript>
         <main id="main">{children}</main>
         <Footer />
+        <MobileBar />
         <Reveal />
         <JsonLd data={dentistSchema()} />
         {isOpen() ? null : <span className="sr-only">Opening {SITE_CONFIG.openingDateLabel}</span>}

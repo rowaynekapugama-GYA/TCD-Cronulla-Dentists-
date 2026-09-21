@@ -76,9 +76,9 @@ function AboutPage({ page, crumbs }: { page: ProsePage; crumbs: { name: string; 
             <CtaButtons />
           </div>
           <div className="photo reveal">
-            <Image src="/images/team.jpg" alt="The Caringbah Dentists team" fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
+            <Image src="/images/dentists.jpg" alt="Dr Ram Nathwani and Dr Lorna Gladwin, the dentists at The Cronulla Dentists" fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
             <div className="photo-caption">
-              <span className="photo-caption-label">The team you already know</span>
+              <span className="photo-caption-label">Dr Ram Nathwani &amp; Dr Lorna Gladwin</span>
               <span className="photo-caption-sub">{isOpen() ? 'Now open on Cronulla Street' : `Opening ${SITE_CONFIG.openingDateLabel}`}</span>
             </div>
           </div>

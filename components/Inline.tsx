@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { SITE_CONFIG, telHref, featureOn } from '@/site.config';
-import { ctaHref } from '@/lib/cta';
+import { ctaHref, bookingOpen } from '@/lib/cta';
 import type { Inline as InlineText, Node, Section } from '@/content/types';
 
 /**
@@ -71,6 +71,7 @@ export function plain(text: InlineText): string {
 
 export function nodeVisible(n: Node): boolean {
   if (n.gate && !featureOn(n.gate)) return false;
+  if (n.type === 'p' && n.mode === 'booking') return bookingOpen();
   if (n.type === 'p' && n.mode && n.mode !== SITE_CONFIG.mode) return false;
   return true;
 }

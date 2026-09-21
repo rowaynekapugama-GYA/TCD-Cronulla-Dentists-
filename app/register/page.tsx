@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Image from '@/components/Img';
-import { SITE_CONFIG, isOpen, fullAddress, openingWhen } from '@/site.config';
+import { SITE_CONFIG, fullAddress, openingWhen } from '@/site.config';
 import { canonical } from '@/lib/content';
 import { OG_IMAGE } from '@/lib/meta';
 import EoiForm from '@/components/EoiForm';
@@ -10,6 +10,7 @@ import { I } from '@/components/Icons';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
+import { bookingOpen } from '@/lib/cta';
 
 export const metadata: Metadata = {
   title: `Register Your Interest | The Cronulla Dentists | Opening ${SITE_CONFIG.openingDateLabel}`,
@@ -33,8 +34,9 @@ const crumbs = [
 ];
 
 export default function Register() {
-  // Once open, the EOI page retires: send people to the booking path.
-  if (isOpen()) redirect(SITE_CONFIG.bookingUrl || '/contact/');
+  // Once bookings open, the EOI page retires. Old links to /register/ (ads, QR
+  // codes, the previous live page) land on the booking system instead of a dead end.
+  if (bookingOpen()) redirect(SITE_CONFIG.bookingUrl || '/contact/');
 
   return (
     <>

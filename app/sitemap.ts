@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { livePages, canonical } from '@/lib/content';
-import { isOpen } from '@/site.config';
+import { bookingOpen } from '@/lib/cta';
 
 /** Live pages only — gated pages are excluded while their flag is OFF. */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -13,6 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: (p.meta.route === '/' ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
       priority: p.meta.route === '/' ? 1 : p.kind === 'service' ? 0.8 : 0.6,
     }));
-  if (!isOpen()) pages.push({ url: canonical('/register/'), lastModified: now, changeFrequency: 'weekly', priority: 0.9 });
+  if (!bookingOpen()) pages.push({ url: canonical('/register/'), lastModified: now, changeFrequency: 'weekly', priority: 0.9 });
   return pages;
 }

@@ -47,7 +47,12 @@ export const SITE_CONFIG = {
   },
 
   // ---- TODO values (swap when supplied) ----
-  bookingUrl: '', // TODO: practice management online booking link
+  /**
+   * Core Practice online booking. Setting this is what switches every CTA on the
+   * site from "Register your interest" to "Book online" + "Call" — see lib/cta.ts.
+   * Clear it to go back to the expression-of-interest flow.
+   */
+  bookingUrl: 'https://www.corepractice.is/practices/tcd/the-cronulla-dentists#/',
   gtmId: '', // Optional GTM container ID (GTM-XXXXXXX). Separate from ga4Id below — leave blank unless a container is actually set up.
   /**
    * GA4 measurement ID. This is the gtag.js property, not a Tag Manager
@@ -141,7 +146,7 @@ export const SITE_CONFIG = {
     /** Emergency Dentistry page + all emergency language. OFF until client confirms. */
     emergency: false,
     /** Kids' Gap Free page + CDBS blocks on Children's/Finances. OFF until bulk billing confirmed in writing. */
-    cdbs: false,
+    cdbs: true, // ON 21 Sep 2026: client asked for the no-gap kids check-up & clean as the lead hero slide.
     /** Zip & Afterpay sections on /payment-plans/. OFF until confirmed. */
     zipAfterpay: false,
   },

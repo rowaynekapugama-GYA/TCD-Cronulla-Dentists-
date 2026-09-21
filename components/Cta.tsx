@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { primaryCta, secondaryCta } from '@/lib/cta';
+import { primaryCta, secondaryCta, bookingOpen } from '@/lib/cta';
 import { SITE_CONFIG, isOpen, fullAddress } from '@/site.config';
 import { Inline } from '@/components/Inline';
 import type { Inline as InlineText } from '@/content/types';
@@ -41,6 +41,10 @@ export function CtaBand({ text, address = false }: { text?: InlineText; address?
         <h2>
           <Inline text={text} />
         </h2>
+      ) : bookingOpen() ? (
+        <h2>
+          Opening <span>{SITE_CONFIG.openingDateLabel}</span>. Book online now or give us a call.
+        </h2>
       ) : (
         <h2>
           Opening <span>{SITE_CONFIG.openingDateLabel}</span>. Register your interest for priority booking.
@@ -64,6 +68,10 @@ export function ClosingCta({ text }: { text: InlineText }) {
         {isOpen() ? (
           <p className="hook" style={{ margin: '0 auto 1.6rem' }}>
             <Inline text={text} />
+          </p>
+        ) : bookingOpen() ? (
+          <p className="hook" style={{ margin: '0 auto 1.6rem' }}>
+            Doors open {SITE_CONFIG.openingDateLabel}, and we are already taking bookings. Book online or call {SITE_CONFIG.phone}.
           </p>
         ) : (
           <p className="hook" style={{ margin: '0 auto 1.6rem' }}>

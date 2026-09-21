@@ -113,12 +113,25 @@ h3.h-display{font-size:clamp(1.25rem,2vw,1.55rem);letter-spacing:-0.01em}
   box-shadow:0 6px 18px rgba(38,184,219,0.35);transition:background 0.3s, transform 0.3s;
 }
 .nav-links a.nav-cta:hover{background:var(--navy);color:var(--white);transform:translateY(-2px)}
+/* Phone number beside the Book online pill (desktop only — hidden with the other
+   plain links at ≤1060px, where the fixed bottom bar carries Call instead). */
+.nav-links a.nav-call{gap:0.45rem;font-weight:600;letter-spacing:0.02em}
+.nav-links a.nav-call svg{width:15px;height:15px;stroke:var(--cyan);flex-shrink:0}
+.nav-links a.nav-call:hover{color:var(--cyan)}
 /* the CTA carries a long and a short label; only one shows at a time */
 .cta-short{display:none}
 
 /* ---- dropdown panel (image cards) ---- */
+/* Positioned with left:0 rather than left:50% + translateX(-50%). The panel is
+   already the full width of the nav, so the result is identical — but the open
+   animation (fadeUp) sets `transform`, and an animation's transform REPLACES the
+   element's own for its whole duration. With the translateX version the panel
+   dropped its centring for 0.26s on every open, rendering ~570px to the right,
+   then snapped back when the animation ended: the "menu moves when you click
+   it" bug. With no transform of its own there is nothing for the animation to
+   override. */
 .mega{
-  position:absolute;top:calc(100% + 0.7rem);left:50%;transform:translateX(-50%);
+  position:absolute;top:calc(100% + 0.7rem);left:0;
   width:100%;
   background:rgba(255,255,255,0.97);
   backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
@@ -180,6 +193,7 @@ h3.h-display{font-size:clamp(1.25rem,2vw,1.55rem);letter-spacing:-0.01em}
 .mnav .mnav-head{font-size:0.66rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);font-weight:600;font-family:var(--display);margin:1.6rem 0 0.3rem}
 .mnav .mnav-sub a{font-size:0.92rem;font-weight:400;padding:0.5rem 0 0.5rem 0.8rem;border:0}
 .mnav .mnav-cta{margin-top:1.6rem;text-align:center;background:var(--cyan);color:#fff;border-radius:100px;padding:1rem;border:0;letter-spacing:0.06em;text-transform:uppercase;font-size:0.85rem;font-weight:600}
+.mnav .mnav-call{margin-top:0.7rem;background:transparent;color:var(--navy);border:1.5px solid rgba(14,53,102,0.2)}
 .mnav .mnav-meta{margin-top:1.6rem;font-size:0.84rem;color:var(--grey-text);line-height:1.9}
 /* Phone and email are the two things a visitor most often opens this menu to
    tap. As plain inline links they were 19px tall — technically exempt from the
@@ -246,7 +260,7 @@ h3.h-display{font-size:clamp(1.25rem,2vw,1.55rem);letter-spacing:-0.01em}
   text-transform:uppercase;color:var(--white);background:var(--navy);border-radius:100px;padding:0.4rem 1.1rem;margin-bottom:1.3rem;
 }
 .glass-card h2{font-family:var(--display);font-weight:600;font-size:1.75rem;line-height:1.2;letter-spacing:-0.01em;color:var(--navy);margin-bottom:0.6rem}
-.glass-card>p{font-size:0.93rem;color:var(--grey-text);margin-bottom:1.7rem}
+.glass-card>p,.glass-card>div>p{font-size:0.93rem;color:var(--grey-text);margin-bottom:1.7rem}
 
 /* ============ FORMS ============ */
 .field{margin-bottom:0.85rem}
@@ -680,3 +694,30 @@ a.practice:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(14,53,10
 .map-links a{color:var(--navy);text-decoration:none}
 .map-links a:hover{color:var(--cyan)}
 .map-links span{color:var(--grey)}
+
+/* ============ MOBILE BOOK / CALL BAR ============
+   Always on screen in the mobile layout (same ≤1060px breakpoint as the burger
+   nav). The body gets matching bottom padding so the bar never sits over the last
+   lines of the footer. Sits below the drawer (999) and nav (1000), so opening the
+   menu covers it rather than the other way round — the drawer has its own
+   Book online and Call buttons. */
+.mobile-bar{display:none}
+@media (max-width:1060px){
+  .mobile-bar{
+    display:grid;grid-template-columns:1fr 1.35fr;gap:0.6rem;
+    position:fixed;left:0;right:0;bottom:0;z-index:998;
+    padding:0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+    border-top:1px solid rgba(14,53,102,0.07);box-shadow:0 -8px 28px rgba(14,53,102,0.10);
+  }
+  .mobile-bar a{
+    display:flex;align-items:center;justify-content:center;gap:0.5rem;min-height:48px;border-radius:100px;
+    font-family:var(--display);font-weight:600;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;
+    text-decoration:none;white-space:nowrap;
+  }
+  .mobile-bar .mb-call{background:var(--white);color:var(--navy);border:1.5px solid rgba(14,53,102,0.18)}
+  .mobile-bar .mb-call svg{width:17px;height:17px;stroke:var(--cyan)}
+  .mobile-bar .mb-book{background:var(--cyan);color:var(--white);box-shadow:0 6px 18px rgba(38,184,219,0.32)}
+  body:has(.mobile-bar){padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+}

@@ -10,7 +10,9 @@ import type { FeatureFlag, SiteMode } from '@/site.config';
 export type Inline = string;
 
 export type Node =
-  | { type: 'p'; text: Inline; gate?: FeatureFlag; mode?: SiteMode }
+  /** mode: show only in that site mode. 'booking': show once online booking is live
+   *  (which can be before the practice itself opens — see bookingOpen() in lib/cta.ts). */
+  | { type: 'p'; text: Inline; gate?: FeatureFlag; mode?: SiteMode | 'booking' }
   | { type: 'ul'; items: Inline[]; gate?: FeatureFlag }
   | { type: 'h4'; text: Inline; gate?: FeatureFlag }
   | { type: 'table'; rows: string[][]; gate?: FeatureFlag };

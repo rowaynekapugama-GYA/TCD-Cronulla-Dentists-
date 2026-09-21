@@ -86,7 +86,7 @@ export function primaryNav(): NavLink[] {
 export function aboutFeatured(): FeaturedService[] {
   const cards: FeaturedService[] = [
     { label: 'The practice', href: '/about/', image: '/images/menu-practice.jpg', alt: '' },
-    { label: 'Meet the team', href: '/about/#meet-the-team', image: '/images/team.jpg', alt: '' },
+    { label: 'Meet the team', href: '/about/#meet-the-team', image: '/images/dentists.jpg', alt: '' },
     { label: 'Nervous patients', href: '/dental-anxiety-cronulla/', image: '/images/services/dental-anxiety-cronulla.jpg', alt: '' },
     { label: 'Parking & getting here', href: '/parking-information/', image: '/images/cronulla-beach.jpg', alt: '' },
   ];

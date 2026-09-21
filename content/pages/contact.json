@@ -92,7 +92,7 @@
         {
           "type": "p",
           "text": "**Online.** Book at a time that suits you, at any hour.",
-          "mode": "open"
+          "mode": "booking"
         },
         {
           "type": "p",

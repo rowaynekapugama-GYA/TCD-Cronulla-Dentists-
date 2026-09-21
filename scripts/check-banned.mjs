@@ -10,6 +10,18 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = path.resolve('.next/server/app');
+
+/**
+ * "gap free", "no gap" and "bulk bill" were banned outright until the practice
+ * confirmed it bulk bills under the Child Dental Benefits Schedule — the same
+ * condition the `cdbs` feature flag waits on. They are now tied to that flag:
+ * allowed while it is ON (the kids no-gap offer is live), banned again the moment
+ * it is switched OFF, so a stray "no gap" can never survive the offer being
+ * withdrawn. Read from the source file because this script cannot import TS.
+ */
+const CDBS_ON = /cdbs:\s*true/.test(fs.readFileSync(path.resolve('site.config.ts'), 'utf8'));
+const CDBS_PHRASES = ['bulk bill', 'gap free', 'no gap'];
+
 const BANNED = [
   'emergency',
   'same-day',
@@ -18,9 +30,7 @@ const BANNED = [
   'after hours',
   'open now',
   'walk-in',
-  'bulk bill',
-  'gap free',
-  'no gap',
+  ...(CDBS_ON ? [] : CDBS_PHRASES),
   'bupa',
   'hcf',
   'medibank',
@@ -79,5 +89,6 @@ for (const f of files) {
     }
   }
 }
+if (CDBS_ON) console.log('(CDBS flag is ON: "gap free", "no gap" and "bulk bill" are permitted.)');
 console.log(`\nScanned ${files.length} rendered pages. ${failures ? failures + ' banned-phrase hit(s).' : 'No banned phrases found. ✓'}`);
 process.exit(failures ? 1 : 0);
