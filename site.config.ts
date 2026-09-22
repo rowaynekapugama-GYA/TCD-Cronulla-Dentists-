@@ -125,7 +125,7 @@ export const SITE_CONFIG = {
   // ---- Hours (exact) ----
   hours: [
     { day: 'Monday', open: '09:00', close: '19:00', label: '9:00am to 7:00pm' },
-    { day: 'Tuesday', open: null, close: null, label: 'Closed' },
+    { day: 'Tuesday', open: '08:00', close: '17:00', label: '8:00am to 5:00pm' }, // open from 22 Sep 2026 client update
     { day: 'Wednesday', open: '08:00', close: '17:00', label: '8:00am to 5:00pm' },
     { day: 'Thursday', open: '08:00', close: '17:00', label: '8:00am to 5:00pm' },
     { day: 'Friday', open: '07:00', close: '15:00', label: '7:00am to 3:00pm' },
