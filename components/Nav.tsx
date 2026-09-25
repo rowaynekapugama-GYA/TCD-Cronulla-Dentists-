@@ -95,7 +95,7 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
           {cards.map((c) => (
             <Link key={c.href} href={c.href} className="mega-card" tabIndex={open === menu ? 0 : -1}>
               <span className="mega-thumb">
-                <Image src={c.image} alt="" fill sizes="(max-width: 1200px) 30vw, 200px" style={{ objectFit: 'cover' }} />
+                <Image src={c.image} alt={c.alt} fill sizes="(max-width: 1200px) 30vw, 200px" style={{ objectFit: 'cover' }} />
               </span>
               <span className="mega-label">{c.label}</span>
             </Link>

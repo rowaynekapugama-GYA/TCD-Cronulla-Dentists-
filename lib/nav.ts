@@ -1,6 +1,7 @@
 import { navServicePages, getPage, isLive, allPages } from '@/lib/content';
 import type { ServicePage, ServicesHubPage } from '@/content/types';
 import { featureOn } from '@/site.config';
+import { imageAlt } from '@/lib/image-alt';
 
 export interface NavLink {
   label: string;
@@ -85,10 +86,10 @@ export function primaryNav(): NavLink[] {
 /** Image cards in the About panel — same treatment as the Services panel. */
 export function aboutFeatured(): FeaturedService[] {
   const cards: FeaturedService[] = [
-    { label: 'The practice', href: '/about/', image: '/images/menu-practice.jpg', alt: '' },
-    { label: 'Meet the team', href: '/about/#meet-the-team', image: '/images/dentists.jpg', alt: '' },
-    { label: 'Nervous patients', href: '/dental-anxiety-cronulla/', image: '/images/services/dental-anxiety-cronulla.jpg', alt: '' },
-    { label: 'Parking & getting here', href: '/parking-information/', image: '/images/cronulla-beach.jpg', alt: '' },
+    { label: 'The practice', href: '/about/', image: '/images/menu-practice.jpg', alt: imageAlt('/images/menu-practice.jpg') },
+    { label: 'Meet the team', href: '/about/#meet-the-team', image: '/images/dentists.jpg', alt: imageAlt('/images/dentists.jpg') },
+    { label: 'Nervous patients', href: '/dental-anxiety-cronulla/', image: '/images/services/dental-anxiety-cronulla.jpg', alt: imageAlt('/images/services/dental-anxiety-cronulla.jpg') },
+    { label: 'Parking & getting here', href: '/parking-information/', image: '/images/cronulla-beach.jpg', alt: imageAlt('/images/cronulla-beach.jpg') },
   ];
   // Drop anything whose page is gated off.
   return cards.filter((c) => allPages().some((p) => isLive(p.meta) && c.href.split('#')[0] === p.meta.route));

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Image from '@/components/Img';
+import { imageAlt } from '@/lib/image-alt';
 import { SITE_CONFIG, fullAddress, openingWhen } from '@/site.config';
 import { canonical } from '@/lib/content';
 import { OG_IMAGE } from '@/lib/meta';
@@ -55,7 +56,7 @@ export default function Register() {
             {SITE_CONFIG.name} by <strong>{SITE_CONFIG.sister.name}</strong>, bringing the same gentle, respectful dentistry the Shire has trusted for over 50 years to {SITE_CONFIG.address.street}.
           </p>
           <div className="hero-photo">
-            <Image src="/images/cronulla-beach.jpg" alt="Cronulla Beach" width={2400} height={1350} priority />
+            <Image src="/images/cronulla-beach.jpg" alt={imageAlt('/images/cronulla-beach.jpg')} width={2400} height={1350} priority />
             <span className="hero-photo-tag">{fullAddress()}</span>
           </div>
           <Countdown iso={SITE_CONFIG.openingDateTime} />

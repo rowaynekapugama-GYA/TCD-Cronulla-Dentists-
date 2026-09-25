@@ -6,6 +6,7 @@ import { Inline, Nodes, Sections, slugify } from '@/components/Inline';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema, personSchemas } from '@/lib/schema';
+import { imageAlt } from '@/lib/image-alt';
 import { CtaButtons, CtaBand } from '@/components/Cta';
 import { I } from '@/components/Icons';
 import { MapEmbed } from '@/components/MapEmbed';
@@ -76,7 +77,7 @@ function AboutPage({ page, crumbs }: { page: ProsePage; crumbs: { name: string; 
             <CtaButtons />
           </div>
           <div className="photo reveal">
-            <Image src="/images/dentists.jpg" alt="Dr Ram Nathwani and Dr Lorna Gladwin, the dentists at The Cronulla Dentists" fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
+            <Image src="/images/dentists.jpg" alt={imageAlt('/images/dentists.jpg')} fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
             <div className="photo-caption">
               <span className="photo-caption-label">Dr Ram Nathwani &amp; Dr Lorna Gladwin</span>
               <span className="photo-caption-sub">{isOpen() ? 'Now open on Cronulla Street' : `Opening ${SITE_CONFIG.openingDateLabel}`}</span>

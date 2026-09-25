@@ -15,6 +15,7 @@ import { I, type IconName } from '@/components/Icons';
 import ProviderCards from '@/components/ProviderCards';
 import { providerCards } from '@/lib/providers';
 import { img } from '@/lib/img';
+import { imageAlt } from '@/lib/image-alt';
 
 const page = getPage<HomePage>('home');
 
@@ -52,7 +53,7 @@ export default function Home() {
           </span>
           <HeroSlider slides={slides}>
             <div className="hero-photo">
-              <Image src="/images/cronulla-beach.jpg" alt="Cronulla Beach" width={2400} height={1350} priority />
+              <Image src="/images/cronulla-beach.jpg" alt={imageAlt('/images/cronulla-beach.jpg')} width={2400} height={1350} priority />
               <span className="hero-photo-tag">{fullAddress()}</span>
             </div>
             {!open && <Countdown iso={SITE_CONFIG.openingDateTime} />}
@@ -193,7 +194,7 @@ export default function Home() {
         <div className="grid grid-3">
           {page.treatments.tiles.map((t) => (
             <Link key={t.title} href={t.href || '/services/'} className="photo photo-tile reveal">
-              <Image src={`/images/tiles/${slug(t.href)}.jpg`} alt="" fill sizes="(max-width: 640px) 100vw, 33vw" style={{ objectFit: 'cover' }} />
+              <Image src={`/images/tiles/${slug(t.href)}.jpg`} alt={imageAlt(`/images/tiles/${slug(t.href)}.jpg`)} fill sizes="(max-width: 640px) 100vw, 33vw" style={{ objectFit: 'cover' }} />
               <div className="photo-caption">
                 <span className="photo-caption-label">{t.title}</span>
                 <span className="photo-caption-sub" style={{ textTransform: 'none', letterSpacing: 0, fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', fontWeight: 400 }}>
@@ -265,7 +266,7 @@ export default function Home() {
       <section className="section section-white" aria-labelledby="note">
         <div className="split">
           <div className="photo reveal">
-            <Image src="/images/dentists.jpg" alt="Dr Ram Nathwani and Dr Lorna Gladwin, the dentists at The Cronulla Dentists" fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
+            <Image src="/images/dentists.jpg" alt={imageAlt('/images/dentists.jpg')} fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
           </div>
           <div>
             <span className="kicker">{page.note.h3}</span>

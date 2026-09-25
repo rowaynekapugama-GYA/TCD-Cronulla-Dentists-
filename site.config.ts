@@ -89,6 +89,8 @@ export const SITE_CONFIG = {
       familyName: 'Nathwani',
       title: 'Principal Dentist', // per the SEO strategy docs (Doc 03)
       image: '/images/team-ram.jpg',
+      /** Public profile linked from the Person schema on /about/ (SEO brief v1.1). */
+      sameAs: 'https://www.linkedin.com/in/ram-nathwani-3601a627b/',
       // The three fields below are drawn from the approved /about/ bio copy.
       alumniOf: 'University of Sydney',
       credentials: ['Bachelor of Dental Surgery, University of Sydney (2009)', 'Graduate Diploma in Implant Surgery, Charles Sturt University (2018)'],
@@ -102,6 +104,7 @@ export const SITE_CONFIG = {
       familyName: 'Gladwin',
       title: 'Principal Dentist', // per the SEO strategy docs (Doc 03)
       image: '/images/team-lorna.jpg',
+      sameAs: '', // none supplied — omitted from the schema when empty
       alumniOf: 'University of Sheffield',
       credentials: ['Bachelor of Dental Surgery, University of Sheffield (2019)'],
       knowsAbout: ['Restorative Dentistry', 'Endodontics', 'Root Canal Therapy', 'General Dentistry', 'Dental Anxiety Care'],

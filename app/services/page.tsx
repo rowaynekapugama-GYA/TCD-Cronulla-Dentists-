@@ -6,6 +6,7 @@ import { pageMetadata } from '@/lib/meta';
 import type { ServicesHubPage, Card } from '@/content/types';
 import { featureOn } from '@/site.config';
 import { allServiceLinks } from '@/lib/nav';
+import { imageAlt } from '@/lib/image-alt';
 import { Inline } from '@/components/Inline';
 import { CtaButtons, CtaBand } from '@/components/Cta';
 import { Breadcrumb } from '@/components/Breadcrumb';
@@ -77,7 +78,7 @@ export default function Services() {
         <div className="grid grid-3">
           {featured.map((f) => (
             <Link key={f.title} href={f.href || '/services/'} className="photo photo-tile reveal">
-              <Image src={`/images/tiles/${(f.href || '').replace(/\//g, '')}.jpg`} alt="" fill sizes="(max-width: 640px) 100vw, 33vw" style={{ objectFit: 'cover' }} />
+              <Image src={`/images/tiles/${(f.href || '').replace(/\//g, '')}.jpg`} alt={imageAlt(`/images/tiles/${(f.href || '').replace(/\//g, '')}.jpg`)} fill sizes="(max-width: 640px) 100vw, 33vw" style={{ objectFit: 'cover' }} />
               <div className="photo-caption">
                 <span className="photo-caption-label">{f.title}</span>
                 <span className="photo-caption-sub">Read more</span>

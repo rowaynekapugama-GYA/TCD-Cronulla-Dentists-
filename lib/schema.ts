@@ -3,6 +3,7 @@ import type { ServicePage, Section } from '@/content/types';
 import { plain } from '@/components/Inline';
 import { canonical } from '@/lib/content';
 import { featureOn } from '@/site.config';
+import { img } from '@/lib/img';
 
 const DAY = { Monday: 'Monday', Tuesday: 'Tuesday', Wednesday: 'Wednesday', Thursday: 'Thursday', Friday: 'Friday', Saturday: 'Saturday', Sunday: 'Sunday' };
 
@@ -91,29 +92,30 @@ function slugId(name: string) {
 }
 
 /**
- * Person schema for both practitioners, emitted on /about/ (SEO Doc 03,
- * Schema 2). Fields come from the approved bio copy via site.config — no
- * placeholders: AHPRA registration numbers are added to `identifier` only when
- * the client supplies them (Doc 03 pitfall 6 bans "[TO CONFIRM]" in production).
+ * Person schema for both practitioners, emitted on /about/ only.
+ *
+ * The shape and values are exactly those in the client's SEO Implementation
+ * Brief v1.1 (24 Sep 2026): name, url, image, sameAs (Dr Ram only), jobTitle
+ * and worksFor. `image` is the same Next.js image-optimiser URL the About page
+ * renders, built from the content-hashed file path so it always resolves.
+ * The earlier, richer Person block (alumniOf, credentials, knowsAbout) was
+ * replaced rather than duplicated, per the brief.
  */
 export function personSchemas() {
   if (!SITE_CONFIG.teamNamesConfirmed) return [];
-  return SITE_CONFIG.team.map((t) => ({
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': `${SITE_CONFIG.domain}/about/#${slugId(t.fullName)}`,
-    name: t.fullName,
-    givenName: t.givenName,
-    familyName: t.familyName,
-    honorificPrefix: 'Dr',
-    jobTitle: t.title,
-    worksFor: { '@id': ORG_ID },
-    url: `${SITE_CONFIG.domain}/about/#meet-the-team`,
-    image: `${SITE_CONFIG.domain}${t.image}`,
-    alumniOf: { '@type': 'EducationalOrganization', name: t.alumniOf },
-    hasCredential: t.credentials.map((name) => ({ '@type': 'EducationalOccupationalCredential', credentialCategory: 'degree', name })),
-    knowsAbout: t.knowsAbout,
-  }));
+  return SITE_CONFIG.team.map((t) => {
+    const person: Record<string, unknown> = {
+      '@context': 'https://schema.org/',
+      '@type': 'Person',
+      name: t.fullName,
+      url: `${SITE_CONFIG.domain}/about/#meet-the-team`,
+      image: `${SITE_CONFIG.domain}/_next/image/?url=${encodeURIComponent(img(t.image))}&w=256&q=75`,
+    };
+    if (t.sameAs) person.sameAs = t.sameAs;
+    person.jobTitle = t.title;
+    person.worksFor = { '@type': 'Organization', name: SITE_CONFIG.name };
+    return person;
+  });
 }
 
 export function breadcrumbSchema(items: { name: string; href: string }[]) {
