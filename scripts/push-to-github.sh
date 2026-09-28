@@ -74,7 +74,7 @@ fresh_clone() {
 # ------------------------------------------------------------------ stage
 stage() {
   local src_in="${1:-}"
-  [ -n "$src_in" ] || die "tell me where the new version is, e.g. bash push-to-github.sh stage ~/Downloads/cronulla-CMS-v2.2.1-FULL-REPO.zip"
+  [ -n "$src_in" ] || die "tell me where the new version is, e.g. bash push-to-github.sh stage ~/Downloads/cronulla-CMS-v2.2.2-FULL-REPO.zip"
   [ -e "$src_in" ] || die "${src_in} does not exist."
 
   # 1. Unpack the zip (or use the folder) and find the folder that holds package.json.

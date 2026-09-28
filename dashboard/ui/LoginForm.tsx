@@ -15,6 +15,8 @@ export function LoginForm() {
         setBusy(true);
         setError('');
         try {
+          // Sign-in rescue: only does anything when these match ADMIN_EMAIL / ADMIN_PASSWORD in Vercel.
+          await fetch('/api/ensure-admin', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email.trim(), password }) }).catch(() => undefined);
           const res = await fetch('/api/users/login', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email.trim(), password }) });
           if (!res.ok) {
             const d = await res.json().catch(() => ({}));

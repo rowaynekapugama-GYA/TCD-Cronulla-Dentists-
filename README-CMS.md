@@ -36,8 +36,8 @@ only ever touches the `cms` branch until you run `promote`.
 
 ```bash
 cd ~/Downloads
-unzip -o cronulla-CMS-v2.2.1-FULL-REPO.zip
-bash cronulla-cms/scripts/push-to-github.sh stage cronulla-CMS-v2.2.1-FULL-REPO.zip
+unzip -o cronulla-CMS-v2.2.2-FULL-REPO.zip
+bash cronulla-cms/scripts/push-to-github.sh stage cronulla-CMS-v2.2.2-FULL-REPO.zip
 ```
 
 First run asks for the repo address (GitHub > the repo > green **Code** button > HTTPS). If git asks you
@@ -110,7 +110,12 @@ After adding variables: Deployments > latest > **Redeploy** (variables are baked
    Redirects and the Tracking tab in Site Settings.
 
 Password resets: there is no outbound email from the dashboard, so if someone forgets their password an
-admin opens Users and clicks **Set new password**. (Adding `@payloadcms/email-nodemailer` with
+admin opens Users and clicks **Set new password**.
+
+Locked out completely (no admin can sign in): in Vercel add `ADMIN_EMAIL` (for example
+`rowayne@gyaclients.com`) and `ADMIN_PASSWORD` (12+ characters, Secret) for Production, redeploy, then sign
+in at /admin with exactly those two. That account is created or reset to that password, made admin and
+unlocked. Then delete `ADMIN_PASSWORD` in Vercel and click Publish website (a redeploy) to switch it off. (Adding `@payloadcms/email-nodemailer` with
 SMTP2GO's SMTP credentials would turn on the "Forgot password" link; not needed for launch.)
 
 ## Step 6: check staging, then go live

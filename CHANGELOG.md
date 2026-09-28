@@ -1,5 +1,12 @@
 # Changelog: The Cronulla Dentists website
 
+## 2.2.2 – 28 September 2026: sign-in rescue
+
+- If the dashboard password is lost (the dashboard cannot email a reset link yet): set ADMIN_EMAIL and
+  ADMIN_PASSWORD in Vercel (Production, Secret), redeploy, and sign in at /admin with exactly those. The
+  account is created, or its password reset, made admin and unlocked. Delete ADMIN_PASSWORD afterwards and
+  redeploy (or Publish website) to switch it off. app/api/ensure-admin/route.ts, same as Footscray.
+
 ## 2.2.1 – 28 September 2026: first-account screen closed
 
 - The dashboard login no longer shows "No accounts yet, create the first admin at /cms" (Rowayne, after
