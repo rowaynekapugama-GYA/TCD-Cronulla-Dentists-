@@ -39,6 +39,16 @@ export interface PageMeta {
   /** Whole page renders only when this flag is ON. */
   gate?: FeatureFlag;
   primaryKeyword?: string;
+  /** Canonical URL override set in the dashboard. Defaults to the page's own address. */
+  canonical?: string;
+  /** Per-page share image set in the dashboard. Falls back to the default OG card. */
+  ogImage?: { src: string; width?: number; height?: number; alt?: string };
+}
+
+/** A photo: a file under /public/images or a URL from the media library. */
+export interface ImageRef {
+  src: string;
+  alt: string;
 }
 
 export interface Card {
@@ -49,6 +59,8 @@ export interface Card {
   /** Rendered instead of this card when its gate is OFF. */
   fallback?: Card;
   icon?: string;
+  /** Optional photo chosen in the dashboard (tiles). Templates fall back to their built-in file. */
+  image?: ImageRef;
 }
 
 export interface ServicePage {
@@ -87,6 +99,10 @@ export interface HomePage {
   iconBlocks: Card[];
   paymentBand: { h2: string; lines: Inline[]; logo: string };
   note: { h2: string; h3: string; paragraphs: Inline[]; signoff: string };
+  /** Dashboard photo overrides; the template's built-in photos are used when unset. */
+  heroImage?: ImageRef;
+  welcomeImage?: ImageRef;
+  dentistsImage?: ImageRef;
 }
 
 export interface ProsePage {
@@ -96,6 +112,8 @@ export interface ProsePage {
   intro?: Inline[];
   sections: Section[];
   breadcrumb?: string[];
+  /** About page: dashboard override for the photo of the dentists. */
+  dentistsImage?: ImageRef;
 }
 
 export interface ServicesHubPage {

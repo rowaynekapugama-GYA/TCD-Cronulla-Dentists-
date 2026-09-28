@@ -1,6 +1,8 @@
 # The Cronulla Dentists — website
 
-Next.js 14 (App Router, TypeScript, plain CSS) · static-generated · deploys to Vercel with zero config.
+Next.js 15 (App Router, TypeScript, plain CSS) · static-generated · Payload CMS client dashboard at /admin.
+
+**Dashboard, deployment and environment variables: see [README-CMS.md](README-CMS.md). The practice's guide is [docs/HOW-TO-UPDATE.md](docs/HOW-TO-UPDATE.md).**
 
 Direct visual extension of the approved EOI landing page: same tokens, glass cards, cyan-gradient buttons, countdown.
 
@@ -16,39 +18,15 @@ Which cards appear: `FEATURED` (Services) and `aboutFeatured()` (About), both in
 npm install
 cp .env.example .env.local   # optional — forms log to the console until SMTP2GO is configured
 npm run dev                  # http://localhost:3000
-npm run build                # production build (also runs type-checking)
+npm run build                # production build: migrations → pull dashboard content → next build
 npm run qa:banned            # definition-of-done check over the rendered HTML (run after build)
-
-npm run build:static         # → static-site/     plain HTML for Vercel drag-and-drop
-npm run preview:offline      # → preview-offline/ same pages, browsable from disk
 ```
 
-## Three ways to deploy / review
+The `build:static` / `preview:offline` targets were retired with the dashboard (2.0).
 
-| | What it is | Use it for |
-|---|---|---|
-| **This repo** | Next.js source | **Recommended.** Import to Vercel from Git; it builds on every push, forms run as serverless functions, images optimised, flags flipped by editing `site.config.ts` and pushing. |
-| **`static-site/`** | 28 plain `.html` files + `_next/` assets + `/api` functions | **Hosting only — do not open from disk.** Its asset paths are absolute (`/_next/…`), correct for a server and broken over `file://`, where the page falls back to unstyled links. (Every page carries a guard script that says so if you try.) Vercel → Deploy without a Git repository, framework **Other**, no build command, output dir `./`. Clean URLs. Mode and flags are baked in — re-run `npm run build:static` after any change. |
-| **`preview-offline/`** | Same pages, paths rewritten to be relative | **Looking at the design — this is the one to double-click.** Open `_all-pages.html` (index of all 28 pages) or `index.html`. No server needed. Do not host this one: its links end in `index.html`, which would give you duplicate URLs. |
+## Deploying
 
-### Where to edit what
-
-| To change | Edit |
-|---|---|
-| Wording on any page | `content/source/website-copy.md`, then `node scripts/ingest-copy.mjs` |
-| Colours, type, spacing, buttons, cards | `app/globals.css` (all tokens at the top) |
-| Phone, email, hours, opening date, feature flags, mode | `site.config.ts` |
-| Home page layout / section order | `app/page.tsx` |
-| Every service page's layout | `components/ServiceTemplate.tsx` |
-| The "in detail" sections on service pages | `components/DetailSections.tsx` |
-| About, parking, privacy layout | `components/ProseTemplate.tsx` |
-| Services hub / contact | `app/services/page.tsx`, `app/contact/page.tsx` |
-| Nav and footer | `components/Nav.tsx`, `components/Footer.tsx`, `lib/nav.ts` |
-| Which cards show in the Services / About dropdowns | `FEATURED` and `aboutFeatured()` in `lib/nav.ts` |
-| Photos | drop files into `public/images/…` per `IMAGES-NEEDED.md` |
-| Logo, favicon, share card | replace `assets-source/logo-primary-original.jpg`, then `python3 scripts/make-brand-assets.py` |
-
-After editing, re-run `npm run build:static && npm run preview:offline` to refresh both folders.
+The repo deploys to Vercel from Git. Full steps, environment variables and the dashboard setup are in [README-CMS.md](README-CMS.md).
 
 ## Where things live
 

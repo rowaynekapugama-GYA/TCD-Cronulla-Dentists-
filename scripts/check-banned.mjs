@@ -19,7 +19,13 @@ const ROOT = path.resolve('.next/server/app');
  * it is switched OFF, so a stray "no gap" can never survive the offer being
  * withdrawn. Read from the source file because this script cannot import TS.
  */
-const CDBS_ON = /cdbs:\s*true/.test(fs.readFileSync(path.resolve('site.config.ts'), 'utf8'));
+const CDBS_ON = (() => {
+  try {
+    const over = JSON.parse(fs.readFileSync(path.resolve('content/site-settings.json'), 'utf8'));
+    if (typeof over?.features?.cdbs === 'boolean') return over.features.cdbs; // dashboard setting wins
+  } catch {}
+  return /cdbs:\s*true/.test(fs.readFileSync(path.resolve('site.config.ts'), 'utf8'));
+})();
 const CDBS_PHRASES = ['bulk bill', 'gap free', 'no gap'];
 
 const BANNED = [

@@ -45,3 +45,23 @@ export function ctaHref() {
 export function heroBadge() {
   return isOpen() ? 'Now taking new patients' : `Opening ${SITE_CONFIG.openingDateLabel}`;
 }
+
+export type BookingLocation = { name: string; address: string; url: string; note: string };
+
+/**
+ * The practices offered in the "Book online" pop-up, with blank links and notes
+ * filled in. Returns an empty list (no pop-up) unless the chooser is switched on
+ * and at least two locations have a booking link.
+ */
+export function bookingLocations(): BookingLocation[] {
+  if (!SITE_CONFIG.bookingChooser || !bookingOpen()) return [];
+  const list = (SITE_CONFIG.bookingLocations || [])
+    .map((l, i) => ({
+      name: l.name,
+      address: l.address || '',
+      url: l.url || (i === 0 ? SITE_CONFIG.bookingUrl : ''),
+      note: l.note || (i === 0 && !isOpen() ? `Opening ${SITE_CONFIG.openingDateLabel}` : ''),
+    }))
+    .filter((l) => l.name && l.url);
+  return list.length > 1 ? list : [];
+}

@@ -77,7 +77,7 @@ function AboutPage({ page, crumbs }: { page: ProsePage; crumbs: { name: string; 
             <CtaButtons />
           </div>
           <div className="photo reveal">
-            <Image src="/images/dentists.jpg" alt={imageAlt('/images/dentists.jpg')} fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
+            <Image src={page.dentistsImage?.src || '/images/dentists.jpg'} alt={page.dentistsImage?.alt ?? imageAlt('/images/dentists.jpg')} fill sizes="(max-width: 980px) 100vw, 45vw" style={{ objectFit: 'cover' }} />
             <div className="photo-caption">
               <span className="photo-caption-label">Dr Ram Nathwani &amp; Dr Lorna Gladwin</span>
               <span className="photo-caption-sub">{isOpen() ? 'Now open on Cronulla Street' : `Opening ${SITE_CONFIG.openingDateLabel}`}</span>
@@ -162,13 +162,23 @@ function AboutPage({ page, crumbs }: { page: ProsePage; crumbs: { name: string; 
 }
 
 function TeamSection({ section }: { section: Section }) {
-  // Copy shape: **Name** paragraph followed by bio paragraphs.
-  const members: { name: string; bio: string[] }[] = [];
-  for (const n of section.nodes) {
-    if (n.type !== 'p') continue;
-    const m = n.text.match(/^\*\*(.+)\*\*$/);
-    if (m) members.push({ name: m[1], bio: [] });
-    else members[members.length - 1]?.bio.push(n.text);
+  /**
+   * Two sources, same output. Once the dashboard has bios (Team collection,
+   * pulled into SITE_CONFIG.team at build time) the cards come from there, so
+   * reception can edit, reorder or hide a practitioner. Until then, the About
+   * page copy is used: a **Name** paragraph followed by bio paragraphs.
+   */
+  const fromConfig = SITE_CONFIG.team.filter((t) => !t.hidden && t.bio && t.bio.length);
+  const members: { name: string; bio: string[] }[] = fromConfig.length
+    ? fromConfig.map((t) => ({ name: t.fullName, bio: t.bio }))
+    : [];
+  if (!members.length) {
+    for (const n of section.nodes) {
+      if (n.type !== 'p') continue;
+      const m = n.text.match(/^\*\*(.+)\*\*$/);
+      if (m) members.push({ name: m[1], bio: [] });
+      else members[members.length - 1]?.bio.push(n.text);
+    }
   }
   return (
     <section className="section section-white" id={slugify(section.heading)} aria-labelledby="team-heading">

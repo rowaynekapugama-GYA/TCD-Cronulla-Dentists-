@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { relay, isEmail, e164 } from '@/lib/relay';
+import { logEnquiry } from '@/lib/enquiries';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,12 +23,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Please complete all fields.' }, { status: 400 });
   }
 
-  const result = await relay(
-    `New EOI: ${first_name} ${last_name}`,
-    // Field names follow the SmileOx intake schema (camelCase, phoneNumber in E.164).
-    { firstName: first_name, lastName: last_name, email, phoneNumber: e164(phone), interest, consent: 'yes', source: 'thecronulladentists.com.au /register' },
-    'Founding patient expression of interest — The Cronulla Dentists website',
-  );
+  // Field names follow the SmileOx intake schema (camelCase, phoneNumber in E.164).
+  const lead = { firstName: first_name, lastName: last_name, email, phoneNumber: e164(phone), interest, consent: 'yes', source: 'thecronulladentists.com.au /register' };
+  const result = await relay(`New EOI: ${first_name} ${last_name}`, lead, 'Founding patient expression of interest — The Cronulla Dentists website');
+  await logEnquiry({
+    form: 'eoi',
+    name: `${first_name} ${last_name}`,
+    email,
+    phone,
+    message: interest,
+    source: lead.source,
+    raw: lead,
+    emailStatus: result.ok ? (process.env.SMTP2GO_API_KEY ? 'sent' : 'skipped') : 'failed',
+    emailError: result.error,
+  });
   if (!result.ok) return NextResponse.json({ error: 'We could not send your registration. Please try again or email us.' }, { status: 502 });
   return NextResponse.json({ ok: true });
 }

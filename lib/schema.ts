@@ -113,6 +113,8 @@ export function personSchemas() {
     };
     if (t.sameAs) person.sameAs = t.sameAs;
     person.jobTitle = t.title;
+    // AHPRA registration, only once the practice supplies it via the dashboard.
+    if ((t as { ahpra?: string }).ahpra) person.identifier = { '@type': 'PropertyValue', propertyID: 'AHPRA', value: (t as { ahpra?: string }).ahpra };
     person.worksFor = { '@type': 'Organization', name: SITE_CONFIG.name };
     return person;
   });

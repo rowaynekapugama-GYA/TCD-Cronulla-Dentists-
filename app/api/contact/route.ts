@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { relay, isEmail, e164 } from '@/lib/relay';
+import { logEnquiry } from '@/lib/enquiries';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,6 +26,17 @@ export async function POST(req: Request) {
   if (lastName) lead.lastName = lastName;
   if (phone) lead.phoneNumber = e164(phone);
   const result = await relay(`Website message: ${name}`, lead, 'Contact form — The Cronulla Dentists website');
+  await logEnquiry({
+    form: 'contact',
+    name,
+    email,
+    phone,
+    message,
+    source: lead.source,
+    raw: lead,
+    emailStatus: result.ok ? (process.env.SMTP2GO_API_KEY ? 'sent' : 'skipped') : 'failed',
+    emailError: result.error,
+  });
   if (!result.ok) return NextResponse.json({ error: 'We could not send your message. Please try again or email us.' }, { status: 502 });
   return NextResponse.json({ ok: true });
 }

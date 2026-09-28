@@ -63,3 +63,40 @@ export function resolvedMeta(meta: PageMeta): { title: string; description: stri
 export function canonical(route: string): string {
   return `${SITE_CONFIG.domain}${route}`;
 }
+
+/* ------------------------------------------------------------------ */
+/* Blog articles, published from the dashboard (content/posts.json).   */
+/* ------------------------------------------------------------------ */
+export interface Post {
+  id: number | string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  featuredImage?: { src: string; alt: string; width?: number; height?: number };
+  body: string; // sanitised HTML from the dashboard editor
+  author: string;
+  categories: { title: string; slug: string }[];
+  publishedAt: string;
+  updatedAt?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: { src: string; alt: string; width?: number; height?: number };
+  noindex?: boolean;
+}
+
+let postCache: Post[] | null = null;
+
+/** Published articles, newest first. Empty until the practice publishes one. */
+export function posts(): Post[] {
+  if (postCache) return postCache;
+  const file = path.join(process.cwd(), 'content', 'posts.json');
+  try {
+    postCache = (JSON.parse(fs.readFileSync(file, 'utf8')) as Post[]).filter((p) => p.slug && p.title);
+  } catch {
+    postCache = [];
+  }
+  return postCache;
+}
+
+export const BLOG_ROUTE = '/blog/';
+export const postRoute = (slug: string) => `${BLOG_ROUTE}${slug}/`;

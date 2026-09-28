@@ -18,20 +18,24 @@ export const OG_IMAGE = {
  */
 export function pageMetadata(meta: PageMeta, extra: Partial<Metadata> = {}): Metadata {
   const { title, description } = resolvedMeta(meta);
+  const canon = meta.canonical || canonical(meta.route);
+  const og = meta.ogImage?.src
+    ? { url: meta.ogImage.src, width: meta.ogImage.width || 1200, height: meta.ogImage.height || 630, alt: meta.ogImage.alt || title }
+    : OG_IMAGE;
   return {
     title,
     description,
-    alternates: { canonical: canonical(meta.route) },
+    alternates: { canonical: canon },
     openGraph: {
       title,
       description,
-      url: canonical(meta.route),
+      url: canon,
       siteName: SITE_CONFIG.name,
       locale: 'en_AU',
       type: 'website',
-      images: [OG_IMAGE],
+      images: [og],
     },
-    twitter: { card: 'summary_large_image', title, description, images: [OG_IMAGE.url] },
+    twitter: { card: 'summary_large_image', title, description, images: [og.url] },
     ...(meta.noindex ? { robots: { index: false, follow: true } } : {}),
     ...extra,
   };

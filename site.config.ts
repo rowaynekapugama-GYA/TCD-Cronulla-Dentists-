@@ -2,11 +2,18 @@
  * SINGLE SOURCE OF TRUTH for The Cronulla Dentists website.
  * Every component reads contact details, hours, mode and feature flags from here.
  * Never hard-code any of these values inside a component.
+ *
+ * Since the dashboard (Payload at /admin) was added, the values below are the
+ * DEFAULTS. Site Settings saved in the dashboard are written to
+ * content/site-settings.json by scripts/pull-content.ts before every build and
+ * merged over these defaults (see the bottom of this file). Edit here for the
+ * fallback; edit in the dashboard for the live site.
  */
+import overrides from './content/site-settings.json';
 
 export type SiteMode = 'pre-opening' | 'open';
 
-export const SITE_CONFIG = {
+const DEFAULTS = {
   name: 'The Cronulla Dentists',
   legalName: 'The Cronulla Dentists', // TODO: full legal entity name + ABN for privacy policy
   domain: 'https://www.thecronulladentists.com.au',
@@ -45,6 +52,8 @@ export const SITE_CONFIG = {
     width: 1400,
     height: 392,
   },
+  /** Dashboard overrides for the two brand colours. Empty = the palette in app/globals.css. */
+  colours: { navy: '', cyan: '' },
 
   // ---- TODO values (swap when supplied) ----
   /**
@@ -53,12 +62,25 @@ export const SITE_CONFIG = {
    * Clear it to go back to the expression-of-interest flow.
    */
   bookingUrl: 'https://www.corepractice.is/practices/tcd/the-cronulla-dentists#/',
+  /**
+   * "Book online" asks which practice first (client request 28 Sep 2026). A
+   * leave-blank `url` means "use bookingUrl above"; a blank `note` on the first
+   * location shows the opening wording while the practice is pre-opening.
+   * Switch `bookingChooser` off to send Book online straight to bookingUrl again.
+   */
+  bookingChooser: true,
+  bookingLocations: [
+    { name: 'The Cronulla Dentists', address: '13 Cronulla Street, Cronulla', url: '', note: '' },
+    { name: 'The Caringbah Dentists', address: '172A Willarong Rd, Caringbah', url: 'https://www.corepractice.is/practices/tcd/the-caringbah-dentists', note: '50 years in the Shire' },
+  ] as { name: string; address: string; url: string; note: string }[],
   gtmId: '', // Optional GTM container ID (GTM-XXXXXXX). Separate from ga4Id below — leave blank unless a container is actually set up.
   /**
    * GA4 measurement ID. This is the gtag.js property, not a Tag Manager
    * container, so it loads on its own and does not need gtmId to be set.
    */
   ga4Id: 'G-XDZHHZLVYL',
+  /** Meta (Facebook) Pixel ID. Loads only when set. */
+  metaPixelId: '',
   /**
    * Keyless Google Maps embed resolved by the exact GBP name + address, so the
    * iframe shows the practice's own pin/listing card, not a bare address point.
@@ -95,6 +117,9 @@ export const SITE_CONFIG = {
       alumniOf: 'University of Sydney',
       credentials: ['Bachelor of Dental Surgery, University of Sydney (2009)', 'Graduate Diploma in Implant Surgery, Charles Sturt University (2018)'],
       knowsAbout: ['General Dentistry', 'Prosthodontics', 'Endodontics', 'Dental Implants', 'Restorative Dentistry'],
+      ahpra: '', // from the AHPRA public register, when the client supplies it
+      bio: [] as string[], // filled from the dashboard; the About page copy is the fallback
+      hidden: false,
     },
     {
       id: 'lorna',
@@ -108,6 +133,9 @@ export const SITE_CONFIG = {
       alumniOf: 'University of Sheffield',
       credentials: ['Bachelor of Dental Surgery, University of Sheffield (2019)'],
       knowsAbout: ['Restorative Dentistry', 'Endodontics', 'Root Canal Therapy', 'General Dentistry', 'Dental Anxiety Care'],
+      ahpra: '',
+      bio: [] as string[],
+      hidden: false,
     },
   ],
   /**
@@ -154,6 +182,30 @@ export const SITE_CONFIG = {
     zipAfterpay: false,
   },
 };
+
+type Config = typeof DEFAULTS;
+
+/**
+ * Merge the dashboard's Site Settings over the defaults. Objects merge one
+ * level deep (address, features, hooks, sister, sameAs, logo); arrays (hours,
+ * team, payment, parkingNotes) are replaced whole when the dashboard supplies
+ * them. An empty overlay leaves everything exactly as written above.
+ */
+function mergeSettings(base: Config, over: Record<string, unknown>): Config {
+  const out: Record<string, unknown> = { ...base };
+  for (const [k, v] of Object.entries(over)) {
+    if (v === undefined || v === null) continue;
+    const cur = (base as Record<string, unknown>)[k];
+    if (cur && typeof cur === 'object' && !Array.isArray(cur) && typeof v === 'object' && !Array.isArray(v)) {
+      out[k] = { ...(cur as object), ...(v as object) };
+    } else {
+      out[k] = v;
+    }
+  }
+  return out as Config;
+}
+
+export const SITE_CONFIG: Config = mergeSettings(DEFAULTS, overrides as Record<string, unknown>);
 
 export type FeatureFlag = keyof typeof SITE_CONFIG.features;
 

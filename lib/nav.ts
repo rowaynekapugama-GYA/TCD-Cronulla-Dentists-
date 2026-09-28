@@ -1,4 +1,4 @@
-import { navServicePages, getPage, isLive, allPages } from '@/lib/content';
+import { navServicePages, getPage, isLive, allPages, posts, BLOG_ROUTE } from '@/lib/content';
 import type { ServicePage, ServicesHubPage } from '@/content/types';
 import { featureOn } from '@/site.config';
 import { imageAlt } from '@/lib/image-alt';
@@ -106,6 +106,8 @@ export function footerLinks(): { label: string; links: NavLink[] }[] {
   ];
   if (featureOn('cdbs'))
     patients.splice(2, 0, { label: getPage('kids-gap-free-dentistry-cronulla').meta.title, href: '/kids-gap-free-dentistry-cronulla/' });
+  // The blog link appears once the practice has published an article from the dashboard.
+  if (posts().length) patients.splice(patients.length - 1, 0, { label: 'Dental advice and news', href: BLOG_ROUTE });
   return [{ label: 'Patients', links: patients }];
 }
 
