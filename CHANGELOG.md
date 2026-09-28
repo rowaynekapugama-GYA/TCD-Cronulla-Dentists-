@@ -1,5 +1,14 @@
 # Changelog: The Cronulla Dentists website
 
+## 2.2.1 – 28 September 2026: first-account screen closed
+
+- The dashboard login no longer shows "No accounts yet, create the first admin at /cms" (Rowayne, after
+  seeing it on the live site).
+- Payload's public "create first user" is closed: /cms/create-first-user returns 404 and any account
+  creation without a signed-in admin is refused (cms/collections/Users.ts, middleware.ts). Admins still add
+  accounts under Users; GYA's scripts are unaffected. For a brand-new site set ALLOW_FIRST_USER=true in
+  Vercel, create the first account at /cms, then delete the variable and redeploy.
+
 ## 2.2.0 – 28 September 2026: visual page editor (Coastal / Footscray style)
 
 - Pages > a page now opens a visual editor like the Coastal Dental and Footscray dashboards: top bar

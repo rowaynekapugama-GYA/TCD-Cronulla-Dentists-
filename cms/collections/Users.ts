@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload';
+import { APIError, type CollectionConfig } from 'payload';
 import { isAdmin, isAdminField, selfOrAdmin } from '../access';
 
 export const Users: CollectionConfig = {
@@ -14,6 +14,21 @@ export const Users: CollectionConfig = {
     defaultColumns: ['name', 'email', 'role'],
     group: 'Admin',
     description: 'Who can log in. Editors change content; admins (GYA) also manage users.',
+  },
+  hooks: {
+    /**
+     * Accounts are only ever created by a signed-in admin (Users in the dashboard) or by GYA's scripts.
+     * This closes Payload's public "create first user" screen on a live site with an empty users table.
+     * To set up a brand-new site, add ALLOW_FIRST_USER=true in Vercel, create the account at /cms,
+     * then delete the variable and redeploy.
+     */
+    beforeOperation: [
+      ({ operation, req }) => {
+        if (operation !== 'create' || req.user || req.payloadAPI === 'local') return;
+        if (process.env.ALLOW_FIRST_USER === 'true') return;
+        throw new APIError('New accounts can only be added by an admin, under Users in the dashboard.', 403);
+      },
+    ],
   },
   access: {
     read: selfOrAdmin,

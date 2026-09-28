@@ -8,6 +8,10 @@ import { NextResponse, type NextRequest } from 'next/server';
  */
 export function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
+  // Payload's "create first user" screen is closed unless GYA is setting up a new site (see cms/collections/Users.ts).
+  if (pathname.startsWith('/cms/create-first-user') && process.env.ALLOW_FIRST_USER !== 'true') {
+    return new NextResponse('Not found', { status: 404 });
+  }
   if (
     pathname === '/' ||
     pathname.endsWith('/') ||

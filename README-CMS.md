@@ -36,8 +36,8 @@ only ever touches the `cms` branch until you run `promote`.
 
 ```bash
 cd ~/Downloads
-unzip -o cronulla-CMS-v2.2.0-FULL-REPO.zip
-bash cronulla-cms/scripts/push-to-github.sh stage cronulla-CMS-v2.2.0-FULL-REPO.zip
+unzip -o cronulla-CMS-v2.2.1-FULL-REPO.zip
+bash cronulla-cms/scripts/push-to-github.sh stage cronulla-CMS-v2.2.1-FULL-REPO.zip
 ```
 
 First run asks for the repo address (GitHub > the repo > green **Code** button > HTTPS). If git asks you
@@ -94,9 +94,12 @@ After adding variables: Deployments > latest > **Redeploy** (variables are baked
 
 ## Step 5: first login and import
 
-1. Open `https://<preview-url>/cms`. The first visit shows Payload's **Create first user**. Use
+1. First account (brand-new database only). Since v2.2.1 the public "create first user" screen is closed.
+   Add `ALLOW_FIRST_USER` = `true` in Vercel (the environment you are setting up), redeploy, then open
+   `https://<site>/cms`. The first visit shows Payload's **Create first user**. Use
    `rowayne@gyaclients.com`, a strong password, name "Rowayne (GYA)", and set **Role: Admin (GYA)**.
-   (Only this first account is created at /cms; everything else happens at /admin.)
+   (Only this first account is created at /cms; everything else happens at /admin.) Then **delete
+   `ALLOW_FIRST_USER` and redeploy**. Every other account is added by an admin under Users.
 2. Open `https://<preview-url>/admin` and sign in. On the Dashboard click **Import missing content**.
    This loads all 29 pages, the two dentists (with the bios from the About page) and the site settings from
    the files in the repo into the database. It takes a few seconds and is safe to click again at any time
