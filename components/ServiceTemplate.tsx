@@ -1,7 +1,8 @@
 import Image from '@/components/Img';
 import Link from 'next/link';
 import type { ServicePage } from '@/content/types';
-import { featureOn } from '@/site.config';
+import { featureOn, SITE_CONFIG } from '@/site.config';
+import { ApeAnxietyPage } from '@/components/ape/Ape';
 import { Inline, Nodes, sectionVisible } from '@/components/Inline';
 import { CtaButtons, CtaBand, ClosingCta } from '@/components/Cta';
 import { Breadcrumb } from '@/components/Breadcrumb';
@@ -28,6 +29,8 @@ function cyanSpan(h2: string) {
 const crumbHref: Record<string, string> = { Home: '/', Services: '/services/' };
 
 export function ServiceTemplate({ page }: { page: ServicePage }) {
+  // The dental anxiety page is presented as The Anxious Patient Experience page.
+  if (featureOn('ape') && page.meta.slug === SITE_CONFIG.ape.pageSlug) return <ApeAnxietyPage page={page} />;
   const zipGated = page.meta.slug === 'payment-plans' && !featureOn('zipAfterpay') && page.gatedText;
   const hook = zipGated && page.gatedText?.hook ? page.gatedText.hook : page.hook;
   const body = zipGated && page.gatedText?.bodyIntro ? [page.body[0], { type: 'p' as const, text: page.gatedText.bodyIntro }, ...page.body.slice(2)] : page.body;

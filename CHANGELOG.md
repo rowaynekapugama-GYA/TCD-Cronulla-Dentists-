@@ -1,5 +1,17 @@
 # Changelog: The Cronulla Dentists website
 
+
+## 2.3.0 – 22 October 2026: The Anxious Patient Experience
+
+- /dental-anxiety-cronulla/ is now the site's Anxious Patient Experience (APE) page: same URL, title
+  tag, description, H1 and page copy, presented in the APE look (APE colours, Playfair Display and
+  Figtree, arch photos) with APE's own copy blocks, word for word from the APE website. Book Now goes
+  to the APE booking page; Discover the Experience goes to the APE website.
+- APE logo in the top menu (and the mobile menu) linking to that page; the About menu card now shows APE.
+- Home page: new APE section after the welcome section.
+- All of it switches off with features.ape in site.config.ts. APE copy: content/ape.json; styles:
+  app/ape.css; components: components/ape/. Links: site.config.ts > ape (url, bookUrl).
+
 ## 2.2.2 – 28 September 2026: sign-in rescue
 
 - If the dashboard password is lost (the dashboard cannot email a reset link yet): set ADMIN_EMAIL and

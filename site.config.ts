@@ -145,6 +145,18 @@ const DEFAULTS = {
    */
   teamNamesConfirmed: true,
 
+  // ---- The Anxious Patient Experience (Dr Lorna Gladwin's programme for anxious patients) ----
+  /**
+   * The APE website and the page on this site that presents it (the dental anxiety page,
+   * shown in the APE look). Switch features.ape off to hide the menu logo, the home page
+   * section and the APE layout (the page then falls back to the standard service layout).
+   */
+  ape: {
+    url: 'https://the-anxious-patient-experience.vercel.app/',
+    bookUrl: 'https://the-anxious-patient-experience.vercel.app/book-now/',
+    pageSlug: 'dental-anxiety-cronulla',
+  },
+
   // ---- Sister practice ----
   sister: {
     name: 'The Caringbah Dentists',
@@ -180,6 +192,8 @@ const DEFAULTS = {
     cdbs: true, // ON 21 Sep 2026: client asked for the no-gap kids check-up & clean as the lead hero slide.
     /** Zip & Afterpay sections on /payment-plans/. OFF until confirmed. */
     zipAfterpay: false,
+    /** The Anxious Patient Experience: menu logo, home page section and the APE-styled dental anxiety page. */
+    ape: true,
   },
 };
 

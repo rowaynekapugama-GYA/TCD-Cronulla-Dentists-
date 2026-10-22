@@ -88,7 +88,7 @@ export function aboutFeatured(): FeaturedService[] {
   const cards: FeaturedService[] = [
     { label: 'The practice', href: '/about/', image: '/images/menu-practice.jpg', alt: imageAlt('/images/menu-practice.jpg') },
     { label: 'Meet the team', href: '/about/#meet-the-team', image: '/images/dentists.jpg', alt: imageAlt('/images/dentists.jpg') },
-    { label: 'Nervous patients', href: '/dental-anxiety-cronulla/', image: '/images/services/dental-anxiety-cronulla.jpg', alt: imageAlt('/images/services/dental-anxiety-cronulla.jpg') },
+    { label: 'The Anxious Patient Experience™', href: '/dental-anxiety-cronulla/', image: '/images/ape/home-hero-calm-smile.webp', alt: 'Smiling woman relaxed at home' },
     { label: 'Parking & getting here', href: '/parking-information/', image: '/images/cronulla-beach.jpg', alt: imageAlt('/images/cronulla-beach.jpg') },
   ];
   // Drop anything whose page is gated off.

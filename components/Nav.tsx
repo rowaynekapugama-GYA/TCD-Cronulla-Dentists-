@@ -23,11 +23,13 @@ interface Props {
   telHref: string;
   email: string;
   address: string;
+  /** The Anxious Patient Experience: logo link to the APE page (null when switched off). */
+  ape?: { href: string; logo: string } | null;
 }
 
 type OpenMenu = 'services' | 'about' | null;
 
-export default function Nav({ primary, groups, featured, aboutCards, serviceCount, cta, call, phone, telHref, email, address }: Props) {
+export default function Nav({ primary, groups, featured, aboutCards, serviceCount, cta, call, phone, telHref, email, address, ape }: Props) {
   const [open, setOpen] = useState<OpenMenu>(null);
   const [drawer, setDrawer] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -140,6 +142,17 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
             );
           })}
 
+          {ape && (
+            <Link href={ape.href} className="nav-ape" aria-current={current(ape.href)} onMouseEnter={closeSoon} aria-label="The Anxious Patient Experience: care for anxious patients" title="The Anxious Patient Experience™">
+              <Image src={ape.logo} alt="" width={38} height={38} sizes="38px" />
+              <span className="nav-ape-label">
+                Anxious
+                <br />
+                patients
+              </span>
+            </Link>
+          )}
+
           {call && (
             <a href={call.href} className="nav-call" onMouseEnter={closeSoon} aria-label={call.label}>
               <I name="phone" />
@@ -209,6 +222,12 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
         }}
       >
         <Link href="/">Home</Link>
+        {ape && (
+          <Link href={ape.href} className="mnav-ape">
+            <Image src={ape.logo} alt="" width={40} height={40} sizes="40px" />
+            The Anxious Patient Experience™
+          </Link>
+        )}
         {primary.map((l) => (
           <Link key={l.href} href={l.href}>
             {l.label}

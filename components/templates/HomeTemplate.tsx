@@ -12,6 +12,7 @@ import { I, type IconName } from '@/components/Icons';
 import ProviderCards from '@/components/ProviderCards';
 import { providerCards } from '@/lib/providers';
 import { img } from '@/lib/img';
+import { ApeHomeBand } from '@/components/ape/Ape';
 import { imageAlt } from '@/lib/image-alt';
 
 /** Resolve a gated card to itself, its fallback, or nothing. */
@@ -150,6 +151,9 @@ export function HomeTemplate({ page }: { page: HomePage }) {
           </div>
         </div>
       </section>
+
+      {/* The Anxious Patient Experience */}
+      <ApeHomeBand />
 
       {/* BLOCK 8: four service category cards */}
       <section className="section section-sand" aria-labelledby="categories">

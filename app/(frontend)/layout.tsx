@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../globals.css';
-import { SITE_CONFIG, fullAddress, telHref, isOpen } from '@/site.config';
+import '../ape.css';
+import { SITE_CONFIG, fullAddress, telHref, isOpen, featureOn } from '@/site.config';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import Reveal from '@/components/Reveal';
@@ -94,6 +95,7 @@ fbq('track', 'PageView');`}
           groups={serviceGroups()}
           featured={featuredServices()}
           aboutCards={aboutFeatured()}
+          ape={featureOn('ape') ? { href: `/${SITE_CONFIG.ape.pageSlug}/`, logo: '/images/ape/ape-logo.webp' } : null}
           serviceCount={serviceCount()}
           cta={primaryCta()}
           call={secondaryCta()}
