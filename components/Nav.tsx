@@ -146,9 +146,9 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
             <Link href={ape.href} className="nav-ape" aria-current={current(ape.href)} onMouseEnter={closeSoon} aria-label="The Anxious Patient Experience: care for anxious patients" title="The Anxious Patient Experience™">
               <Image src={ape.logo} alt="" width={38} height={38} sizes="38px" />
               <span className="nav-ape-label">
-                Anxious
+                The Anxious
                 <br />
-                patients
+                Patient Experience
               </span>
             </Link>
           )}

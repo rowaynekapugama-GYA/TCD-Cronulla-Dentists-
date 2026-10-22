@@ -128,11 +128,11 @@
 .nav-ape{display:inline-flex !important;align-items:center;gap:.5rem;padding:0 !important;line-height:1}
 .nav-ape img{width:38px;height:38px;border-radius:10px;transition:transform .3s}
 .nav-ape:hover img{transform:translateY(-2px)}
-.nav-ape .nav-ape-label{font-size:.72rem;line-height:1.15;text-align:left;font-weight:600;color:var(--navy)}
+.nav-ape .nav-ape-label{font-size:.72rem;line-height:1.2;text-align:left;font-weight:600;color:var(--navy);white-space:nowrap}
 .mnav .mnav-ape{display:flex !important;align-items:center;gap:.8rem}
 .mnav .mnav-ape img{width:40px;height:40px;border-radius:10px}
 
-@media (max-width:1240px){.nav-ape .nav-ape-label{display:none}}
+@media (max-width:1180px){.nav-ape .nav-ape-label{display:none}}
 @media (max-width:900px){
   .ape-split,.ape-grid3{grid-template-columns:1fr}
   .ape-sticky{position:static}
