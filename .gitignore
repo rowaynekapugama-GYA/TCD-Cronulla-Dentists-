@@ -8,3 +8,4 @@ media
 *.log
 tsconfig.tsbuildinfo
 .vercel
+next-env.d.ts
