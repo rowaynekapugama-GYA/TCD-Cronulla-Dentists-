@@ -143,13 +143,8 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
           })}
 
           {ape && (
-            <Link href={ape.href} className="nav-ape" aria-current={current(ape.href)} onMouseEnter={closeSoon} aria-label="The Anxious Patient Experience: care for anxious patients" title="The Anxious Patient Experience™">
-              <Image src={ape.logo} alt="" width={38} height={38} sizes="38px" />
-              <span className="nav-ape-label">
-                The Anxious
-                <br />
-                Patient Experience
-              </span>
+            <Link href={ape.href} className="nav-ape" aria-current={current(ape.href)} onMouseEnter={closeSoon}>
+              The Anxious Patient Experience
             </Link>
           )}
 
@@ -223,10 +218,7 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
       >
         <Link href="/">Home</Link>
         {ape && (
-          <Link href={ape.href} className="mnav-ape">
-            <Image src={ape.logo} alt="" width={40} height={40} sizes="40px" />
-            The Anxious Patient Experience™
-          </Link>
+          <Link href={ape.href}>The Anxious Patient Experience</Link>
         )}
         {primary.map((l) => (
           <Link key={l.href} href={l.href}>
