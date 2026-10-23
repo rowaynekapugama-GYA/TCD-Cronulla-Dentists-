@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../globals.css';
+import '../ape.css'; // The Anxious Patient Experience page (/dental-anxiety/), scoped to .ape-page
 import { SITE_CONFIG, fullAddress, telHref, isOpen } from '@/site.config';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';

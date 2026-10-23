@@ -2,11 +2,18 @@ import { navServicePages, getPage, isLive, allPages, posts, BLOG_ROUTE } from '@
 import type { ServicePage, ServicesHubPage } from '@/content/types';
 import { featureOn } from '@/site.config';
 import { imageAlt } from '@/lib/image-alt';
+import { APE_ROUTE } from '@/lib/ape';
 
 export interface NavLink {
   label: string;
   href: string;
+  /** Mobile menu: list this link straight after Home instead of in its desktop position. */
+  mobileFirst?: boolean;
 }
+
+/** The Anxious Patient Experience (TM) link, shown in the top menu after Contact and first in the mobile menu. */
+const APE_LINK: NavLink = { label: 'The Anxious Patient Experience', href: APE_ROUTE, mobileFirst: true };
+const APE_CARD = { image: '/images/ape/home-hero-calm-smile.webp', alt: 'A woman with long dark hair smiling warmly at home' };
 export interface NavGroup {
   label: string;
   links: NavLink[];
@@ -73,14 +80,20 @@ export function serviceCount(): number {
   return hub.serviceList.length;
 }
 
-/** The pill nav. 'About' and 'Services' both open an image-card panel. */
+/**
+ * The pill nav. 'About' and 'Services' both open an image-card panel. The APE
+ * link sits after Contact (before the phone number and Book online) and only
+ * appears while the dental anxiety page is live.
+ */
 export function primaryNav(): NavLink[] {
-  return [
+  const links: NavLink[] = [
     { label: 'About', href: '/about/' },
     { label: 'Services', href: '/services/' },
     { label: 'Finances', href: '/finances/' },
     { label: 'Contact', href: '/contact/' },
   ];
+  if (allPages().some((p) => isLive(p.meta) && p.meta.route === APE_ROUTE)) links.push(APE_LINK);
+  return links;
 }
 
 /** Image cards in the About panel — same treatment as the Services panel. */
@@ -88,7 +101,7 @@ export function aboutFeatured(): FeaturedService[] {
   const cards: FeaturedService[] = [
     { label: 'The practice', href: '/about/', image: '/images/menu-practice.jpg', alt: imageAlt('/images/menu-practice.jpg') },
     { label: 'Meet the team', href: '/about/#meet-the-team', image: '/images/dentists.jpg', alt: imageAlt('/images/dentists.jpg') },
-    { label: 'Nervous patients', href: '/dental-anxiety-cronulla/', image: '/images/services/dental-anxiety-cronulla.jpg', alt: imageAlt('/images/services/dental-anxiety-cronulla.jpg') },
+    { label: 'The Anxious Patient Experience™', href: APE_ROUTE, image: APE_CARD.image, alt: APE_CARD.alt },
     { label: 'Parking & getting here', href: '/parking-information/', image: '/images/cronulla-beach.jpg', alt: imageAlt('/images/cronulla-beach.jpg') },
   ];
   // Drop anything whose page is gated off.
@@ -101,7 +114,7 @@ export function footerLinks(): { label: string; links: NavLink[] }[] {
     { label: 'Finances & health funds', href: '/finances/' },
     { label: 'Payment plans', href: '/payment-plans/' },
     { label: 'Parking & getting here', href: '/parking-information/' },
-    { label: 'Nervous patients', href: '/dental-anxiety-cronulla/' },
+    { label: 'The Anxious Patient Experience™', href: APE_ROUTE },
     { label: 'Contact', href: '/contact/' },
   ];
   if (featureOn('cdbs'))

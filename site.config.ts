@@ -153,6 +153,19 @@ const DEFAULTS = {
     heritage: '50 years in the Shire',
   },
 
+  // ---- The Anxious Patient Experience (TM), Dr Lorna Gladwin's dental anxiety programme ----
+  /**
+   * The APE website and its booking page. The /dental-anxiety/ page links out to
+   * them ("Discover the Experience" and "Book Now"); the page's own copy lives in
+   * content/ape.json. Update `url` when the programme moves to its own domain.
+   */
+  ape: {
+    route: '/dental-anxiety/',
+    url: 'https://the-anxious-patient-experience.vercel.app/',
+    bookUrl: 'https://the-anxious-patient-experience.vercel.app/book-now/',
+    teamUrl: 'https://the-anxious-patient-experience.vercel.app/meet-the-team/',
+  },
+
   // ---- Hours (exact) ----
   hours: [
     { day: 'Monday', open: '09:00', close: '19:00', label: '9:00am to 7:00pm' },

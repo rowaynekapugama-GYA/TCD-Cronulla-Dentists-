@@ -145,7 +145,7 @@ const ALT_NAMES: Record<string, string[]> = {
 };
 
 export function serviceSchema(page: ServicePage) {
-  const isProcedure = !['finances', 'payment-plans', 'dental-anxiety-cronulla'].includes(page.meta.slug);
+  const isProcedure = !['finances', 'payment-plans', 'dental-anxiety', 'dental-anxiety-cronulla'].includes(page.meta.slug);
   return {
     '@context': 'https://schema.org',
     '@type': isProcedure ? 'MedicalProcedure' : 'Service',

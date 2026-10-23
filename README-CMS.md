@@ -157,6 +157,11 @@ Point `PUBLISH_HOOK_URL` (Production) at the `main` hook if you have not already
 - A page created in the dashboard (Pages > Create New, kind "Service page") is added to the site, the
   Services menu and the sitemap on the next publish. A page deleted in the dashboard disappears on the
   next publish; add a Redirect for its old address first.
+- The Anxious Patient Experience page (/dental-anxiety/, v2.3.0) is a special case: the APE blocks
+  (wording in `content/ape.json`, styles in `app/ape.css`, photos in `public/images/ape/`) are fixed in
+  the repo because they are Dr Lorna Gladwin's trademarked programme. Only the Cronulla copy between them
+  (the "Dental Anxiety" page in the dashboard: eyebrow, heading, hook, body, photo and the numbered
+  sections) is editable. Update the APE wording from a new APE website build, not in the dashboard.
 
 ## What the current site and the brief disagreed on (decisions taken)
 

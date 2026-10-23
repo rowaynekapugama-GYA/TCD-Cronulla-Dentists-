@@ -13,7 +13,7 @@ interface Props {
   groups: NavGroup[];
   /** Cards in the Services panel. */
   featured: FeaturedService[];
-  /** Cards in the About panel — same styling, fewer columns. */
+  /** Cards in the About panel (same styling, fewer columns). */
   aboutCards: FeaturedService[];
   serviceCount: number;
   cta: { label: string; short: string; href: string; external: boolean };
@@ -81,7 +81,7 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
     pathname === '/services/' || featured.some((f) => f.href === pathname) || groups.some((g) => g.links.some((l) => l.href === pathname));
   const inAbout = aboutCards.some((c) => c.href.split('#')[0] === pathname);
 
-  /** Shared panel — only the column count and the footer differ. */
+  /** Shared panel: only the column count and the footer differ. */
   const panel = (menu: Exclude<OpenMenu, null>, cards: FeaturedService[], foot: React.ReactNode) => (
     <div
       className={`mega${open === menu ? ' open' : ''}`}
@@ -182,7 +182,7 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
           aboutCards,
           <>
             <p>
-              {SITE_CONFIG.name} by <strong>{SITE_CONFIG.sister.name}</strong> — {SITE_CONFIG.sister.heritage}.
+              {SITE_CONFIG.name} by <strong>{SITE_CONFIG.sister.name}</strong>, {SITE_CONFIG.sister.heritage}.
             </p>
             <Link href="/about/" className="mega-all" tabIndex={open === 'about' ? 0 : -1}>
               About the practice <I name="arrow" />
@@ -209,11 +209,21 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
         }}
       >
         <Link href="/">Home</Link>
-        {primary.map((l) => (
-          <Link key={l.href} href={l.href}>
-            {l.label}
-          </Link>
-        ))}
+        {/* The Anxious Patient Experience sits straight after Home on mobile (client request, 23 Oct 2026). */}
+        {primary
+          .filter((l) => l.mobileFirst)
+          .map((l) => (
+            <Link key={l.href} href={l.href}>
+              {l.label}
+            </Link>
+          ))}
+        {primary
+          .filter((l) => !l.mobileFirst)
+          .map((l) => (
+            <Link key={l.href} href={l.href}>
+              {l.label}
+            </Link>
+          ))}
         {groups.map((g) => (
           <div key={g.label} className="mnav-sub">
             <div className="mnav-head">{g.label}</div>

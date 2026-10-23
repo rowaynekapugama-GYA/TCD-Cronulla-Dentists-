@@ -9,6 +9,8 @@ import { ServicesTemplate } from '@/components/templates/ServicesTemplate';
 import { ContactTemplate } from '@/components/templates/ContactTemplate';
 import { ServiceTemplate } from '@/components/ServiceTemplate';
 import { ProseTemplate } from '@/components/ProseTemplate';
+import { ApeTemplate } from '@/components/ape/ApeTemplate';
+import { isApePage } from '@/lib/ape';
 import EditorBridge from '@/components/EditorBridge';
 import { DRAFT_KEY } from '@/lib/preview';
 
@@ -31,7 +33,8 @@ function render(page: Page) {
     case 'contact':
       return <ContactTemplate page={page} />;
     case 'service':
-      return <ServiceTemplate page={page} />;
+      // The dental anxiety page keeps its APE design in the visual editor too.
+      return isApePage(page.meta.slug) ? <ApeTemplate page={page} /> : <ServiceTemplate page={page} />;
     case 'prose':
       return <ProseTemplate page={page} />;
     default:

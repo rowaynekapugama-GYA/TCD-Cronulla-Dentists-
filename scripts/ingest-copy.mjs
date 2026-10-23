@@ -37,8 +37,8 @@ function clean(text) {
 }
 
 const LINKS = [
-  ['There is a full page on how this works.', '/dental-anxiety-cronulla/'],
-  ['our dental anxiety page', '/dental-anxiety-cronulla/'],
+  ['There is a full page on how this works.', '/dental-anxiety/'],
+  ['our dental anxiety page', '/dental-anxiety/'],
   ['our finances page', '/finances/'],
   ['our periodontal treatment page', '/periodontal-treatment-cronulla/'],
   ['our periodontal treatment and gum disease pages', null], // handled specially below
@@ -198,7 +198,7 @@ const ROUTES = {
   'Cosmetic Dentistry': '/cosmetic-dentistry-cronulla/',
   'Restorative Dentistry': '/restorative-dentistry-cronulla/',
   'Emergency Dentistry': '/emergency-dentist-cronulla/',
-  'Dental Anxiety': '/dental-anxiety-cronulla/',
+  'Dental Anxiety': '/dental-anxiety/',
   'Root Canal Therapy': '/root-canal-therapy-cronulla/',
   'Wisdom Teeth Removal': '/wisdom-teeth-removal-cronulla/',
   'Dental Crowns and Bridges': '/dental-crowns-bridges-cronulla/',
@@ -221,7 +221,7 @@ const CATEGORY = {
   'dental-veneers-cronulla': 'cosmetic',
   'dental-implants-cronulla': 'restorative',
   'dental-crowns-bridges-cronulla': 'restorative',
-  'dental-anxiety-cronulla': 'general',
+  'dental-anxiety': 'general', // moved to /dental-anxiety/ on 23 Oct 2026 (The Anxious Patient Experience)
   'emergency-dentist-cronulla': 'general',
   'finances': 'other',
   'hygiene-treatments-cronulla': 'gum',
@@ -299,7 +299,7 @@ function buildHome(p) {
   });
   slides[1].gate = 'emergency';
   slides[1].linkHref = '/emergency-dentist-cronulla/';
-  slides[2].linkHref = '/dental-anxiety-cronulla/';
+  slides[2].linkHref = '/dental-anxiety/';
   const b3 = b(3).nodes.map((n) => n.text);
   const welcomeNodes = b(7).nodes.map((n) => n.text);
   const categoryCards = cardsFrom(b(8), ROUTES);

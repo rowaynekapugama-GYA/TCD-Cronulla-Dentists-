@@ -7,10 +7,69 @@
  * 23 Oct 2026: nib removed per client request (Ram), pending nib provider approval for Cronulla.
  * Reinstate when confirmed: delete NIB_FIXES below, then put the wording back in the dashboard (or
  * restore the 2.2.3 content files and run Import > Reset from files) and restore the logo files.
+ *
+ * 23 Oct 2026: the dental anxiety page moved from /dental-anxiety-cronulla/ to /dental-anxiety/ for
+ * The Anxious Patient Experience (TM). applyApeRename() below renames the page once (slug, route,
+ * SEO title and description) and points every link in the other pages at the new address.
  */
 import type { Payload } from 'payload';
+import { APE_OLD_SLUG, APE_ROUTE, APE_SLUG } from '../lib/ape';
 
 type Rule = [RegExp, string];
+
+/** The SEO wording set when the page is renamed. Edits made in the dashboard afterwards are kept. */
+const APE_META = {
+  metaTitle: 'Dental Anxiety and Phobia | Trustable Dentist in Sutherland Shire',
+  metaDescription:
+    'Scared of the dentist? The Cronulla Dentists offer The Anxious Patient Experience™, a dedicated dental anxiety pathway for nervous patients in Cronulla.',
+  primaryKeyword: 'dental anxiety Cronulla, anxious patient dentist Sutherland Shire, nervous patients dentist Cronulla',
+};
+const OLD_ROUTE_RE = new RegExp(`/${APE_OLD_SLUG}/`, 'g');
+
+function relink(value: any): any {
+  if (typeof value === 'string') return value.replace(OLD_ROUTE_RE, APE_ROUTE);
+  if (Array.isArray(value)) return value.map(relink);
+  if (value && typeof value === 'object') {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(value)) out[k] = SKIP_KEYS.has(k) ? v : relink(v);
+    return out;
+  }
+  return value;
+}
+
+async function applyApeRename(payload: Payload, context: Record<string, unknown>): Promise<number> {
+  let changed = 0;
+  const pages = await payload.find({ collection: 'pages', limit: 500, depth: 0, overrideAccess: true });
+  const docs = pages.docs as any[];
+  const old = docs.find((d) => d.slug === APE_OLD_SLUG);
+  const already = docs.find((d) => d.slug === APE_SLUG);
+  if (old && !already) {
+    await payload.update({
+      collection: 'pages',
+      id: old.id,
+      data: { slug: APE_SLUG, route: APE_ROUTE, ...APE_META, _status: 'published' } as any,
+      depth: 0,
+      overrideAccess: true,
+      context,
+    });
+    console.log(`[content-fixes] dental anxiety page moved to ${APE_ROUTE} (The Anxious Patient Experience)`);
+    changed++;
+  }
+  // Links in the other pages (home slide, services hub, about, contact) follow the page.
+  for (const doc of docs) {
+    const patch: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(doc)) {
+      if (SKIP_KEYS.has(k)) continue;
+      const r = relink(v);
+      if (JSON.stringify(r) !== JSON.stringify(v)) patch[k] = r;
+    }
+    if (!Object.keys(patch).length) continue;
+    await payload.update({ collection: 'pages', id: doc.id, data: { ...patch, _status: 'published' } as any, depth: 0, overrideAccess: true, context });
+    console.log(`[content-fixes] links to the dental anxiety page updated on "${doc.slug}" (${Object.keys(patch).join(', ')})`);
+    changed++;
+  }
+  return changed;
+}
 
 /** Sentence-level removals; everything else in each sentence is kept word for word. */
 const NIB_RULES: Rule[] = [
@@ -58,7 +117,7 @@ function leftovers(value: any, path: string, out: string[]) {
 
 export async function applyContentFixes(payload: Payload): Promise<void> {
   const context = { skipMarkChanged: true };
-  let changed = 0;
+  let changed = await applyApeRename(payload, context);
   const pages = await payload.find({ collection: 'pages', limit: 500, depth: 0, overrideAccess: true });
   for (const doc of pages.docs as any[]) {
     const patch = changedFields(doc);

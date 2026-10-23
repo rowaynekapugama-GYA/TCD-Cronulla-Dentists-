@@ -36,6 +36,12 @@ const nextConfig = {
   reactStrictMode: true,
   async redirects() {
     const list = dashboardRedirects();
+    // 23 Oct 2026: the dental anxiety page moved to /dental-anxiety/ (The Anxious
+    // Patient Experience). Permanent (308) so old links and search results follow.
+    list.push(
+      { source: '/dental-anxiety-cronulla', destination: '/dental-anxiety/', permanent: true },
+      { source: '/dental-anxiety-cronulla/', destination: '/dental-anxiety/', permanent: true },
+    );
     if (BOOKING_URL) {
       list.push(
         { source: '/register', destination: BOOKING_URL, permanent: false },
