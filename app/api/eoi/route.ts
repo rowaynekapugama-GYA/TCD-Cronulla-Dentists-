@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 
   // Field names follow the SmileOx intake schema (camelCase, phoneNumber in E.164).
   const lead = { firstName: first_name, lastName: last_name, email, phoneNumber: e164(phone), interest, consent: 'yes', source: 'thecronulladentists.com.au /register' };
-  const result = await relay(`New EOI: ${first_name} ${last_name}`, lead, 'Founding patient expression of interest — The Cronulla Dentists website');
+  const result = await relay(`New EOI: ${first_name} ${last_name}`, lead, 'Founding patient expression of interest: The Cronulla Dentists website');
   await logEnquiry({
     form: 'eoi',
     name: `${first_name} ${last_name}`,

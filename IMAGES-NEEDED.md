@@ -94,49 +94,33 @@ Landscape 3:2, 1600×1067, shown beside the intro copy. Suggested shots are indi
 | `services/tooth-coloured-fillings-cronulla.jpg` ✅ | Tooth Coloured Fillings ("white fillings") — page only, not a menu card | **In place** (1600×1067, replaced 9 Sep 2026). Older couple at home, relaxed and laughing — a lifestyle framing rather than a clinical one. Master: `assets-source/tooth-coloured-fillings-original.png` (2240×1260), cropped right so both faces stay whole and the empty wall on the left is trimmed; the 4:3 home/hub tile was regenerated from the same master at the same time. |
 | `services/wisdom-teeth-removal-cronulla.jpg` ✅ | Wisdom Teeth Removal — page only, not a menu card | **Replaced 9 Sep 2026** (1600×1067). Client-supplied: a woman against a brick wall holding an extracted tooth in one hand and making an OK sign with the other. Near-identical in concept to the shot it replaces (extracted tooth, thumbs-up), so the page reads much as before. Master: `assets-source/wisdom-teeth-removal-original.jpg` — kept at its native 1600×1066 rather than the usual 2240×1260, because the supply is only 1600 wide and upscaling would just soften the page crop taken straight back out of it. The photo is within a pixel of 3:2, so the page file is effectively the full frame; the 4:3 tile is a centre crop that keeps her face and both hands. **Note:** the OK gesture carries the same presentation question as the thumbs-up did — it reads as a patient endorsing the result, and testimonials are not permitted when advertising a regulated health service. A stock model is not a patient testimonial, so this is not a breach, but a panoramic X-ray or an assessment shot would sit more comfortably beside copy whose hook is "Not all of them need removing, and assessment comes first." |
 
-## 6. Provider logos — DentiCare, nib, HICAPS
+## 6. Provider logos: DentiCare and HICAPS
 
-The home page shows these three as **three cards** (BLOCK 2, `components/ProviderCards.tsx`)
-and again as a quieter strip near the footer (BLOCK 13). Both read from the same
-place, so each logo is supplied once.
+**23 Oct 2026: the nib logo and every nib mention were removed at the practice's request.** The
+Cronulla practice has applied to be an nib provider but is not approved yet. Reinstate only once the
+practice confirms approval (see CHANGELOG 2.2.4 for the steps and the original files).
+
+The home page shows the logos as **cards** (BLOCK 2, `components/ProviderCards.tsx`, now two cards
+centred, the grid sizes itself to the number of cards) and again as a quieter strip near the footer
+(BLOCK 13). Both read from the same place, so each logo is supplied once.
 
 | File | Provider | Supplied logo reads |
 |---|---|---|
 | `providers/denticare.png` ✅ | DentiCare | DentiCare · Payment Solutions |
-| `providers/nib.png` ✅ | nib | nib first choice |
 | `providers/hicaps.png` ✅ | HICAPS | HICAPS · *Fast* claims… on the spot |
 
-**All three are in place.** Client-supplied masters are kept untouched in
-`assets-source/providers/`; the copies in `public/images/providers/` are trimmed
-to the ink bounding box and normalised to 600px wide with transparency intact,
-so the three sit at matching optical weight despite different proportions. They
-render into a 62px-high box on the cards and 34px in the partner strip and scale
-to fit.
+Client-supplied masters are kept untouched in `assets-source/providers/`; the copies in
+`public/images/providers/` are trimmed to the ink bounding box and normalised to 600px wide with
+transparency intact. They render into a 62px-high box on the cards and 34px in the partner strip.
 
-**No card taglines.** Each supplied logo already carries its own descriptor
-("Payment Solutions", "first choice", "Fast claims… on the spot"), so a tagline
-line beneath would repeat it — most obviously HICAPS, whose logo says "claims…
-on the spot" directly above where "Claim on the spot" would have sat. The
-tagline is kept in each logo's alt text, and the wordmark fallback still shows it.
+**No card taglines.** Each supplied logo already carries its own descriptor, so a tagline line beneath
+would repeat it. The tagline is kept in each logo's alt text, and the wordmark fallback still shows it.
 
-To replace a logo, drop a new file in `public/images/providers/` under the same
-base name — `.svg`, `.png`, `.webp` and `.jpg` are tried in that order, SVG
-preferred. Remove all three and the cards fall back to styled wordmarks with
-taglines; the layout stays correct either way. The lookup is `lib/providers.ts`.
+To replace a logo, drop a new file in `public/images/providers/` under the same base name (`.svg`,
+`.png`, `.webp` and `.jpg` are tried in that order). The list of providers is `lib/providers.ts`.
 
-**Check the nib program name before launch.** The supplied logo is **nib first
-choice**, which is nib's specific dental provider network. The site's copy calls
-it "preferred provider" — fair as a description, but the logo names the actual
-program, so the practice needs to be in *that* program for the mark to be used.
-Same for HICAPS "claim on the spot", which needs a terminal in the practice.
-
-**Where to get them.** From DentiCare, nib and HICAPS themselves — each runs a
-partner or media kit with approved logo files and usage rules for practices that
-hold the relevant arrangement. These are registered trade marks: taking the
-files off another dental practice's website copies their hosted asset and skips
-the permission that makes the use legitimate. Two of the three taglines are also
-factual claims — "nib preferred provider" and HICAPS "claim on the spot" — so
-they should only go live once those arrangements are actually in place.
+Logos are registered trade marks: use only files supplied by (or licensed from) each provider, and only
+once the arrangement is actually in place. HICAPS "claim on the spot" needs a terminal in the practice.
 
 ## 7. Derived brand assets (generated from the logo — no client input needed)
 

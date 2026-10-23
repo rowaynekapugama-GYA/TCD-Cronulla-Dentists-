@@ -36,7 +36,6 @@
   ],
   "providers": [
     "DentiCare",
-    "nib",
     "HICAPS"
   ],
   "h1": "The Cronulla Dentists",

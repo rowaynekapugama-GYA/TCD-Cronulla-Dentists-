@@ -18,6 +18,8 @@ async function touch(payload: { updateGlobal: Function; logger: { warn: Function
 }
 
 export const markChanged: CollectionAfterChangeHook & CollectionAfterDeleteHook & GlobalAfterChangeHook = async ({ req, doc }: any) => {
+  // Build-time content fixes (cms/contentFixes.ts) are part of a publish, so they are not "waiting".
+  if (req?.context?.skipMarkChanged) return doc;
   await touch(req.payload);
   return doc;
 };

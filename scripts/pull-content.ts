@@ -17,6 +17,7 @@ import './load-env';
 import { getPayload } from 'payload';
 import config from '../payload.config';
 import { fromDoc, postFromDoc, settingsFromDoc } from '../cms/sync';
+import { applyContentFixes } from '../cms/contentFixes';
 
 const ROOT = process.cwd();
 const write = (rel: string, data: unknown) => {
@@ -32,6 +33,8 @@ async function main() {
   }
   const payload = await getPayload({ config });
   try {
+    // Practice-requested corrections to content already in the database (cms/contentFixes.ts).
+    await applyContentFixes(payload).catch((e) => console.warn(`[pull-content] content fixes skipped: ${(e as Error).message}`));
     const pages = await payload.find({ collection: 'pages', limit: 500, depth: 2, overrideAccess: true, where: { _status: { equals: 'published' } } });
     if (!pages.docs.length) {
       console.log('[pull-content] The dashboard has no published pages yet (run Import on the dashboard); building from the files in the repo.');

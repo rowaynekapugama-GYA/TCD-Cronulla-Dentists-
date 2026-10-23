@@ -5,7 +5,7 @@
     "route": "/finances/",
     "title": "Finances",
     "metaTitle": "Payment Plans & Finances | The Cronulla Dentists",
-    "metaDescription": "Written estimates before treatment, nib preferred provider, HICAPS claiming on the spot and DentiCare payment plans at our Cronulla practice.",
+    "metaDescription": "Written estimates before treatment, HICAPS claiming on the spot and DentiCare payment plans at our Cronulla practice.",
     "primaryKeyword": "dental payment plans Cronulla"
   },
   "h1": "Finances in Cronulla",
@@ -55,7 +55,7 @@
       "nodes": [
         {
           "type": "p",
-          "text": "We are an nib preferred provider. We also use HICAPS, so whichever fund you are with, bring your card and you can claim on the spot and pay only the gap."
+          "text": "We use HICAPS, so whichever fund you are with, bring your card and you can claim on the spot and pay only the gap."
         },
         {
           "type": "p",

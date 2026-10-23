@@ -434,9 +434,10 @@ a.card:hover,.card.lift:hover{transform:translateY(-6px);box-shadow:0 20px 44px 
 .provider{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);opacity:0.55;display:flex;align-items:center;gap:0.6rem}
 .provider small{font-family:var(--display);font-weight:500;font-size:0.6rem;letter-spacing:0.16em;color:var(--cyan);opacity:1}
 
-/* provider cards — DentiCare / nib / HICAPS, three-up */
+/* provider cards: DentiCare and HICAPS (grid sized to the number of cards) */
 .provider-section{padding-top:2.6rem;padding-bottom:2.6rem;border-bottom:1px solid #E6EDF3}
 .provider-cards{max-width:1000px;margin:0 auto}
+.provider-cards-2{max-width:680px}
 .provider-card{
   padding:2rem 1.6rem 1.5rem;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;gap:1rem;min-height:150px;

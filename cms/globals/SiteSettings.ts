@@ -153,7 +153,7 @@ export const SiteSettings: GlobalConfig = {
               type: 'array',
               label: 'Health funds and payment lines',
               fields: [{ name: 'value', type: 'text', required: true }],
-              admin: { description: 'Shown on the home page and finances pages, for example: nib preferred provider' },
+              admin: { description: 'Shown on the home page and finances pages, for example: HICAPS claimed on the spot' },
             },
           ],
         },

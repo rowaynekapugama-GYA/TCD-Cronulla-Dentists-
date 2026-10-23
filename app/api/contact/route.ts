@@ -25,7 +25,7 @@ export async function POST(req: Request) {
   const lead: Record<string, string> = { firstName, email, message, source: 'thecronulladentists.com.au /contact' };
   if (lastName) lead.lastName = lastName;
   if (phone) lead.phoneNumber = e164(phone);
-  const result = await relay(`Website message: ${name}`, lead, 'Contact form — The Cronulla Dentists website');
+  const result = await relay(`Website message: ${name}`, lead, 'Contact form: The Cronulla Dentists website');
   await logEnquiry({
     form: 'contact',
     name,

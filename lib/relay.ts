@@ -4,13 +4,19 @@
  * The SmileOx intake parses leads ONLY from a plain-text email body that is a
  * raw JSON object with camelCase keys (firstName, lastName, email, phoneNumber
  * + any extra fields). So the intake email carries exactly
- * JSON.stringify(payload) and nothing else — no HTML part, no prose. The
+ * JSON.stringify(payload) and nothing else, no HTML part, no prose. The
  * optional NOTIFY_EMAIL copy is sent as a SEPARATE human-readable email so
  * reception never sees raw JSON.
  *
  * Env vars (see .env.example): SMTP2GO_API_KEY, SMTP2GO_SENDER,
- * SMILEOX_INTAKE_EMAIL, NOTIFY_EMAIL (optional).
+ * SMILEOX_INTAKE_EMAIL, NOTIFY_EMAIL (optional). Setup guide: docs/EMAIL-FORMS-SETUP.md.
  */
+
+/**
+ * Every form submission is always emailed to these addresses, whatever NOTIFY_EMAIL says (Rowayne,
+ * 28 Sep 2026). NOTIFY_EMAIL can add more; it cannot remove these. Changing this list needs a code change.
+ */
+export const ALWAYS_NOTIFY = ['reception@thecronulladentists.com.au', 'rowayne@gyaclients.com'];
 export interface RelayResult {
   ok: boolean;
   error?: string;
@@ -33,7 +39,7 @@ export function e164(phone: string) {
 
 export async function relay(subject: string, lead: Record<string, string>, source: string): Promise<RelayResult> {
   // Trim every value. A key pasted into a hosting dashboard very often picks up
-  // a trailing newline, which is invisible on screen and rejected by the API —
+  // a trailing newline, which is invisible on screen and rejected by the API -
   // diagnosed exactly that on 17 Sep 2026, where the key measured 38 characters
   // instead of 36. Trimming here means the same paste cannot break it again.
   const apiKey = process.env.SMTP2GO_API_KEY?.trim();
@@ -50,15 +56,18 @@ export async function relay(subject: string, lead: Record<string, string>, sourc
    * Whitespace around each address is trimmed, because a list pasted into
    * Vercel almost always arrives with spaces after the commas.
    */
-  const notifyList = (process.env.NOTIFY_EMAIL || '')
-    .split(/[,;]/)
-    .map((a) => a.trim())
-    .filter(Boolean);
+  const notifyList = Array.from(
+    new Set(
+      [...ALWAYS_NOTIFY, ...(process.env.NOTIFY_EMAIL || '').split(/[,;]/)]
+        .map((a) => a.trim().toLowerCase())
+        .filter((a) => isEmail(a)),
+    ),
+  );
   const notify = notifyList.length > 0;
 
   if (!apiKey || !(intake || notify)) {
     // Not configured yet (local dev / preview): log and succeed so the UI can be tested.
-    console.warn('[relay] SMTP2GO not configured — submission logged only:', source, lead);
+    console.warn('[relay] SMTP2GO not configured, submission logged only:', source, lead);
     return { ok: true };
   }
 
@@ -89,7 +98,7 @@ export async function relay(subject: string, lead: Record<string, string>, sourc
     // Log the provider's own words. Without this the visitor sees "we could not
     // send" and the function log says nothing, which leaves no way to tell a bad
     // API key from an unverified sender from an account out of credits. The
-    // visitor still only ever sees the generic message — the detail is for the
+    // visitor still only ever sees the generic message, the detail is for the
     // log, and the key is never printed.
     if (!res.ok || json.data?.error || json.data?.failures?.length) {
       console.error(
@@ -131,14 +140,19 @@ export async function relay(subject: string, lead: Record<string, string>, sourc
     const text = Object.entries(lead)
       .map(([k, v]) => `${k}: ${v}`)
       .join('\n');
-    await send({
+    const replyTo = isEmail(lead.email || '') ? lead.email : '';
+    const copy = await send({
       api_key: apiKey,
       sender,
       to: notifyList,
       subject,
       text_body: `${source}\n\n${text}`,
       html_body: `<p>${esc(source)}</p><table>${rows}</table>`,
-    }).catch(() => ({ ok: false }));
+      // Reply in the mail app goes straight to the person who filled in the form.
+      ...(replyTo ? { custom_headers: [{ header: 'Reply-To', value: replyTo }] } : {}),
+    }).catch(() => ({ ok: false as const, error: 'send failed' }));
+    // With no SmileOx intake set, this copy IS the delivery, so its result is the result.
+    if (!intake) result = copy;
   }
 
   return result.ok ? { ok: true } : { ok: false, error: result.error };

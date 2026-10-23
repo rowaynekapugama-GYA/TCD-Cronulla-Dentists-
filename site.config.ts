@@ -170,7 +170,7 @@ const DEFAULTS = {
   },
 
   // ---- Health funds / payment (ONLY these three) ----
-  payment: ['nib preferred provider', 'HICAPS claimed on the spot', 'DentiCare payment plans'],
+  payment: ['HICAPS claimed on the spot', 'DentiCare payment plans'],
 
   // ---- Feature flags: build everything, ship it OFF ----
   features: {

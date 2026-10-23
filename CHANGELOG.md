@@ -1,5 +1,39 @@
 # Changelog: The Cronulla Dentists website
 
+## 2.2.4 – 23 Oct 2026: nib removed
+
+23 Oct 2026: NIB removed per client request, pending NIB provider approval. Reinstate when confirmed.
+
+- Ram (Principal Dentist, email 23 Oct 2026): the Cronulla practice has applied to be an nib provider
+  but is not approved yet, so nib comes off the website in case the application is unsuccessful.
+  Cronulla only; the Caringbah site is a separate repo and is untouched. No other health fund, payment
+  option or content changed.
+- Home: the nib card is gone from the provider cards (DentiCare and HICAPS now sit as two centred cards;
+  the grid sizes itself to the number of cards) and from the partner strip near the footer.
+- Finances: meta description and the health funds paragraph no longer mention nib. Contact and Dental
+  implants: the nib sentence fragment is removed; the HICAPS and DentiCare wording is unchanged.
+- Logo files deleted: public/images/providers/nib.png, assets-source/providers/nib-original.png.
+- Site Settings default payment lines and the dashboard help text no longer mention nib.
+- The live wording is in the dashboard database, so cms/contentFixes.ts applies the same removals to
+  the database on the next build (before the content pull) and logs anything it could not match.
+- scripts/check-banned.mjs now fails on "nib" in any rendered page, so it cannot come back by accident.
+
+To reinstate once approved: delete the 'nib' line in scripts/check-banned.mjs and NIB_RULES in
+cms/contentFixes.ts, restore the two logo files and lib/providers.ts / the content files from the 2.2.3
+commit, then put the wording back in the dashboard (Pages: Home, Finances, Contact, Dental implants;
+Site Settings > Booking and payment) and Publish website.
+
+## 2.2.3 – 28 September 2026: form emails
+
+- Every form submission is always emailed to reception@thecronulladentists.com.au and
+  rowayne@gyaclients.com (fixed in lib/relay.ts, ALWAYS_NOTIFY), plus anyone in NOTIFY_EMAIL. Addresses are
+  trimmed, lower-cased, checked and de-duplicated. Rowayne, 28 Sep 2026.
+- Reply-To on the notification email is the visitor, so reception can reply straight from the inbox.
+- When there is no SmileOx intake address, a failed notification now counts as a failed send (the visitor
+  sees the error, Enquiries shows "failed") instead of reporting success.
+- docs/EMAIL-FORMS-SETUP.md: SMTP2GO domain verification, API key, Vercel settings, test and
+  troubleshooting. README forms section updated; the stale VERCEL-ENV-VARIABLES.txt reference removed.
+
 ## 2.2.2 – 28 September 2026: sign-in rescue
 
 - If the dashboard password is lost (the dashboard cannot email a reset link yet): set ADMIN_EMAIL and

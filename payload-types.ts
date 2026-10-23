@@ -1682,7 +1682,7 @@ export interface SiteSetting {
       }[]
     | null;
   /**
-   * Shown on the home page and finances pages, for example: nib preferred provider
+   * Shown on the home page and finances pages, for example: HICAPS claimed on the spot
    */
   payment?:
     | {

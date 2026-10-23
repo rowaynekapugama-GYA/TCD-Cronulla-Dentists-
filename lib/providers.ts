@@ -2,14 +2,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 /**
- * The three health-fund / payment marks shown on the home page.
+ * The health-fund / payment marks shown on the home page (DentiCare and HICAPS).
+ * nib was removed on 23 Oct 2026 at the practice's request, pending nib provider
+ * approval for Cronulla; see CHANGELOG 2.2.4 to reinstate.
  *
  * Each card renders the supplied logo file when one is present in
  * `public/images/providers/`, and falls back to the styled wordmark when it is
  * not — so the layout is correct either way and dropping the files in needs no
  * code change. Accepted extensions, in order of preference: svg, png, webp, jpg.
  *
- * Only use official logo files supplied by (or licensed from) DentiCare, nib
+ * Only use official logo files supplied by (or licensed from) DentiCare
  * and HICAPS — see IMAGES-NEEDED.md §6.
  */
 export interface ProviderCard {
@@ -22,7 +24,6 @@ export interface ProviderCard {
 
 const CARDS: { name: string; tagline: string; file: string }[] = [
   { name: 'DentiCare', tagline: 'Payment plans', file: 'denticare' },
-  { name: 'nib', tagline: 'Preferred provider', file: 'nib' },
   { name: 'HICAPS', tagline: 'Claim on the spot', file: 'hicaps' },
 ];
 

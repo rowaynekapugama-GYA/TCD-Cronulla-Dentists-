@@ -2,7 +2,7 @@ import { providerCards } from '@/lib/providers';
 import { img } from '@/lib/img';
 
 /**
- * Three-up cards for DentiCare / nib / HICAPS.
+ * Cards for DentiCare and HICAPS, centred in a grid sized to the number of cards.
  *
  * Shows the real logo when a file has been supplied (see lib/providers.ts),
  * otherwise the styled wordmark, so the block reads correctly either way.
@@ -11,7 +11,7 @@ export default function ProviderCards() {
   const cards = providerCards();
   return (
     <section className="section section-white provider-section" aria-label="Health funds and payment options">
-      <div className="grid grid-3 provider-cards">
+      <div className={`grid grid-${Math.min(Math.max(cards.length, 1), 3)} provider-cards provider-cards-${cards.length}`}>
         {cards.map((c) => (
           <div key={c.name} className={`card provider-card lift${c.logo ? ' has-logo' : ''}`}>
             <div className="provider-logo">

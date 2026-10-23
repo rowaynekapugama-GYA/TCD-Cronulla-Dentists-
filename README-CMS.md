@@ -36,8 +36,8 @@ only ever touches the `cms` branch until you run `promote`.
 
 ```bash
 cd ~/Downloads
-unzip -o cronulla-CMS-v2.2.2-FULL-REPO.zip
-bash cronulla-cms/scripts/push-to-github.sh stage cronulla-CMS-v2.2.2-FULL-REPO.zip
+unzip -o cronulla-CMS-v2.2.4-FULL-REPO.zip
+bash cronulla-cms/scripts/push-to-github.sh stage cronulla-CMS-v2.2.4-FULL-REPO.zip
 ```
 
 First run asks for the repo address (GitHub > the repo > green **Code** button > HTTPS). If git asks you
@@ -48,6 +48,11 @@ until Step 3 is done. That is expected; the live site is unaffected.
 
 Other commands: `bash cronulla-cms/scripts/push-to-github.sh status` (what is live and what is staged),
 `promote` (Step 6), `rollback` (undo the last promote).
+
+**Small change straight to the live site (no staging):** `bash cronulla-cms/scripts/push-to-main.sh
+<zip>` replaces `main` with the zip, shows every changed file, asks `yes`, commits, pushes (never a force
+push), lists the Vercel deployments and checks the live pages afterwards. `push-to-github.sh rollback`
+undoes it. Used for the 23 Oct 2026 nib removal (v2.2.4).
 
 ## Step 2: create the database and the photo store (Vercel Storage)
 
@@ -75,7 +80,7 @@ from the current site stay exactly as they are.
 | `PAYLOAD_SECRET` | any long random string, for example the output of `openssl rand -hex 32`, or 40+ random characters typed by hand. Mark it Sensitive. Never change it later without telling everyone to log in again. |
 | `NEXT_PUBLIC_SERVER_URL` | `https://www.thecronulladentists.com.au` (Production and Preview; previews automatically use their own address) |
 | `PUBLISH_HOOK_URL` | see step 4 |
-| `SMTP2GO_API_KEY`, `SMTP2GO_SENDER`, `SMILEOX_INTAKE_EMAIL`, `NOTIFY_EMAIL` | unchanged from today |
+| `SMTP2GO_API_KEY`, `SMTP2GO_SENDER`, `SMILEOX_INTAKE_EMAIL`, `NOTIFY_EMAIL` | form emails; full steps in `docs/EMAIL-FORMS-SETUP.md`. Reception and rowayne@gyaclients.com always receive every submission |
 
 The build fails on purpose with a clear message if `PAYLOAD_SECRET` is missing, so a half-configured
 deploy can never expose the dashboard with a known secret.

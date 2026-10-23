@@ -1,4 +1,4 @@
-# The Cronulla Dentists — website
+# The Cronulla Dentists, website
 
 Next.js 15 (App Router, TypeScript, plain CSS) · static-generated · Payload CMS client dashboard at /admin.
 
@@ -6,7 +6,7 @@ Next.js 15 (App Router, TypeScript, plain CSS) · static-generated · Payload CM
 
 Direct visual extension of the approved EOI landing page: same tokens, glass cards, cyan-gradient buttons, countdown.
 
-**Navigation.** The approved floating pill: logo left, `About · Services · Finances · Contact` and the cyan CTA on the right. **About** and **Services** each open a panel of rounded image cards directly beneath the pill — Services shows six treatments plus a *We offer 15 treatments* line and an *All services* button; About shows four cards (the practice, the team, nervous patients, parking).
+**Navigation.** The approved floating pill: logo left, `About · Services · Finances · Contact` and the cyan CTA on the right. **About** and **Services** each open a panel of rounded image cards directly beneath the pill, Services shows six treatments plus a *We offer 15 treatments* line and an *All services* button; About shows four cards (the practice, the team, nervous patients, parking).
 
 Both panels open on hover *and* on click (so they work on touch), close on Escape or when the pointer leaves, and survive the trip from pill to panel: the 0.7rem gap is bridged by an invisible `.mega::before` strip, and open/close is React state with a 200ms close delay rather than a CSS-only `:hover` rule. That combination is what fixes the old menu vanishing mid-travel.
 
@@ -16,7 +16,7 @@ Which cards appear: `FEATURED` (Services) and `aboutFeatured()` (About), both in
 
 ```bash
 npm install
-cp .env.example .env.local   # optional — forms log to the console until SMTP2GO is configured
+cp .env.example .env.local   # optional, forms log to the console until SMTP2GO is configured
 npm run dev                  # http://localhost:3000
 npm run build                # production build: migrations → pull dashboard content → next build
 npm run qa:banned            # definition-of-done check over the rendered HTML (run after build)
@@ -33,7 +33,7 @@ The repo deploys to Vercel from Git. Full steps, environment variables and the d
 | Path | What |
 |---|---|
 | `site.config.ts` | **Single source of truth**: name, address, phone, email, hours, mode, feature flags, TODO values. Nothing is hard-coded in components. |
-| `content/source/website-copy.md` | The client's final copy (do not edit — edit the source doc and re-ingest). |
+| `content/source/website-copy.md` | The client's final copy (do not edit, edit the source doc and re-ingest). |
 | `scripts/ingest-copy.mjs` | Turns the copy doc into `content/pages/*.json` (one file per page). Re-run after any copy change: `node scripts/ingest-copy.mjs`. |
 | `content/pages/*.json` | Structured copy, block by block, with `gate` tags on gated content. |
 | `app/` | Routes. `app/[slug]/page.tsx` renders every service + prose page; home, services hub, contact, register are explicit. |
@@ -54,7 +54,7 @@ Effect: primary CTA becomes **Book an appointment** (→ `bookingUrl`, falls bac
 
 While `mode` is `'pre-opening'`, every CTA is **Register your interest → /register/**, the "Opening late November 2026" pill shows (the countdown returns automatically once an exact `openingDateTime` is set in `site.config.ts`), and the phone number is displayed (footer, contact, schema) but never used as a CTA.
 
-## Feature flags (all default OFF — flipping a flag is the whole launch)
+## Feature flags (all default OFF, flipping a flag is the whole launch)
 
 ```ts
 features: {
@@ -70,35 +70,40 @@ features: {
 | `cdbs` | `/kids-gap-free-dentistry-cronulla/` is not built; "The Child Dental Benefits Schedule" section on Children's Dentistry and the CDBS paragraph on Finances are hidden (pages render cleanly). | Page + blocks live; footer gets a "Kids' Gap Free Dentistry" link. |
 | `zipAfterpay` | `/payment-plans/` ships DentiCare-only: Zip and Afterpay sections hidden; hook + intro sentence use the DentiCare-only wording stored in `gatedText`; meta title "Payment Plans \| DentiCare \| Cronulla". | Full copy + original meta. |
 
-Gated copy is never deleted — it stays in `content/pages/*.json` with `gate` tags.
+Gated copy is never deleted, it stays in `content/pages/*.json` with `gate` tags.
 
 Gated pages are served as **404** (not built) rather than `noindex`, so nothing can leak while a flag is off.
 
 ## TODO config values to swap in (`site.config.ts`)
 
-- `bookingUrl` — practice-management online booking link (used in `open` mode)
+- `bookingUrl`, practice-management online booking link (used in `open` mode)
 
-Now set (no longer TODO): `mapEmbedUrl` (keyless Google embed of the GBP listing), `gbpShareUrl` + `sameAs.googleMaps` (the client's share.google listing link, also emitted as `hasMap`), `teamNamesConfirmed: true` with Person schema for both practitioners on /about/ per the SEO strategy docs. Env vars for the forms are in `VERCEL-ENV-VARIABLES.txt` — only `SMTP2GO_API_KEY` still needs its value pasted in Vercel.
-- `gtmId` — GTM container; the snippet loads on every page only when set
-- `sameAs.googleMaps / facebook / instagram` — schema `sameAs` (empty strings are omitted)
-- `geo` — verify against the final map pin
-- `team[].title` — registration/title wording; set `teamNamesConfirmed: true` to publish full names in metadata/schema (body copy already uses the names from the approved copy)
-- `parkingNotes` — bullet list for the Parking section on `/parking-information/` (hidden while empty; the copy's section was entirely `[TO CONFIRM]`)
-- `privacyLastUpdated` — shown at the top of the privacy policy once published
-- `legalName` — entity name + ABN for the privacy policy (currently the trading name)
+Now set (no longer TODO): `mapEmbedUrl` (keyless Google embed of the GBP listing), `gbpShareUrl` + `sameAs.googleMaps` (the client's share.google listing link, also emitted as `hasMap`), `teamNamesConfirmed: true` with Person schema for both practitioners on /about/ per the SEO strategy docs. Form email setup: `docs/EMAIL-FORMS-SETUP.md`.
+- `gtmId`, GTM container; the snippet loads on every page only when set
+- `sameAs.googleMaps / facebook / instagram`, schema `sameAs` (empty strings are omitted)
+- `geo`, verify against the final map pin
+- `team[].title`, registration/title wording; set `teamNamesConfirmed: true` to publish full names in metadata/schema (body copy already uses the names from the approved copy)
+- `parkingNotes`, bullet list for the Parking section on `/parking-information/` (hidden while empty; the copy's section was entirely `[TO CONFIRM]`)
+- `privacyLastUpdated`, shown at the top of the privacy policy once published
+- `legalName`, entity name + ABN for the privacy policy (currently the trading name)
 
 ## Forms (`/register/` EOI and `/contact/`)
 
-`/api/eoi` and `/api/contact` relay through **SMTP2GO → SmileOx intake address**, the same pattern as the live EOI page. Set in Vercel → Project → Environment Variables:
+`/api/eoi` and `/api/contact` save each submission in the dashboard (Enquiries) and email it through
+**SMTP2GO** to **reception@thecronulladentists.com.au** and **rowayne@gyaclients.com** (always, fixed in
+`lib/relay.ts` as `ALWAYS_NOTIFY`), plus anyone in `NOTIFY_EMAIL`, with Reply-To set to the visitor. If
+`SMILEOX_INTAKE_EMAIL` is set, the lead also goes to SmileOx as a JSON body. **Step-by-step setup:
+`docs/EMAIL-FORMS-SETUP.md`.**
 
 ```
-SMTP2GO_API_KEY=…
-SMTP2GO_SENDER=website@thecronulladentists.com.au   # must be a verified SMTP2GO sender
-SMILEOX_INTAKE_EMAIL=the-cronulla-dentists+94b89dce-…@intake.smileox.com.au
-NOTIFY_EMAIL=reception@thecronulladentists.com.au   # optional CC
+SMTP2GO_API_KEY=…                                     # Vercel only, never in the repo
+SMTP2GO_SENDER=website@thecronulladentists.com.au   # must be on the SMTP2GO-verified domain
+NOTIFY_EMAIL=reception@thecronulladentists.com.au, rowayne@gyaclients.com   # extras; these two are always included
+SMILEOX_INTAKE_EMAIL=                                 # optional
 ```
 
-Both routes have a honeypot field (`website`), server-side validation and a glass-card success state. Until the env vars are set, submissions are logged server-side and the UI still shows success (handy for previews).
+Both routes have a honeypot field (`website`) and server-side validation. Until `SMTP2GO_API_KEY` is set,
+submissions are saved in Enquiries (email status "skipped") and the form still shows success.
 
 ## Deploy to Vercel
 
@@ -145,7 +150,7 @@ Verified: both modes, each flag ON and OFF (routes, nav, sitemap, in-page blocks
 ## Service-page detail sections (BLOCK 10)
 
 The copy's detail sections render **section by section down the page**, not as an
-accordion — nothing the client wrote is hidden behind a click, and search engines
+accordion, nothing the client wrote is hidden behind a click, and search engines
 read it as body copy. `components/DetailSections.tsx` handles it:
 
 - A jump list at the top links to every section; sections alternate white/sand and
@@ -154,14 +159,14 @@ read it as body copy. `components/DetailSections.tsx` handles it:
   then a run of paragraphs each opening with a bold lead-in (`**We look,
   properly.** An examination of…`), then a closing line, the run of two or more
   becomes a grid of **icon cards**; everything else stays prose. Nothing is
-  reworded or reordered — only laid out. 38 of the 143 detail sections across the
+  reworded or reordered, only laid out. 38 of the 143 detail sections across the
   site take the card treatment.
 - Icons are chosen from what each lead-in says (`KEYWORDS` in that file), with a
   per-grid de-duplication pass so two cards side by side never share an icon.
 - Lead-ins keep their full stop, because the copy is rendered verbatim and
   `scripts/verify-copy.mjs` checks it word for word.
 
-FAQ schema is unaffected — it is built from the page data, not this markup, so
+FAQ schema is unaffected, it is built from the page data, not this markup, so
 question-phrased headings still emit `FAQPage`.
 
 ## Site-wide QA sweep (`scripts/audit.mjs`)
@@ -177,7 +182,7 @@ menus (hover, click, Escape), the detail jump-nav, mobile menu open/navigate,
 and form validation blocking empty submits.
 
 Note on scroll-reveal: `components/Reveal.tsx` observes with a huge top
-rootMargin so anything at or above the current viewport always reveals — without
+rootMargin so anything at or above the current viewport always reveals, without
 it, a reload that restores scroll mid-page, an anchor jump, or a fast flick
 could leave sections at opacity 0. A `<noscript>` fallback in `app/layout.tsx`
 forces everything visible when JS is off.

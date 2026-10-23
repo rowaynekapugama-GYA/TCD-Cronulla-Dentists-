@@ -159,7 +159,7 @@ export function SettingsForm({ initial, isAdmin }: { initial: any; isAdmin: bool
             <div className="d-field">
               <span className="d-label">Health funds and payment lines</span>
               <StringListEditor value={(doc.payment || []).map(withId)} onChange={(payment) => up({ payment })} itemLabel="Line" rows={1} />
-              <div className="d-help">Shown on the home page and the finances pages, for example: nib preferred provider.</div>
+              <div className="d-help">Shown on the home page and the finances pages, for example: HICAPS claimed on the spot.</div>
             </div>
           </>
         )}

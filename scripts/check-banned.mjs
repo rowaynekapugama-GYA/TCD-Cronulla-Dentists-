@@ -50,6 +50,8 @@ const BANNED = [
   'ortho@',
   'accounts@',
   'thecaringbahdentists@gmail',
+  // 23 Oct 2026: nib removed pending provider approval for Cronulla. Delete this line when reinstating.
+  'nib',
 ];
 const ALLOWED = [
   /fitted on the same day teeth are extracted/i, // Dentures — describes a procedure
