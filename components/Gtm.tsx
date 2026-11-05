@@ -1,22 +1,37 @@
 import Script from 'next/script';
 import { SITE_CONFIG } from '@/site.config';
 
-/** Google Tag Manager — loads only when SITE_CONFIG.gtmId is set. */
+/**
+ * Google Tag Manager, using the container snippet exactly as Google supplied it
+ * for GTM-TNWQ82NH (Brian, Google Ads, 4 Nov 2026: new containers use this
+ * shorter tag). Rendered as the first thing inside <head>, as Google asks, and
+ * only when SITE_CONFIG.gtmId is set (dashboard: Site Settings > Tracking).
+ * Plain <script> tags rather than next/script so it sits in the server HTML
+ * straight after <head> instead of being injected after hydration.
+ */
 export function GtmHead() {
   if (!SITE_CONFIG.gtmId) return null;
   return (
-    <Script id="gtm" strategy="afterInteractive">
-      {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${SITE_CONFIG.gtmId}');`}
-    </Script>
+    <>
+      <script async src={`https://www.googletagmanager.com/gtm.js?id=${SITE_CONFIG.gtmId}`} />
+      <script
+        id="gtm-init"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());`,
+        }}
+      />
+    </>
   );
 }
 /**
- * GA4 (gtag.js) — loads only when SITE_CONFIG.ga4Id is set.
+ * GA4 (gtag.js): loads only when SITE_CONFIG.ga4Id is set.
  *
  * Deliberately separate from the GTM block above: a G-XXXXXXXXXX measurement ID
  * and a GTM-XXXXXXX container are different products, and dropping the GA4 ID
  * into the Tag Manager loader would not report anything. If a GTM container is
- * ever added, set gtmId as well — but then move GA4 INSIDE the container and
+ * ever added, set gtmId as well, but then move GA4 INSIDE the container and
  * clear ga4Id here, or every pageview is counted twice.
  *
  * One tag only. The snippet supplied was pasted twice; a second copy of gtag.js

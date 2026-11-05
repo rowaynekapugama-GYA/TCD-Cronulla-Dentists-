@@ -14,6 +14,7 @@ export const IMAGE_ALT: Record<string, string> = {
   '/images/tiles/cosmetic-dentistry-cronulla.jpg': 'Lady smiling after a cosmetic surgery in Cronulla',
   '/images/tiles/dental-crowns-bridges-cronulla.jpg': 'Crowns & Bridges in Cronulla',
   '/images/tiles/dental-anxiety-cronulla.jpg': 'Family Dentistry in Cronulla',
+  '/images/tiles/dental-anxiety.jpg': 'A woman with long dark hair smiling warmly at home',
   '/images/tiles/tooth-coloured-fillings-cronulla.jpg': 'Tooth Coloured Fillings in Cronulla',
   '/images/tiles/periodontal-treatment-cronulla.jpg': 'Periodontal Treatment in Cronulla',
   '/images/tiles/wisdom-teeth-removal-cronulla.jpg': 'Wisdom Teeth Removal in Cronulla',

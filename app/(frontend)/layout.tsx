@@ -51,11 +51,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-AU" className={`${poppins.variable} ${inter.variable}`}>
       <head>
+        {/* Google Tag Manager first, immediately after <head> (Google's instruction). */}
+        <GtmHead />
         {(SITE_CONFIG.colours.navy || SITE_CONFIG.colours.cyan) && (
           // Brand colour overrides from the dashboard. Absent until someone sets them.
           <style>{`:root{${SITE_CONFIG.colours.navy ? `--navy:${SITE_CONFIG.colours.navy};` : ''}${SITE_CONFIG.colours.cyan ? `--cyan:${SITE_CONFIG.colours.cyan};` : ''}}`}</style>
         )}
-        <GtmHead />
         {/*
           GA4 inlined deliberately rather than imported from components/Gtm.tsx.
           The three-file chain (layout -> Gtm -> site.config) meant a partial

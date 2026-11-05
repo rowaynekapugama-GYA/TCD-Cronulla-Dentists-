@@ -394,7 +394,7 @@
 .ape-page .ape-local .btn-row{margin-top:1.6rem}
 
 /* FAQs: a plain list of the APE questions, one open at a time via <details> */
-.ape-page .ape-faq{display:grid;gap:12px;max-width:860px}
+.ape-page .ape-faq{display:grid;gap:12px;max-width:860px;margin-left:auto;margin-right:auto}
 .ape-page .ape-faq details{background:var(--offwhite);border:1px solid rgba(231,223,212,.9);border-radius:22px;padding:0 clamp(20px,3vw,30px)}
 .ape-page .ape-faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 0;font-family:var(--serif);font-size:clamp(18px,1.5vw,22px);line-height:1.3;color:var(--ink)}
 .ape-page .ape-faq summary::-webkit-details-marker{display:none}
@@ -404,7 +404,7 @@
 .ape-page .ape-faq summary:focus-visible{outline:2px solid var(--taupe);outline-offset:4px;border-radius:8px}
 .ape-page .ape-faq .ape-faq-a{padding:0 0 22px;color:var(--ink-soft);max-width:68ch}
 .ape-page .ape-faq .ape-faq-a p:last-child{margin-bottom:0}
-.ape-page .ape-faq-more{margin-top:clamp(28px,4vw,44px)}
+.ape-page .ape-faq-more{margin-top:clamp(28px,4vw,44px);max-width:860px;margin-left:auto;margin-right:auto}
 
 /* Single team member (Dr Lorna) */
 .ape-page .ape-member .ape-member-photo .ape-frame{max-width:460px}

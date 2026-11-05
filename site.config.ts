@@ -73,7 +73,7 @@ const DEFAULTS = {
     { name: 'The Cronulla Dentists', address: '13 Cronulla Street, Cronulla', url: '', note: '' },
     { name: 'The Caringbah Dentists', address: '172A Willarong Rd, Caringbah', url: 'https://www.corepractice.is/practices/tcd/the-caringbah-dentists', note: '50 years in the Shire' },
   ] as { name: string; address: string; url: string; note: string }[],
-  gtmId: '', // Optional GTM container ID (GTM-XXXXXXX). Separate from ga4Id below — leave blank unless a container is actually set up.
+  gtmId: 'GTM-TNWQ82NH', // Google Tag Manager container (Brian, Google Ads, 4 Nov 2026). Separate from ga4Id below. The live value is the one in Site Settings > Tracking.
   /**
    * GA4 measurement ID. This is the gtag.js property, not a Tag Manager
    * container, so it loads on its own and does not need gtmId to be set.

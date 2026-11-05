@@ -11,11 +11,27 @@
  * 23 Oct 2026: the dental anxiety page moved from /dental-anxiety-cronulla/ to /dental-anxiety/ for
  * The Anxious Patient Experience (TM). applyApeRename() below renames the page once (slug, route,
  * SEO title and description) and points every link in the other pages at the new address.
+ *
+ * 5 Nov 2026: Google Tag Manager container GTM-TNWQ82NH (Brian, Google Ads). applyGtmContainer()
+ * fills the Site Settings > Tracking field once when it is blank; a different ID typed in the
+ * dashboard is left alone. To remove GTM later, also blank GTM_CONTAINER below, or the next build
+ * fills the field again.
  */
 import type { Payload } from 'payload';
 import { APE_OLD_SLUG, APE_ROUTE, APE_SLUG } from '../lib/ape';
 
 type Rule = [RegExp, string];
+
+const GTM_CONTAINER = 'GTM-TNWQ82NH';
+
+async function applyGtmContainer(payload: Payload, context: Record<string, unknown>): Promise<number> {
+  if (!GTM_CONTAINER) return 0;
+  const settings = (await payload.findGlobal({ slug: 'site-settings', depth: 0, overrideAccess: true })) as any;
+  if (!settings || (settings.gtmId || '').trim()) return 0;
+  await payload.updateGlobal({ slug: 'site-settings', data: { gtmId: GTM_CONTAINER } as any, depth: 0, overrideAccess: true, context });
+  console.log(`[content-fixes] Google Tag Manager container ${GTM_CONTAINER} added to Site Settings`);
+  return 1;
+}
 
 /** The SEO wording set when the page is renamed. Edits made in the dashboard afterwards are kept. */
 const APE_META = {
@@ -118,6 +134,7 @@ function leftovers(value: any, path: string, out: string[]) {
 export async function applyContentFixes(payload: Payload): Promise<void> {
   const context = { skipMarkChanged: true };
   let changed = await applyApeRename(payload, context);
+  changed += await applyGtmContainer(payload, context);
   const pages = await payload.find({ collection: 'pages', limit: 500, depth: 0, overrideAccess: true });
   for (const doc of pages.docs as any[]) {
     const patch = changedFields(doc);

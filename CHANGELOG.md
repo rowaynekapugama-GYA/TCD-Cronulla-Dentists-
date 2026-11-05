@@ -1,5 +1,20 @@
 # Changelog: The Cronulla Dentists website
 
+## 2.4.0 – 5 Nov 2026: Google Tag Manager
+
+- Google Tag Manager container GTM-TNWQ82NH added (Brian, Google Ads, 4 Nov 2026), using the shorter
+  snippet Google now issues for new containers, as the first thing inside <head> on every page
+  (components/Gtm.tsx, app/(frontend)/layout.tsx). The noscript fallback after <body> is kept.
+- The live value comes from the dashboard (Site Settings > Tracking), which was blank, so
+  cms/contentFixes.ts fills that field with GTM-TNWQ82NH on the next build when it is empty. The repo
+  default in site.config.ts is set to the same ID.
+- GA4 (G-XDZHHZLVYL) still loads directly as before. If the GTM container also fires GA4 for that ID,
+  clear the GA4 field in Site Settings > Tracking and Publish, or page views are counted twice.
+- Carried into this release (prepared 23 Oct 2026, never pushed): the Services page Dental Anxiety card
+  now has a photo (public/images/tiles/dental-anxiety.jpg, alt text in lib/image-alt.ts; it was broken
+  after the page moved to /dental-anxiety/), and the Questions section on the APE page is centred under
+  its heading (app/ape.css).
+
 ## 2.3.0 – 23 Oct 2026: The Anxious Patient Experience page
 
 New page at /dental-anxiety/ for The Anxious Patient Experience(TM) (APE), Dr Lorna Gladwin's dental
