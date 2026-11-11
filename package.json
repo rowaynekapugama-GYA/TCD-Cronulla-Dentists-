@@ -1,6 +1,6 @@
 {
   "name": "the-cronulla-dentists",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -14,7 +14,8 @@
     "gen:images": "node scripts/gen-image-manifest.mjs",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
-    "qa:banned": "node scripts/check-banned.mjs"
+    "qa:banned": "node scripts/check-banned.mjs",
+    "qa:verification": "node scripts/check-verification.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

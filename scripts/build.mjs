@@ -1,5 +1,6 @@
 /**
  * Production build, in order:
+ *   0. site verification files still in public/ and unchanged (scripts/check-verification.mjs)
  *   1. image manifest (content hashes for /public/images)
  *   2. database migrations (only when DATABASE_URL is set; no-op when up to date)
  *   3. pull the latest dashboard content into /content
@@ -17,6 +18,7 @@ const run = (cmd, args, { allowFail = false } = {}) => {
   return r.status === 0;
 };
 
+run('node', ['scripts/check-verification.mjs']);
 run('node', ['scripts/gen-image-manifest.mjs']);
 
 if (process.env.DATABASE_URL) {

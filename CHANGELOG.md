@@ -1,5 +1,15 @@
 # Changelog: The Cronulla Dentists website
 
+## 2.4.1 – 11 Nov 2026: Google Search Console verification file
+
+- Added public/google4e7c6f675ceaec49.html, Google's HTML verification file, exactly as issued (one
+  line, trailing newline). Served as a plain 200 at /google4e7c6f675ceaec49.html: the middleware lets
+  file paths through untouched and Next serves public files before the [slug] route.
+- The file must stay for good: Google re-checks it and removing it unverifies the property.
+  scripts/check-verification.mjs now runs at the start of every build and as
+  `npm run qa:verification`, and fails if the file is missing or its content changes.
+- Not added to the sitemap. GTM GTM-TNWQ82NH, GA4 and everything else unchanged.
+
 ## 2.4.0 – 5 Nov 2026: Google Tag Manager
 
 - Google Tag Manager container GTM-TNWQ82NH added (Brian, Google Ads, 4 Nov 2026), using the shorter
