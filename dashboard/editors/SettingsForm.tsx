@@ -9,7 +9,7 @@ import { SortableList, DragHandle } from '../ui/Sortable';
 import { toPayload } from './PageEditor';
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-const TABS = ['Practice', 'Opening hours', 'Booking and payment', 'Features', 'Brand', 'Tracking and links'] as const;
+const TABS = ['Practice', 'Opening hours', 'Booking and payment', 'APE promotion', 'Features', 'Brand', 'Tracking and links'] as const;
 
 /** "08:00" -> "8:00am" for the label the site prints. */
 const label12 = (t: string) => {
@@ -33,6 +33,7 @@ export function SettingsForm({ initial, isAdmin }: { initial: any; isAdmin: bool
     d.sister = d.sister || {};
     d.colours = d.colours || {};
     d.geo = d.geo || {};
+    d.apePromo = d.apePromo || {};
     return d;
   });
   const [saved, setSaved] = useState(doc);
@@ -161,6 +162,37 @@ export function SettingsForm({ initial, isAdmin }: { initial: any; isAdmin: bool
               <StringListEditor value={(doc.payment || []).map(withId)} onChange={(payment) => up({ payment })} itemLabel="Line" rows={1} />
               <div className="d-help">Shown on the home page and the finances pages, for example: HICAPS claimed on the spot.</div>
             </div>
+          </>
+        )}
+
+        {tab === 'APE promotion' && (
+          <>
+            <HelpBox>
+              The Anxious Patient Experience launch promotion: a slim banner at the top of the homepage, and a panel in the Book online pop-up under the two locations. Both show only between the start and end dates (Sydney time, both days included) and switch off by themselves after the end date. To stop either one early, untick it, save, then Publish website.
+            </HelpBox>
+            <div className="d-row">
+              <Check label="Show the homepage banner" checked={doc.apePromo.bannerEnabled !== false} onChange={(bannerEnabled) => upIn('apePromo', { bannerEnabled })} help="Visitors can also hide it themselves for 7 days." />
+              <Check label="Show the panel in the Book online pop-up" checked={doc.apePromo.panelEnabled !== false} onChange={(panelEnabled) => upIn('apePromo', { panelEnabled })} help="Normal booking is not affected." />
+            </div>
+            <div className="d-row">
+              <TextInput label="Start date" type="date" value={doc.apePromo.startDate || ''} onChange={(startDate) => upIn('apePromo', { startDate })} help="Empty = from now." />
+              <TextInput label="End date (last day shown)" type="date" value={doc.apePromo.endDate || ''} onChange={(endDate) => upIn('apePromo', { endDate })} help="Empty = no end date." />
+              <TextInput label="APE opening date" type="date" value={doc.apePromo.openDate || ''} onChange={(openDate) => upIn('apePromo', { openDate })} help='Before this day the panel says "opening", from it "now available".' />
+            </div>
+            <TextInput label="Link (APE website)" value={doc.apePromo.link || ''} onChange={(link) => upIn('apePromo', { link })} placeholder="https://theanxiouspatientexperience.com.au/" help="Tracking tags are added automatically." />
+            <TextInput label="Banner text" value={doc.apePromo.bannerText || ''} onChange={(bannerText) => upIn('apePromo', { bannerText })} counter={{ max: 110 }} />
+            <TextInput label="Banner text on phones" value={doc.apePromo.bannerTextShort || ''} onChange={(bannerTextShort) => upIn('apePromo', { bannerTextShort })} counter={{ max: 48 }} help="Keep it short so it fits beside the button." />
+            <div className="d-row">
+              <TextInput label="Banner button" value={doc.apePromo.bannerButton || ''} onChange={(bannerButton) => upIn('apePromo', { bannerButton })} counter={{ max: 42 }} />
+              <TextInput label="Banner button on phones" value={doc.apePromo.bannerButtonShort || ''} onChange={(bannerButtonShort) => upIn('apePromo', { bannerButtonShort })} counter={{ max: 24 }} />
+            </div>
+            <TextArea label="Panel text" value={doc.apePromo.panelText || ''} onChange={(panelText) => upIn('apePromo', { panelText })} rows={3} help="Followed by one of the two endings below, picked by the opening date." />
+            <div className="d-row">
+              <TextInput label="Ending before the opening date" value={doc.apePromo.panelBefore || ''} onChange={(panelBefore) => upIn('apePromo', { panelBefore })} />
+              <TextInput label="Ending from the opening date" value={doc.apePromo.panelAfter || ''} onChange={(panelAfter) => upIn('apePromo', { panelAfter })} />
+            </div>
+            <TextInput label="Panel button" value={doc.apePromo.panelButton || ''} onChange={(panelButton) => upIn('apePromo', { panelButton })} />
+            <div className="d-help">Empty wording falls back to the launch wording. Changes reach the live site when you Publish website.</div>
           </>
         )}
 

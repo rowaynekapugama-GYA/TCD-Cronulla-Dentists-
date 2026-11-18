@@ -1,5 +1,32 @@
 # Changelog: The Cronulla Dentists website
 
+## 2.5.0 – 18 Nov 2026: APE launch banner and Book Now panel
+
+Dr Lorna Gladwin's email of 18 Nov 2026: promote The Anxious Patient Experience (APE) around its
+opening at The Cronulla Dentists on 2 December 2026.
+
+- APE links now use the live domain: site.config.ts `ape.url` https://theanxiouspatientexperience.com.au/
+  and `ape.bookUrl` .../book-now/ (were the vercel.app address). This changes the three Book Now
+  buttons on /dental-anxiety/. The menu link and the homepage "Nervous patients welcome" link stay on
+  /dental-anxiety/ (this site).
+- Homepage only: a slim APE banner above the header (navy #284858, cream text, #D2B490 button,
+  Figtree), linking to the APE homepage with utm_content=banner. Dismissible for 7 days per browser,
+  gentle fade (none with reduced motion), height reserved before first paint, menu sits under it and
+  slides back as it scrolls away. Shorter text and button on phones.
+- Book online location pop-up: an APE panel after the two location choices, with Lorna's wording
+  (her "The Cronulla Dentist" corrected to "The Cronulla Dentists") ending "opening 2 December at The
+  Cronulla Dentists." before 2 December and "now available at The Cronulla Dentists." from it (Sydney
+  time), and a "Find out more and book" button to the APE homepage with utm_content=book-now-tab.
+  The location choices, their order and their links are unchanged, and they still get the focus.
+- Both run from 18 Nov to 16 Dec 2026 inclusive, checked in the visitor's browser so they stop on
+  their own. Clicks push `ape_promo_click` with `placement` to the GTM dataLayer (no new tags).
+- Dashboard: new Site Settings tab "APE promotion" (both the /admin dashboard and /cms) with the two
+  on/off switches, start, end and APE opening dates, link and all wording. Migration
+  20261118_004913_ape_promo adds the fields and fills the existing settings row once with the launch
+  values; later edits in the dashboard are kept.
+- New: lib/apePromo.ts, components/ape/ApePromoBanner.tsx, components/ape/promoFont.ts (Figtree, not
+  preloaded on other pages).
+
 ## 2.4.1 – 11 Nov 2026: Google Search Console verification file
 
 - Added public/google4e7c6f675ceaec49.html, Google's HTML verification file, exactly as issued (one

@@ -2,6 +2,10 @@ import type { GlobalConfig } from 'payload';
 import { anyone, isAdminField, isLoggedIn } from '../access';
 import { markChanged } from '../hooks/markChanged';
 
+/** Blank, or a real YYYY-MM-DD date. */
+const apeDate = (value: unknown) =>
+  !value || (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value))) || 'Use the format YYYY-MM-DD, for example 2026-12-16.';
+
 /**
  * Practice details, hours, booking link, tracking IDs and feature switches.
  * Mirrors site.config.ts: scripts/pull-content.ts writes this global to
@@ -154,6 +158,53 @@ export const SiteSettings: GlobalConfig = {
               label: 'Health funds and payment lines',
               fields: [{ name: 'value', type: 'text', required: true }],
               admin: { description: 'Shown on the home page and finances pages, for example: HICAPS claimed on the spot' },
+            },
+          ],
+        },
+        {
+          label: 'APE promotion',
+          description: 'The Anxious Patient Experience launch banner (homepage) and the panel in the Book online pop-up. Dates are Sydney time and include both days. Publish website after saving.',
+          fields: [
+            {
+              name: 'apePromo',
+              type: 'group',
+              label: 'APE promotion',
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    { name: 'bannerEnabled', type: 'checkbox', label: 'Show the homepage banner', defaultValue: true },
+                    { name: 'panelEnabled', type: 'checkbox', label: 'Show the panel in the Book online pop-up', defaultValue: true },
+                  ],
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    { name: 'startDate', type: 'text', label: 'Start date', validate: apeDate, admin: { placeholder: '2026-11-18', description: 'YYYY-MM-DD. Empty = from now.' } },
+                    { name: 'endDate', type: 'text', label: 'End date (last day shown)', validate: apeDate, admin: { placeholder: '2026-12-16', description: 'YYYY-MM-DD. Empty = no end.' } },
+                    { name: 'openDate', type: 'text', label: 'APE opening date', validate: apeDate, admin: { placeholder: '2026-12-02', description: 'Before this day the panel says "opening", from it "now available".' } },
+                  ],
+                },
+                { name: 'link', type: 'text', label: 'Link (APE website)', admin: { placeholder: 'https://theanxiouspatientexperience.com.au/', description: 'Tracking tags are added automatically.' } },
+                { name: 'bannerText', type: 'text', label: 'Banner text' },
+                { name: 'bannerTextShort', type: 'text', label: 'Banner text on phones' },
+                {
+                  type: 'row',
+                  fields: [
+                    { name: 'bannerButton', type: 'text', label: 'Banner button' },
+                    { name: 'bannerButtonShort', type: 'text', label: 'Banner button on phones' },
+                  ],
+                },
+                { name: 'panelText', type: 'textarea', label: 'Panel text', admin: { rows: 3, description: 'Followed by one of the two endings below.' } },
+                {
+                  type: 'row',
+                  fields: [
+                    { name: 'panelBefore', type: 'text', label: 'Ending before the opening date' },
+                    { name: 'panelAfter', type: 'text', label: 'Ending from the opening date' },
+                  ],
+                },
+                { name: 'panelButton', type: 'text', label: 'Panel button' },
+              ],
             },
           ],
         },

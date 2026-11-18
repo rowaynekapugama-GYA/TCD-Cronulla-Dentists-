@@ -760,3 +760,43 @@ a.practice:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(14,53,10
 .nav-links{gap:1.4rem}
 @media (max-width:1280px){.nav-links{gap:1.1rem}}
 @media (max-width:1160px){.nav-links{gap:0.85rem}.nav-links a:not(.nav-cta),.nav-trigger{font-size:0.74rem;letter-spacing:0.02em}.nav-links a.nav-cta{padding:0.7rem 1.2rem}}
+
+/* The Anxious Patient Experience launch promotion (18 Nov 2026): homepage banner and the
+   panel in the Book online pop-up. APE colours: navy #284858, cream #F7F4EF, button #D2B490.
+   The banner only shows (and only takes up space) when <html data-ape-promo="on"> is set by
+   the homepage's boot script, so the height is reserved from the first paint. */
+:root{--ape-promo-h:52px}
+@media (max-width:760px){:root{--ape-promo-h:64px}}
+.ape-promo{display:none;position:relative;z-index:1001;height:var(--ape-promo-h);background:#284858;color:#F7F4EF;font-family:var(--ape-promo-sans),-apple-system,'Segoe UI',sans-serif}
+html[data-ape-promo="on"] .ape-promo{display:block;animation:apePromoIn 0.3s ease}
+html[data-ape-promo="on"]{--ape-promo-offset:var(--ape-promo-h)}
+html[data-ape-promo="on"] .nav{top:calc(1.1rem + var(--ape-promo-offset, 0px))}
+html[data-ape-promo-leaving] .ape-promo{opacity:0;transition:opacity 0.2s ease}
+@keyframes apePromoIn{from{opacity:0}to{opacity:1}}
+.ape-promo-inner{height:100%;max-width:1200px;margin:0 auto;padding:0 1rem;display:flex;align-items:center;gap:0.9rem}
+.ape-promo-text{flex:1;min-width:0;margin:0;font-size:0.9rem;line-height:1.3;color:#F7F4EF;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ape-promo-btn{flex-shrink:0;display:inline-flex;align-items:center;background:#D2B490;color:#284858;border-radius:100px;padding:0.5rem 1.05rem;font-size:0.82rem;font-weight:600;line-height:1.2;text-decoration:none;white-space:nowrap;transition:background 0.2s ease}
+.ape-promo-btn:hover{background:#C7A783}
+.ape-promo-btn:focus-visible,.ape-promo-close:focus-visible{outline:2px solid #F7F4EF;outline-offset:2px}
+.ape-promo-close{flex-shrink:0;width:32px;height:32px;display:grid;place-items:center;border:0;border-radius:50%;background:transparent;color:#F7F4EF;cursor:pointer;padding:0}
+.ape-promo-close:hover{background:rgba(247,244,239,0.12)}
+.ape-promo-close svg{width:16px;height:16px}
+.ape-promo-short{display:none}
+@media (max-width:760px){
+  .ape-promo-inner{padding:0 0.6rem 0 0.75rem;gap:0.55rem}
+  .ape-promo-text{font-size:0.8rem;line-height:1.28}
+  .ape-promo-btn{padding:0.45rem 0.8rem;font-size:0.76rem}
+  .ape-promo-long{display:none}
+  .ape-promo-short{display:inline}
+}
+@media (max-width:520px){html[data-ape-promo="on"] .nav{top:calc(0.6rem + var(--ape-promo-offset, 0px))}}
+@media (prefers-reduced-motion:reduce){html[data-ape-promo="on"] .ape-promo{animation:none}html[data-ape-promo-leaving] .ape-promo{transition:none}}
+
+.loc-ape{margin-top:1.4rem;display:flex;gap:0.95rem;align-items:flex-start;background:#F7F4EF;border:1px solid #E7DFD4;border-radius:16px;padding:1.05rem 1.15rem;color:#284858;font-family:var(--ape-promo-sans),-apple-system,'Segoe UI',sans-serif}
+.loc-ape-logo{width:44px;height:44px;border-radius:10px;flex-shrink:0;display:block}
+.loc-ape-title{margin:0 0 0.3rem;font-size:0.98rem;font-weight:600;color:#284858;line-height:1.3}
+.loc-ape-text{margin:0 0 0.8rem;font-size:0.88rem;line-height:1.55;color:#4E5F6A}
+.loc-ape-btn{display:inline-flex;align-items:center;background:#D2B490;color:#284858;border-radius:100px;padding:0.55rem 1.15rem;font-size:0.86rem;font-weight:600;text-decoration:none;transition:background 0.2s ease}
+.loc-ape-btn:hover{background:#C7A783}
+.loc-ape-btn:focus-visible{outline:2px solid #284858;outline-offset:2px}
+@media (max-width:560px){.loc-ape{padding:0.95rem;gap:0.75rem}.loc-ape-logo{width:36px;height:36px}}

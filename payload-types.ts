@@ -1690,6 +1690,37 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  apePromo?: {
+    bannerEnabled?: boolean | null;
+    panelEnabled?: boolean | null;
+    /**
+     * YYYY-MM-DD. Empty = from now.
+     */
+    startDate?: string | null;
+    /**
+     * YYYY-MM-DD. Empty = no end.
+     */
+    endDate?: string | null;
+    /**
+     * Before this day the panel says "opening", from it "now available".
+     */
+    openDate?: string | null;
+    /**
+     * Tracking tags are added automatically.
+     */
+    link?: string | null;
+    bannerText?: string | null;
+    bannerTextShort?: string | null;
+    bannerButton?: string | null;
+    bannerButtonShort?: string | null;
+    /**
+     * Followed by one of the two endings below.
+     */
+    panelText?: string | null;
+    panelBefore?: string | null;
+    panelAfter?: string | null;
+    panelButton?: string | null;
+  };
   /**
    * Turning one off hides every page, section and line that depends on it.
    */
@@ -1833,6 +1864,24 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         value?: T;
         id?: T;
+      };
+  apePromo?:
+    | T
+    | {
+        bannerEnabled?: T;
+        panelEnabled?: T;
+        startDate?: T;
+        endDate?: T;
+        openDate?: T;
+        link?: T;
+        bannerText?: T;
+        bannerTextShort?: T;
+        bannerButton?: T;
+        bannerButtonShort?: T;
+        panelText?: T;
+        panelBefore?: T;
+        panelAfter?: T;
+        panelButton?: T;
       };
   features?:
     | T

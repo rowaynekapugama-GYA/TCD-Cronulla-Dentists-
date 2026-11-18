@@ -49,7 +49,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-AU" className={`${poppins.variable} ${inter.variable}`}>
+    // suppressHydrationWarning: the homepage's APE banner script sets data-ape-promo on <html> before React loads.
+    <html lang="en-AU" className={`${poppins.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         {/* Google Tag Manager first, immediately after <head> (Google's instruction). */}
         <GtmHead />
@@ -111,7 +112,7 @@ fbq('track', 'PageView');`}
         <main id="main">{children}</main>
         <Footer />
         <MobileBar />
-        <BookingChooser bookingUrl={SITE_CONFIG.bookingUrl} locations={bookingLocations()} />
+        <BookingChooser bookingUrl={SITE_CONFIG.bookingUrl} locations={bookingLocations()} promo={SITE_CONFIG.apePromo} />
         <Reveal />
         <JsonLd data={dentistSchema()} />
         {isOpen() ? null : <span className="sr-only">Opening {SITE_CONFIG.openingDateLabel}</span>}

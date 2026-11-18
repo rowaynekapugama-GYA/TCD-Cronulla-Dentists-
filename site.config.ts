@@ -157,13 +157,40 @@ const DEFAULTS = {
   /**
    * The APE website and its booking page. The /dental-anxiety/ page links out to
    * them ("Discover the Experience" and "Book Now"); the page's own copy lives in
-   * content/ape.json. Update `url` when the programme moves to its own domain.
+   * content/ape.json. APE moved to its own domain on 11 Nov 2026 (apex primary,
+   * www redirects to it).
    */
   ape: {
     route: '/dental-anxiety/',
-    url: 'https://the-anxious-patient-experience.vercel.app/',
-    bookUrl: 'https://the-anxious-patient-experience.vercel.app/book-now/',
-    teamUrl: 'https://the-anxious-patient-experience.vercel.app/meet-the-team/',
+    url: 'https://theanxiouspatientexperience.com.au/',
+    bookUrl: 'https://theanxiouspatientexperience.com.au/book-now/',
+    teamUrl: 'https://theanxiouspatientexperience.com.au/meet-the-team/',
+  },
+  /**
+   * APE launch promotion (Dr Lorna Gladwin, 18 Nov 2026): a slim banner at the
+   * top of the homepage and a panel in the Book online location pop-up. Both are
+   * shown only between startDate and endDate (inclusive, Sydney time), checked in
+   * the visitor's browser so they switch off on their own without a rebuild.
+   * Live values come from the dashboard: Site Settings > APE promotion.
+   * UTM tags are added to `link` automatically for each placement.
+   */
+  apePromo: {
+    bannerEnabled: true,
+    panelEnabled: true,
+    startDate: '2026-11-18',
+    endDate: '2026-12-16',
+    /** The panel says "opening 2 December" before this date and "now available" from it. */
+    openDate: '2026-12-02',
+    link: 'https://theanxiouspatientexperience.com.au/',
+    bannerText: "Feeling anxious about visiting the dentist? We've designed an entire experience around you.",
+    bannerTextShort: 'Feeling anxious about visiting the dentist?',
+    bannerButton: 'Discover the Anxious Patient Experience',
+    bannerButtonShort: 'Discover the experience',
+    panelText:
+      "Feeling anxious about visiting the dentist? We've designed an entire experience around you. Discover the Anxious Patient Experience, a purpose-built dental programme specifically for anxious patients,",
+    panelBefore: 'opening 2 December at The Cronulla Dentists.',
+    panelAfter: 'now available at The Cronulla Dentists.',
+    panelButton: 'Find out more and book',
   },
 
   // ---- Hours (exact) ----

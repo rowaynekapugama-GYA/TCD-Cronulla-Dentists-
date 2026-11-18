@@ -157,6 +157,10 @@ Point `PUBLISH_HOOK_URL` (Production) at the `main` hook if you have not already
 - A page created in the dashboard (Pages > Create New, kind "Service page") is added to the site, the
   Services menu and the sitemap on the next publish. A page deleted in the dashboard disappears on the
   next publish; add a Redirect for its old address first.
+- APE launch promotion (v2.5.0): Site Settings > APE promotion holds the homepage banner and the
+  Book online pop-up panel (on/off switches, start and end dates, APE opening date, link, wording).
+  Both stop by themselves after the end date (checked in the visitor's browser, Sydney time). To stop
+  one early: untick it, Save settings, then Publish website. Clicks reach GTM as `ape_promo_click`.
 - The Anxious Patient Experience page (/dental-anxiety/, v2.3.0) is a special case: the APE blocks
   (wording in `content/ape.json`, styles in `app/ape.css`, photos in `public/images/ape/`) are fixed in
   the repo because they are Dr Lorna Gladwin's trademarked programme. Only the Cronulla copy between them

@@ -1,6 +1,8 @@
 'use client';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import type { BookingLocation } from '@/lib/cta';
+import { inWindow, panelTail, promoHref, sydneyToday, trackPromoClick, type ApePromo } from '@/lib/apePromo';
+import { apePromoSans } from '@/components/ape/promoFont';
 
 declare global {
   interface Window {
@@ -23,7 +25,43 @@ declare global {
 /** "The Caringbah Dentists" -> "Caringbah" for the button label. */
 const shortName = (name: string) => name.replace(/^the\s+/i, '').replace(/\s+dent(al|ists?)\b.*$/i, '').trim() || name;
 
-export function BookingChooser({ bookingUrl, locations }: { bookingUrl: string; locations: BookingLocation[] }) {
+/**
+ * The Anxious Patient Experience (TM) launch panel (18 Nov 2026). It sits after
+ * the location choices, so the normal booking options, their order and their
+ * links are untouched and keyboard users reach them first. Shown only while the
+ * promotion is switched on and inside its dates (Site Settings > APE promotion).
+ */
+function ApePanel({ promo, onGo }: { promo: ApePromo; onGo: () => void }) {
+  const today = sydneyToday();
+  if (!promo.panelEnabled || !inWindow(promo, today)) return null;
+  return (
+    <aside className={`loc-ape ${apePromoSans.variable}`} aria-labelledby="loc-ape-title">
+      <img className="loc-ape-logo" src="/images/ape/ape-logo.webp" alt="" width={44} height={44} decoding="async" />
+      <div className="loc-ape-body">
+        <h3 id="loc-ape-title" className="loc-ape-title">
+          The Anxious Patient Experience
+        </h3>
+        <p className="loc-ape-text">
+          {promo.panelText} {panelTail(promo, today)}
+        </p>
+        <a
+          className="loc-ape-btn"
+          href={promoHref(promo.link, 'book-now-tab')}
+          target="_blank"
+          rel="noopener"
+          onClick={() => {
+            trackPromoClick('book-now-tab');
+            onGo();
+          }}
+        >
+          {promo.panelButton}
+        </a>
+      </div>
+    </aside>
+  );
+}
+
+export function BookingChooser({ bookingUrl, locations, promo }: { bookingUrl: string; locations: BookingLocation[]; promo?: ApePromo }) {
   const [open, setOpen] = useState(false);
   const opener = useRef<HTMLElement | null>(null);
   const dialog = useRef<HTMLDivElement | null>(null);
@@ -121,6 +159,7 @@ export function BookingChooser({ bookingUrl, locations }: { bookingUrl: string; 
             </a>
           ))}
         </div>
+        {promo && <ApePanel promo={promo} onGo={() => setTimeout(() => setOpen(false), 0)} />}
       </div>
     </div>
   );

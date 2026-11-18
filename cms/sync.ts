@@ -328,7 +328,27 @@ export function settingsToDoc(cfg: any): Record<string, unknown> {
     metaPixelId: cfg.metaPixelId,
     sameAs: { facebook: cfg.sameAs?.facebook, instagram: cfg.sameAs?.instagram },
     sister: { name: cfg.sister?.name, url: cfg.sister?.url, heritage: cfg.sister?.heritage },
+    apePromo: cfg.apePromo ? { ...cfg.apePromo } : undefined,
   });
+}
+
+/**
+ * APE launch promotion (Site Settings > APE promotion). The two switches are passed
+ * on when they are true or false, so switching one off sticks. Empty wording falls
+ * back to site.config.ts; an empty date means no limit on that side.
+ */
+const APE_PROMO_DATES = ['startDate', 'endDate', 'openDate'] as const;
+const APE_PROMO_TEXT = ['link', 'bannerText', 'bannerTextShort', 'bannerButton', 'bannerButtonShort', 'panelText', 'panelBefore', 'panelAfter', 'panelButton'] as const;
+function apePromoFromDoc(p: any): Record<string, unknown> | undefined {
+  if (!p || typeof p !== 'object') return undefined;
+  const out: Record<string, unknown> = {};
+  if (typeof p.bannerEnabled === 'boolean') out.bannerEnabled = p.bannerEnabled;
+  if (typeof p.panelEnabled === 'boolean') out.panelEnabled = p.panelEnabled;
+  // A date cleared in the dashboard means "no limit on that side", so it is passed on as ''.
+  for (const k of APE_PROMO_DATES) if (k in p) out[k] = typeof p[k] === 'string' ? p[k].trim() : '';
+  // Empty wording falls back to the wording in site.config.ts.
+  for (const k of APE_PROMO_TEXT) if (typeof p[k] === 'string' && p[k].trim()) out[k] = p[k].trim();
+  return Object.keys(out).length ? out : undefined;
 }
 
 export function settingsFromDoc(d: any, team: any[]): Record<string, unknown> {
@@ -363,6 +383,7 @@ export function settingsFromDoc(d: any, team: any[]): Record<string, unknown> {
     metaPixelId: d.metaPixelId ?? '',
     sameAs: clean({ googleMaps: d.gbpShareUrl ?? undefined, facebook: d.sameAs?.facebook ?? '', instagram: d.sameAs?.instagram ?? '' }),
     sister: d.sister ? clean({ name: d.sister.name, url: d.sister.url, heritage: d.sister.heritage }) : undefined,
+    apePromo: apePromoFromDoc(d.apePromo),
   });
   if (d.logo && typeof d.logo === 'object' && d.logo.url && d.logo.width && d.logo.height) {
     out.logo = { src: mediaUrl(d.logo), width: d.logo.width, height: d.logo.height };
