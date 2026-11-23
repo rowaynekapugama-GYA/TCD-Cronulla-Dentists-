@@ -16,6 +16,10 @@
  * fills the Site Settings > Tracking field once when it is blank; a different ID typed in the
  * dashboard is left alone. To remove GTM later, also blank GTM_CONTAINER below, or the next build
  * fills the field again.
+ *
+ * 23 Nov 2026: Dr Lorna Gladwin is an Associate Dentist at Cronulla, not a principal (Alex). The site
+ * said Principal Dentist on her Team record and "led by Dr Ram Nathwani and Dr Lorna Gladwin" on the
+ * homepage and About page. applyLornaAssociate() corrects both once; later dashboard edits are kept.
  */
 import type { Payload } from 'payload';
 import { APE_OLD_SLUG, APE_ROUTE, APE_SLUG } from '../lib/ape';
@@ -87,6 +91,69 @@ async function applyApeRename(payload: Payload, context: Record<string, unknown>
   return changed;
 }
 
+const LORNA_ROLE = 'Associate Dentist';
+const LORNA_RULES: Rule[] = [
+  [/The practice is led by Dr Ram Nathwani and Dr Lorna Gladwin\.\s*Between them/g,
+    'The practice is led by Principal Dentist Dr Ram Nathwani, and Dr Lorna Gladwin joins him as Associate Dentist. Between them'],
+  [/The practice is led by Dr Ram Nathwani and Dr Lorna Gladwin,\s*who between them bring/g,
+    'The practice is led by Principal Dentist Dr Ram Nathwani, and Dr Lorna Gladwin joins him as Associate Dentist. Between them they bring'],
+];
+const isLorna = (t: any) => t?.key === 'lorna' || /lorna\s+gladwin/i.test(t?.fullName || '');
+
+function lornaText(value: any): any {
+  if (typeof value === 'string') return LORNA_RULES.reduce((s, [re, to]) => s.replace(re, to), value);
+  if (Array.isArray(value)) return value.map(lornaText);
+  if (value && typeof value === 'object') {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(value)) out[k] = SKIP_KEYS.has(k) ? v : lornaText(v);
+    return out;
+  }
+  return value;
+}
+
+/** Wording that still puts Dr Lorna alongside Dr Ram as a principal or co-lead, reported rather than guessed at. */
+function lornaLeftovers(value: any, path: string, out: string[]) {
+  if (typeof value === 'string') {
+    for (const sentence of value.split(/(?<=[.!?])\s+/)) {
+      if (/lorna|gladwin/i.test(sentence) && /principal|co-?owner|led by dr ram nathwani and/i.test(sentence) && !/Associate Dentist/.test(sentence)) {
+        out.push(`${path}: ${sentence.slice(0, 120)}`);
+      }
+    }
+  } else if (Array.isArray(value)) value.forEach((v, i) => lornaLeftovers(v, `${path}.${i}`, out));
+  else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) if (!SKIP_KEYS.has(k)) lornaLeftovers(v, `${path}.${k}`, out);
+}
+
+async function applyLornaAssociate(payload: Payload, context: Record<string, unknown>): Promise<number> {
+  let changed = 0;
+  const team = await payload.find({ collection: 'team', limit: 50, depth: 0, overrideAccess: true });
+  for (const t of team.docs as any[]) {
+    if (!isLorna(t) || !/principal/i.test(t.title || '')) continue;
+    await payload.update({ collection: 'team', id: t.id, data: { title: LORNA_ROLE } as any, depth: 0, overrideAccess: true, context });
+    console.log(`[content-fixes] ${t.fullName}: role "${t.title}" changed to "${LORNA_ROLE}"`);
+    changed++;
+  }
+  const pages = await payload.find({ collection: 'pages', limit: 500, depth: 0, overrideAccess: true });
+  for (const doc of pages.docs as any[]) {
+    const patch: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(doc)) {
+      if (SKIP_KEYS.has(k)) continue;
+      const r = lornaText(v);
+      if (JSON.stringify(r) !== JSON.stringify(v)) patch[k] = r;
+    }
+    if (!Object.keys(patch).length) continue;
+    await payload.update({ collection: 'pages', id: doc.id, data: { ...patch, _status: 'published' } as any, depth: 0, overrideAccess: true, context });
+    console.log(`[content-fixes] Dr Lorna shown as Associate Dentist on "${doc.slug}" (${Object.keys(patch).join(', ')})`);
+    changed++;
+  }
+  const left: string[] = [];
+  const pagesAfter = await payload.find({ collection: 'pages', limit: 500, depth: 0, overrideAccess: true });
+  for (const doc of pagesAfter.docs as any[]) lornaLeftovers(doc, `pages/${doc.slug}`, left);
+  const teamAfter = await payload.find({ collection: 'team', limit: 50, depth: 0, overrideAccess: true });
+  for (const t of teamAfter.docs as any[]) if (isLorna(t)) lornaLeftovers({ title: t.title, bio: t.bio }, `team/${t.key || t.id}`, left);
+  if (left.length) console.warn(`[content-fixes] WARNING: check Dr Lorna's role in this dashboard wording:\n  ${left.join('\n  ')}`);
+  return changed;
+}
+
 /** Sentence-level removals; everything else in each sentence is kept word for word. */
 const NIB_RULES: Rule[] = [
   [/We are an nib preferred provider\.\s*We also use HICAPS/gi, 'We use HICAPS'],
@@ -135,6 +202,7 @@ export async function applyContentFixes(payload: Payload): Promise<void> {
   const context = { skipMarkChanged: true };
   let changed = await applyApeRename(payload, context);
   changed += await applyGtmContainer(payload, context);
+  changed += await applyLornaAssociate(payload, context);
   const pages = await payload.find({ collection: 'pages', limit: 500, depth: 0, overrideAccess: true });
   for (const doc of pages.docs as any[]) {
     const patch = changedFields(doc);

@@ -1,5 +1,20 @@
 # Changelog: The Cronulla Dentists website
 
+## 2.5.1 – 23 Nov 2026: Dr Lorna Gladwin shown as Associate Dentist
+
+Alex (23 Nov 2026): Dr Lorna is an associate dentist at The Cronulla Dentists, not a principal
+alongside Dr Ram.
+
+- Her role is now "Associate Dentist" (About page team card and the Person schema). site.config.ts
+  default updated.
+- Homepage and About page: "The practice is led by Dr Ram Nathwani and Dr Lorna Gladwin" is now "The
+  practice is led by Principal Dentist Dr Ram Nathwani, and Dr Lorna Gladwin joins him as Associate
+  Dentist." The rest of each paragraph is unchanged.
+- The live wording lives in the dashboard database, so cms/contentFixes.ts (applyLornaAssociate)
+  makes the same corrections there on the next build: her Team role, if it still says Principal, and
+  the two sentences, if they still read as before. It runs once; later dashboard edits are kept, and
+  any other wording that still puts her as a principal is reported in the build log.
+
 ## 2.5.0 – 18 Nov 2026: APE launch banner and Book Now panel
 
 Dr Lorna Gladwin's email of 18 Nov 2026: promote The Anxious Patient Experience (APE) around its

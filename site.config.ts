@@ -127,7 +127,7 @@ const DEFAULTS = {
       fullName: 'Dr Lorna Gladwin',
       givenName: 'Lorna',
       familyName: 'Gladwin',
-      title: 'Principal Dentist', // per the SEO strategy docs (Doc 03)
+      title: 'Associate Dentist', // Alex, 23 Nov 2026: Dr Lorna is an associate dentist at Cronulla, not a principal
       image: '/images/team-lorna.jpg',
       sameAs: '', // none supplied — omitted from the schema when empty
       alumniOf: 'University of Sheffield',
