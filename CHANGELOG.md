@@ -1,5 +1,43 @@
 # Changelog: The Cronulla Dentists website
 
+## 2.7.0 – 24 Nov 2026: the APE page identical to the APE website
+
+An update to the existing repo. Dr Lorna Gladwin (23 Nov) asked for the APE page here to match the APE
+website; Rowayne's instruction (24 Nov): identical. Built from the APE source pack of 24 Nov 2026
+(APE website v1.14.0), which is now the source of truth for this page.
+
+- /dental-anxiety/: between this site's header and footer there are only the 16 sections of the APE
+  home page, in the APE order, with the APE wording (content/ape.json is the pack's ape-page.json,
+  unchanged), the pack's photos at the APE crops and sizes (800, 1400 and 2400 px), the APE styles
+  re-ported from the pack's stylesheet (app/ape.css) and the same elements, classes, scroll reveals,
+  "Read more" and FAQ viewer as the APE page (components/ape/ApeTemplate.tsx, ApeBehaviour.tsx).
+- New on the page: Alex Loupos and Lauren Bright in Meet the team, as on the APE website (switch
+  "Show Alex and Lauren on the APE page" in Site Settings > APE promotion, on); "Read more" on the
+  three bios; the FAQ question list with one open answer, arrows and the "1 / 11" counter; and
+  section 16, the APE website's footer details and disclaimer (id="ape-contact"), where both "Reach out
+  to Alex" buttons now land (they went to /contact/).
+- Removed from the page: the breadcrumb line, the location line under the closing Book Now (the same
+  details are in section 16), the separate disclaimer strip and the hidden "Back to all services" link.
+  The practice's own dental anxiety copy stays in the dashboard, switched off for this page
+  (site.config.ts `ape.practiceCopy: false`).
+- The five differences from the APE website, all on purpose: this site's header and footer; the page's
+  own URL, title, description and H1 ("Dental Anxiety in Cronulla", one small line above the hero's
+  small heading, with the hero question as an h2 in the APE h1 look); Book Now to the APE booking page
+  with utm_content=ape-page in a new tab; "Reach out to Alex" to #ape-contact and "Discover the
+  Experience" to #intro; no "Opening special" ribbon, FAQ note or pop-up.
+- Elsewhere: the About menu APE card and the page photo use the pack's armchair files; the Book online
+  pop-up shows the real rounded APE logo (was a stand-in); the share image alt text is the armchair
+  alt, now also sent with the X/Twitter card (lib/meta.ts, only for a page with its own share image). Fonts: the six files the APE site serves (three unused weights removed).
+- Dashboard: migration 20261124_011410_ape_team adds the new switch (additive, on by default, safe
+  to run twice). cms/contentFixes.ts moves the stored page photo to the pack's file name, once.
+- New check: `npm run qa:ape` (scripts/ape/tools/check-ape-match.mjs with scripts/ape/expected-text.json,
+  both from the pack) compares the built page with the APE wording, photos and alt text.
+- Deleted: public/images/ape/ape-armchair-corner.webp, ape-candle-book.webp, ape-textured-napkin.webp,
+  ape-toothbrushes-eucalyptus.webp and team-lorna-gladwin.webp (replaced by the pack's files), and
+  components/ape/fonts/playfair-display-latin-500-italic, -600-normal and -600-italic.woff2.
+- Not changed: "Opening late November 2026" elsewhere on the site, the homepage banner, the pop-up
+  wording and dates, the 15 and over switch (off).
+
 ## 2.6.2 – 23 Nov 2026: /dental-anxiety/ matches the APE website
 
 Dr Lorna Gladwin (phone, 23 Nov 2026): the Cronulla APE page mentions things that are not on the APE

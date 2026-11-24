@@ -26,6 +26,11 @@
  * (services/dental-anxiety-cronulla.jpg) and any tile or card that links to /dental-anxiety/ with an
  * old built-in photo (the Services page tile). A photo uploaded in the dashboard is never replaced;
  * it is reported in the build log instead.
+ *
+ * 24 Nov 2026 (v2.7.0): the APE photos now carry the APE source pack's file names, so the page photo
+ * v2.6.2 stored (ape/ape-armchair-corner.webp) moves to ape/ape-armchair-corner-1400.webp, once, by the
+ * same applyApePhotos(). Nothing else in the dashboard changes: the practice's own dental anxiety copy
+ * stays there, it is just not shown on the page (site.config.ts `ape.practiceCopy`).
  */
 import type { Payload } from 'payload';
 import { APE_OLD_SLUG, APE_ROUTE, APE_SLUG } from '../lib/ape';
@@ -162,10 +167,16 @@ async function applyLornaAssociate(payload: Payload, context: Record<string, unk
 
 const APE_ARMCHAIR_ALT =
   'A soft cream armchair beside a small wooden table with a white vase of olive branches and a lit candle, in warm afternoon light';
-const APE_PAGE_PHOTO = { path: '/images/ape/ape-armchair-corner.webp', alt: APE_ARMCHAIR_ALT };
+const APE_PAGE_PHOTO = { path: '/images/ape/ape-armchair-corner-1400.webp', alt: APE_ARMCHAIR_ALT };
 const APE_TILE_PHOTO = { path: '/images/tiles/dental-anxiety.jpg', alt: APE_ARMCHAIR_ALT };
 /** Photos of people (stock or client-supplied) used before the APE page matched the APE site. These files are gone. */
-const RETIRED_PHOTOS = new Set(['/images/services/dental-anxiety-cronulla.jpg', '/images/tiles/dental-anxiety-cronulla.jpg', '/images/ape/home-hero-calm-smile.webp']);
+const RETIRED_PHOTOS = new Set([
+  '/images/services/dental-anxiety-cronulla.jpg',
+  '/images/tiles/dental-anxiety-cronulla.jpg',
+  '/images/ape/home-hero-calm-smile.webp',
+  // v2.6.2 pointed the page photo here; since v2.7.0 the APE photos use the source pack's file names
+  '/images/ape/ape-armchair-corner.webp',
+]);
 /** tiles/dental-anxiety.jpg is now the armchair; only its old alt text marks it as not yet updated. */
 const OLD_TILE_ALTS = new Set(['', 'A woman with long dark hair smiling warmly at home']);
 const hasUpload = (img: any) => img && img.upload != null && img.upload !== '';

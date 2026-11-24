@@ -35,7 +35,8 @@ export function pageMetadata(meta: PageMeta, extra: Partial<Metadata> = {}): Met
       type: 'website',
       images: [og],
     },
-    twitter: { card: 'summary_large_image', title, description, images: [og.url] },
+    // A page with its own share image (the APE page) also gives X/Twitter the image's alt text.
+    twitter: { card: 'summary_large_image', title, description, images: meta.ogImage?.src ? [{ url: og.url, alt: og.alt }] : [og.url] },
     ...(meta.noindex ? { robots: { index: false, follow: true } } : {}),
     ...extra,
   };

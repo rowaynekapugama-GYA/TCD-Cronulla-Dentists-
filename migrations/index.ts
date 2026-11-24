@@ -3,6 +3,7 @@ import * as migration_20260928_023808_dashboard_fields from './20260928_023808_d
 import * as migration_20260928_034546_booking_locations from './20260928_034546_booking_locations';
 import * as migration_20261118_004913_ape_promo from './20261118_004913_ape_promo';
 import * as migration_20261119_070119_ape_age_line from './20261119_070119_ape_age_line';
+import * as migration_20261124_011410_ape_team from './20261124_011410_ape_team';
 
 export const migrations = [
   {
@@ -29,5 +30,10 @@ export const migrations = [
     up: migration_20261119_070119_ape_age_line.up,
     down: migration_20261119_070119_ape_age_line.down,
     name: '20261119_070119_ape_age_line',
+  },
+  {
+    up: migration_20261124_011410_ape_team.up,
+    down: migration_20261124_011410_ape_team.down,
+    name: '20261124_011410_ape_team',
   },
 ];

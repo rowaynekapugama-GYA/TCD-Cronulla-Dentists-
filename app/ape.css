@@ -1,13 +1,14 @@
 /* =====================================================================
    The Anxious Patient Experience (TM) page: /dental-anxiety/
-   PART 1 (generated): the APE website's own stylesheet (public/assets/site.css,
-   APE v1.12.0, 19 Nov 2026) ported to this site with scripts/port-ape-css.py.
+   PART 1 (generated): the APE website's own stylesheet (APE v1.14.0, from the APE source
+   pack of 24 Nov 2026, styles/site.css) ported to this site with:
+     python3 -I scripts/port-ape-css.py <pack>/styles/site.css <out> components/ape/ApeTemplate.tsx
    Every rule is scoped to .ape-page and every APE class is renamed .X -> .ape-X so
-   nothing collides with the Cronulla design system in globals.css. Header, footer,
-   booking flow, forms, FAQ carousel, "Opening special" and reveal-animation rules
-   are left out, and only rules for classes the page renders
-   (components/ape/ApeTemplate.tsx) are kept. Fonts come from components/ape/fonts.ts
-   (--ape-serif / --ape-sans).
+   nothing collides with the Cronulla design system in globals.css (.reveal and .in keep
+   their names). Header, footer, booking and "Opening special" rules are left out, and only
+   rules for classes the page renders (components/ape/ApeTemplate.tsx) are kept. Fonts
+   come from components/ape/fonts.ts (--ape-serif / --ape-sans). Do not edit PART 1 by
+   hand: re-run the port from a new pack.
    ===================================================================== */
 .ape-page{--navy:#284858;--navy-deep:#2A3C4E;--teal:#125454;--taupe-logo:#C8B8A0;--taupe:#BA9C7E;--taupe-deep:#8F7455;--taupe-ink:#7E6548;--btn:#D2B490;--btn-hover:#C7A783;--cream:#F7F4EF;--blush:#F0E8E0;--linen:#F3EEE7;--offwhite:#FCFCF6;--line:#E7DFD4;--ink:#284858;--ink-soft:#4E5F6A;--serif:var(--ape-serif),Georgia,"Times New Roman",serif;--sans:var(--ape-sans),"Inter",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;--r-card:28px;--r-img:32px;--r-arch:56px;--wrap:1200px;--gutter:clamp(20px,5vw,64px);--section:clamp(72px,9vw,130px);--header-h:96px}
 .ape-page *{box-sizing:border-box}
@@ -16,9 +17,9 @@
   .ape-page{scroll-behavior:auto}
 }
 .ape-page{background:var(--cream);font-family:var(--sans);font-size:17.5px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.ape-page,.ape-page h1,.ape-page h2,.ape-page h3{margin:0;color:var(--ink)}
-.ape-page h1,.ape-page h2,.ape-page h3{font-family:var(--serif);font-weight:400;letter-spacing:-.005em;line-height:1.18}
-.ape-page h1{font-size:clamp(34px,4.6vw,58px)}
+.ape-page,.ape-page h1,.ape-page .ape-h1,.ape-page h2,.ape-page h3{margin:0;color:var(--ink)}
+.ape-page h1,.ape-page .ape-h1,.ape-page h2,.ape-page h3{font-family:var(--serif);font-weight:400;letter-spacing:-.005em;line-height:1.18}
+.ape-page h1,.ape-page .ape-h1{font-size:clamp(34px,4.6vw,58px)}
 .ape-page h2{font-size:clamp(28px,3.2vw,42px)}
 .ape-page h3{font-size:clamp(21px,1.6vw,24px);line-height:1.3}
 .ape-page p{margin:0 0 1em}
@@ -50,11 +51,11 @@
 .ape-page .ape-center .ape-actions{justify-content:center}
 .ape-page .ape-hero{padding:clamp(56px,8vw,110px) 0 clamp(64px,8vw,120px);overflow:hidden}
 .ape-page .ape-hero .ape-grid{display:grid;grid-template-columns:1.05fr .95fr;grid-gap:clamp(40px,6vw,96px);gap:clamp(40px,6vw,96px);align-items:center}
-.ape-page .ape-hero h1{margin-bottom:24px;max-width:17ch}
+.ape-page .ape-hero h1,.ape-page .ape-hero .ape-h1{margin-bottom:24px;max-width:17ch}
 .ape-page .ape-hero .ape-sub,.ape-page .ape-hero-simple .ape-sub{font-family:var(--serif);font-size:clamp(20px,1.7vw,24px);color:var(--taupe-deep);margin:0 0 34px;max-width:30ch}
 .ape-page .ape-hero-simple{padding:clamp(56px,8vw,110px) 0 clamp(40px,5vw,72px)}
-.ape-page .ape-hero-simple h1{max-width:20ch}
-.ape-page .ape-hero-simple.ape-center h1{margin-left:auto;margin-right:auto}
+.ape-page .ape-hero-simple h1,.ape-page .ape-hero-simple .ape-h1{max-width:20ch}
+.ape-page .ape-hero-simple.ape-center h1,.ape-page .ape-hero-simple.ape-center .ape-h1{margin-left:auto;margin-right:auto}
 .ape-page .ape-hero-simple .ape-sub{margin-bottom:0}
 .ape-page .ape-hero-simple.ape-center .ape-sub{margin-left:auto;margin-right:auto}
 .ape-page .ape-frame{position:relative;overflow:hidden;background:var(--linen);border-radius:var(--r-img);box-shadow:0 30px 60px -44px rgba(40,72,88,.45)}
@@ -123,8 +124,14 @@
 .ape-page .ape-member .ape-actions{margin-top:30px}
 .ape-page .ape-reassure{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;background:var(--linen);border-radius:var(--r-card);padding:clamp(24px,4vw,40px) clamp(24px,4vw,48px)}
 .ape-page .ape-reassure p{margin:0;font-family:var(--serif);font-size:clamp(19px,1.6vw,23px);color:var(--navy);max-width:44ch}
+.ape-page .reveal{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s ease}
+.ape-page .reveal.in{opacity:1;transform:none}
+.ape-page .reveal.ape-d1{transition-delay:.12s}
+.ape-page .reveal.ape-d2{transition-delay:.24s}
+.ape-page .reveal.ape-d3{transition-delay:.36s}
 @media (prefers-reduced-motion:reduce){
-  .ape-page .ape-btn,.ape-page .ape-btn svg{transition:none}
+  .ape-page .reveal{opacity:1;transform:none}
+  .ape-page .ape-btn,.ape-page .ape-btn svg,.ape-page .reveal{transition:none}
 }
 @media (max-width:1024px){
   .ape-page .ape-heart{grid-template-columns:1fr}
@@ -156,7 +163,7 @@
 .ape-page .ape-link-arrow{white-space:nowrap}
 .ape-page .ape-two-tone .ape-actions{justify-content:center}
 .ape-page .ape-hero-simple .ape-sub{max-width:40ch}
-.ape-page .ape-hero-simple h1{margin-bottom:20px}
+.ape-page .ape-hero-simple h1,.ape-page .ape-hero-simple .ape-h1{margin-bottom:20px}
 .ape-page .ape-member:nth-child(2n){grid-template-columns:1.2fr .8fr}
 .ape-page .ape-intro-band p.ape-eyebrow,.ape-page .ape-ready-card p.ape-eyebrow,.ape-page p.ape-eyebrow{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.22em;line-height:1.7;text-transform:uppercase;margin:0 0 22px;max-width:none}
 .ape-page .ape-intro-band p.ape-eyebrow{color:var(--taupe-ink)}
@@ -182,7 +189,11 @@
   .ape-page .ape-card-grid{grid-template-columns:minmax(0,1fr);gap:16px}
   .ape-page .ape-card-grid>.ape-card,.ape-page .ape-card-grid>.ape-card:nth-child(5),.ape-page .ape-card-grid>.ape-card:nth-child(7){grid-column:1/-1}
 }
+.ape-page .reveal.ape-d1{--d:.12s}
+.ape-page .reveal.ape-d2{--d:.24s}
+.ape-page .reveal.ape-d3{--d:.36s}
 .ape-page .ape-card,.ape-page .ape-feel-card,.ape-page .ape-heart-card,.ape-page .ape-ready-card{transition:translate .35s ease,box-shadow .35s ease,border-color .35s ease,background-color .35s ease}
+.ape-page .ape-card.reveal,.ape-page .ape-feel-card.reveal,.ape-page .ape-heart-card.reveal,.ape-page .ape-ready-card.reveal{transition:opacity .9s ease var(--d,0s),transform .9s ease var(--d,0s),translate .35s ease,box-shadow .35s ease,border-color .35s ease,background-color .35s ease}
 .ape-page .ape-card .ape-icon{transition:background-color .35s ease,color .35s ease}
 @media (hover:hover){
   .ape-page .ape-card:hover{translate:0 -5px;box-shadow:0 30px 50px -34px rgba(40,72,88,.42);border-color:var(--taupe)}
@@ -194,6 +205,45 @@
   .ape-page .ape-card:hover,.ape-page .ape-feel-card:hover,.ape-page .ape-heart-card:hover,.ape-page .ape-ready-card:hover{translate:none}
 }
 .ape-page .ape-card-grid>.ape-card h3{align-self:end}
+.ape-page .ape-faq-deck{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(28px,4.5vw,72px);align-items:center;max-width:1120px;margin:0 auto}
+.ape-page .ape-faq-index{list-style:none;margin:0;padding:0;border-top:1px solid var(--line);counter-reset:faq}
+.ape-page .ape-faq-index li{border-bottom:1px solid var(--line);counter-increment:faq}
+.ape-page .ape-faq-jump{position:relative;display:flex;align-items:baseline;gap:14px;width:100%;min-height:44px;padding:clamp(8px,1.3vh,13px) 8px clamp(8px,1.3vh,13px) 4px;background:none;border:0;cursor:pointer;text-align:left;
+  font-family:var(--serif);font-size:clamp(16px,1.2vw,18px);line-height:1.35;color:var(--ink-soft);transition:color .3s ease}
+.ape-page .ape-faq-jump:before{content:counter(faq,decimal-leading-zero);flex:none;font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--taupe-ink);width:22px}
+.ape-page .ape-faq-jump:after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--taupe-deep);transform:scaleX(0);transform-origin:left center;transition:transform .45s var(--ease-calm)}
+.ape-page .ape-faq-jump:hover{color:var(--navy)}
+.ape-page .ape-faq-jump[aria-current=true]{color:var(--navy)}
+.ape-page .ape-faq-jump[aria-current=true]:after{transform:scaleX(1)}
+.ape-page .ape-faq-jump:focus-visible,.ape-page .ape-faq-arrow:focus-visible,.ape-page .ape-faq-track:focus-visible{outline:2px solid var(--navy);outline-offset:3px;border-radius:8px}
+.ape-page .ape-faq-stage{min-width:0}
+.ape-page .ape-faq-track{display:flex;gap:16px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;scrollbar-width:none;padding:6px 2px 18px}
+.ape-page .ape-faq-track::-webkit-scrollbar{display:none}
+.ape-page .ape-faq-card{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;background:var(--offwhite);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:clamp(28px,4.2vw,56px);box-shadow:0 30px 56px -46px rgba(40,72,88,.4)}
+.ape-page .ape-faq-card h3{font-size:clamp(24px,2.3vw,34px);line-height:1.25;margin:0 0 18px;max-width:22ch}
+.ape-page .ape-faq-card p{color:var(--ink-soft);font-size:clamp(16.5px,1.25vw,18.5px);line-height:1.7;margin:0;max-width:52ch}
+.ape-page .ape-faq-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:clamp(10px,2vh,20px)}
+.ape-page .ape-faq-arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--taupe);background:var(--offwhite);color:var(--navy);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background-color .3s ease,border-color .3s ease,opacity .3s ease}
+.ape-page .ape-faq-arrow svg{width:18px;height:18px}
+.ape-page .ape-faq-arrow:hover:not(:disabled){background:var(--btn);border-color:var(--btn)}
+.ape-page .ape-faq-arrow:disabled{opacity:.35;cursor:default}
+.ape-page .ape-faq-count{min-width:64px;text-align:center;font-size:14px;font-weight:600;letter-spacing:.08em;color:var(--taupe-ink)}
+@media (max-width:900px){
+  .ape-page .ape-faq-deck{grid-template-columns:minmax(0,1fr)}
+  .ape-page .ape-faq-index{display:none}
+  .ape-page .ape-faq-track{gap:12px;margin:0 calc(-1 * var(--gutter));padding:6px var(--gutter) 16px;scroll-padding-inline:var(--gutter)}
+  .ape-page .ape-faq-card{flex-basis:86%;padding:26px 22px}
+  .ape-page .ape-faq-card h3{font-size:clamp(22px,6vw,28px);margin-bottom:14px}
+  .ape-page .ape-faq-card p{font-size:16.5px}
+}
+.ape-page:not(.ape-js-ready) .ape-faq-deck{display:block}
+.ape-page:not(.ape-js-ready) .ape-faq-index,.ape-page:not(.ape-js-ready) .ape-faq-nav{display:none}
+.ape-page:not(.ape-js-ready) .ape-faq-track{display:grid;gap:16px;overflow:visible;margin:0;padding:0}
+@media (prefers-reduced-motion:reduce){
+  .ape-page .ape-faq-track{scroll-behavior:auto}
+  .ape-page .ape-faq-jump:after,.ape-page .ape-faq-arrow{transition:none}
+}
 .ape-page{--ease-calm:cubic-bezier(.25,.46,.3,1);--hdr-h:104px;--logo-h:clamp(64px,6vw,84px);--logo-sm:48px;--hdr-sm:72px}
 @media (max-width:900px){
   .ape-page{--hdr-h:84px;--logo-h:60px;--logo-sm:44px;--hdr-sm:64px}
@@ -202,7 +252,26 @@
 .ape-page section[id],.ape-page article[id]{scroll-margin-top:calc(var(--hdr-sm) + 1px)}
 .ape-page{overflow-x:hidden;overflow-x:clip}
 .ape-page{padding-top:var(--hdr-h)}
-.ape-page .ape-home .ape-hero{padding-top:clamp(24px,4vw,64px)}
+.ape-page .reveal:not(.in){opacity:0;transform:translate3d(0,18px,0)}
+.ape-page .reveal{transition:opacity 1s var(--ease-calm) var(--d,0s),transform 1.1s var(--ease-calm) var(--d,0s)}
+.ape-page .reveal.ape-from-left:not(.in){transform:translate3d(-36px,0,0)}
+.ape-page .reveal.ape-from-right:not(.in){transform:translate3d(36px,0,0)}
+.ape-page .reveal.ape-pop:not(.in){transform:scale(.965)}
+.ape-page .reveal.ape-fade:not(.in){transform:none}
+.ape-page .reveal.ape-fade{transition:opacity 1.2s var(--ease-calm) var(--d,0s)}
+.ape-page .reveal.in{opacity:1;transform:none}
+.ape-page .reveal.ape-d1{--d:.15s}
+.ape-page .reveal.ape-d2{--d:.3s}
+.ape-page .reveal.ape-d3{--d:.45s}
+.ape-page .ape-card.reveal,.ape-page .ape-feel-card.reveal,.ape-page .ape-heart-card.reveal,.ape-page .ape-ready-card.reveal,.ape-page .ape-reassure.reveal{transition:opacity 1s var(--ease-calm) var(--d,0s),transform 1.1s var(--ease-calm) var(--d,0s),translate .35s ease,box-shadow .35s ease,border-color .35s ease,background-color .35s ease}
+@media (max-width:900px){
+  .ape-page .reveal.ape-from-left:not(.in){transform:translate3d(-20px,0,0)}
+  .ape-page .reveal.ape-from-right:not(.in){transform:translate3d(20px,0,0)}
+}
+@media (prefers-reduced-motion:reduce){
+  .ape-page .reveal,.ape-page .reveal.ape-from-left,.ape-page .reveal.ape-from-right,.ape-page .reveal.ape-pop,.ape-page .reveal.ape-fade,.ape-page .ape-card.reveal,.ape-page .ape-feel-card.reveal,.ape-page .ape-heart-card.reveal,.ape-page .ape-ready-card.reveal,.ape-page .ape-reassure.reveal{opacity:1;transform:none;transition:none}
+}
+.ape-page.ape-home .ape-hero{padding-top:clamp(24px,4vw,64px)}
 .ape-page .ape-hero .ape-actions .ape-btn svg{width:15px;height:15px}
 .ape-page .ape-hero .ape-actions .ape-btn:hover svg{transform:translateY(2px)}
 .ape-page .ape-what-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(36px,6vw,96px);align-items:start}
@@ -251,9 +320,17 @@
 @media (min-width:901px){
   .ape-page .ape-member .ape-member-photo{max-width:440px}
 }
-.ape-page .ape-frame.ape-ph .ape-initials{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:40%;aspect-ratio:1/1;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;background:rgba(252,252,246,.72);border:1px solid rgba(143,116,85,.35);
-  font-family:var(--serif);font-size:clamp(22px,2.4vw,36px);letter-spacing:.04em;color:var(--navy)}
+.ape-page .ape-team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,3.6vw,60px);align-items:start}
+@media (min-width:901px){
+  .ape-page .ape-team-grid .ape-member{display:block}
+  .ape-page .ape-team-grid .ape-member .ape-member-photo,.ape-page .ape-team-grid .ape-member:nth-child(2n) .ape-member-photo{max-width:none;order:0;margin-bottom:26px}
+  .ape-page .ape-team-grid .ape-member-photo .ape-frame{aspect-ratio:4/4.4}
+  .ape-page .ape-team-grid .ape-member .ape-member-name{font-size:clamp(25px,2.2vw,32px)}
+  .ape-page .ape-team-grid .ape-member .ape-role{margin-bottom:18px;font-size:12px;letter-spacing:.14em;line-height:1.6}
+  .ape-page .ape-team-grid .ape-member .ape-bio{font-size:16px;line-height:1.7}
+  .ape-page .ape-team-grid .ape-member blockquote{font-size:clamp(18px,1.45vw,21px)}
+  .ape-page .ape-team-grid .ape-member .ape-actions{margin-top:22px}
+}
 @media (max-width:900px){
   .ape-page .ape-member{grid-template-columns:clamp(104px,30vw,150px) minmax(0,1fr);gap:4px 18px;align-items:center}
   .ape-page .ape-member:nth-child(2n){grid-template-columns:clamp(104px,30vw,150px) minmax(0,1fr)}
@@ -266,10 +343,34 @@
   .ape-page .ape-member .ape-member-text>*:not(.ape-member-name):not(.ape-role){grid-column:1 / -1}
   .ape-page .ape-member .ape-role+.ape-bio{margin-top:22px}
   .ape-page .ape-member blockquote{margin-top:12px}
+  .ape-page .ape-team-grid{grid-template-columns:minmax(0,1fr);gap:clamp(44px,8vw,64px)}
   .ape-page .ape-member .ape-member-text>.ape-actions{margin-top:18px}
 }
 .ape-page .ape-faqs-head{text-align:center;margin-left:auto;margin-right:auto}
 .ape-page .ape-faqs-head h2{margin-left:auto;margin-right:auto}
+.ape-page .ape-faq-card p+p{margin-top:14px}
+.ape-page .ape-faq-more{max-width:1120px;margin:clamp(36px,5vw,64px) auto 0;background:var(--offwhite);border:1px solid rgba(231,223,212,.8)}
+.ape-page .ape-faq-more h3{margin:0 0 6px}
+.ape-page .ape-faq-more p{font-size:clamp(17px,1.3vw,19px);color:var(--ink-soft);font-family:var(--sans)}
+.ape-page .ape-bio-more{display:grid;grid-template-rows:1fr;transition:grid-template-rows .6s var(--ease-calm)}
+.ape-page .ape-bio-more-inner{min-height:0;overflow:hidden}
+.ape-page .ape-bio-more.ape-is-collapsed{grid-template-rows:0fr}
+.ape-page .ape-bio-more.ape-is-collapsed .ape-bio-more-inner{visibility:hidden;transition:visibility 0s linear .6s}
+.ape-page .ape-bio-more .ape-bio:first-child{margin-top:0}
+.ape-page .ape-read-more{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:2px 0 0;padding:0;border:0;background:none;cursor:pointer;
+  font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:.02em;color:var(--taupe-ink);
+  text-decoration:underline;text-decoration-color:var(--taupe);text-decoration-thickness:1px;text-underline-offset:6px}
+.ape-page .ape-read-more[hidden]{display:none}
+.ape-page .ape-read-more:hover{color:var(--navy)}
+.ape-page .ape-read-more:focus-visible{outline:2px solid var(--navy);outline-offset:4px;border-radius:6px}
+.ape-page .ape-read-more svg{width:15px;height:15px;flex:none;transition:transform .4s var(--ease-calm)}
+.ape-page .ape-read-more[aria-expanded=true] svg{transform:rotate(180deg)}
+@media (max-width:900px){
+  .ape-page .ape-member .ape-member-text>.ape-read-more{justify-self:start}
+}
+@media (prefers-reduced-motion:reduce){
+  .ape-page .ape-bio-more,.ape-page .ape-bio-more.ape-is-collapsed .ape-bio-more-inner,.ape-page .ape-read-more svg{transition:none}
+}
 .ape-page picture{display:contents}
 .ape-page .ape-bridge-quote h2.ape-two-tone-lines{max-width:none;margin:0;font-size:inherit;font-weight:inherit;letter-spacing:normal}
 .ape-page .ape-bridge-quote .ape-l1{max-width:26ch}
@@ -284,54 +385,58 @@
   .ape-page to{opacity:1}
 }
 /* =====================================================================
-   PART 2 (hand written): where the APE blocks meet the Cronulla site.
+   PART 2 (hand written): where the APE page meets the Cronulla site.
+   Only what the five agreed differences need (see components/ape/ApeTemplate.tsx).
    ===================================================================== */
-/* The page sits under the Cronulla fixed nav, not the APE header. */
+/* The page sits under the Cronulla fixed menu, not the APE header. */
 .ape-page{padding-top:0;overflow-x:clip}
-.ape-page.ape-home .ape-home-hero{padding-top:clamp(150px,12.5vw,180px)}
-@media (max-width:900px){.ape-page.ape-home .ape-home-hero{padding-top:124px}}
+.ape-page.ape-home .ape-hero{padding-top:clamp(150px,12.5vw,180px)}
+@media (max-width:900px){.ape-page.ape-home .ape-hero{padding-top:124px}}
+.ape-page section[id],.ape-page article[id]{scroll-margin-top:7rem}
+/* Things this site's globals.css would otherwise pass into the APE sections: the body's light font
+   weight, a max-width on svg icons, and will-change on every .reveal. The APE site has none of them. */
+.ape-page{font-weight:400}
+.ape-page svg{max-width:none}
+/* globals.css zeroes every element's padding; the round FAQ arrows keep the browser's own button padding on the APE site. */
+.ape-page .ape-faq-arrow{padding:1px 6px}
+.ape-page .reveal{will-change:auto}
 
-/* Breadcrumb inside the hero */
-.ape-page .breadcrumb{margin-bottom:1.4rem;font-family:var(--sans);color:var(--ink-soft)}
-.ape-page .breadcrumb a{color:var(--ink-soft)}
-.ape-page .breadcrumb a:hover{color:var(--teal)}
-.ape-page .breadcrumb li+li::before{color:var(--taupe)}
-.ape-page .breadcrumb [aria-current]{color:var(--navy)}
+/* The page's own H1 ("Dental Anxiety in Cronulla"): one small line above the hero's small heading
+   (Figtree 600, 12.5px, letter-spaced, upper case, taupe-ink, no rule). The hero question below it
+   carries the APE h1 look through .ape-h1. */
+.ape-page .ape-hero h1.ape-page-h1{font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.22em;line-height:1.7;text-transform:uppercase;color:var(--taupe-ink);margin:0 0 10px;max-width:none}
 
-/* Hero: the page's own H1 (practice SEO) above the APE opening line, which keeps the APE h1 styling. */
-.ape-page .ape-hero h1.ape-page-title{font-size:clamp(22px,2.2vw,30px);line-height:1.25;letter-spacing:0;margin:0 0 14px;color:var(--taupe-ink)}
-.ape-page .ape-hero .ape-hero-line{font-family:var(--serif);font-weight:400;letter-spacing:-.005em;line-height:1.12;font-size:clamp(34px,4.6vw,58px);color:var(--ink);margin:0 0 20px;max-width:14ch}
-.ape-page .ape-hero .ape-sub{margin-bottom:30px}
-.ape-page .ape-hero .ape-actions .ape-link-arrow svg{width:15px;height:15px}
+/* Section 16, "How to reach APE": the APE website's footer details and disclaimer, with the APE
+   footer's own type and colours (the APE footer's logo, tagline and menu are not copied). */
+.ape-page .ape-reach{background:var(--cream);border-top:1px solid var(--line);padding:64px 0 56px}
+.ape-page .ape-reach ul{list-style:none;margin:0;padding:0}
+.ape-page .ape-reach li{margin:0 0 10px;color:var(--ink-soft);font-size:15.5px}
+.ape-page .ape-reach li a{color:var(--ink-soft);font-size:15.5px;text-decoration:none;transition:color .3s;overflow-wrap:anywhere}
+.ape-page .ape-reach li a:hover{color:var(--navy)}
+.ape-page .ape-reach .ape-contact-name{font-family:var(--serif);font-size:18px;color:var(--navy);margin-bottom:12px}
+.ape-page .ape-reach .ape-contact-email{margin-top:16px}
+.ape-page .ape-reach .ape-contact-label{display:block;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe-ink);margin-bottom:2px}
+.ape-page .ape-reach .ape-disclaimer{margin:44px 0 0;padding-top:24px;border-top:1px solid var(--line);line-height:1.6;max-width:92ch;font-size:13.5px;color:var(--ink-soft)}
 
+/* "15 and over" line next to Book Now (Site Settings > APE promotion, off). */
+.ape-page .ape-age-line{margin:18px 0 0;font-family:var(--sans);font-size:15px;line-height:1.55;color:var(--ink-soft);max-width:46ch}
+.ape-page .ape-ready-card p.ape-age-line{margin:22px auto 0;font-family:var(--sans);font-size:15px;line-height:1.55;color:rgba(252,252,246,.82);max-width:46ch}
+
+/* ---------------------------------------------------------------------
+   The practice's own dental anxiety copy (components/ape/ApePracticeCopy.tsx). Not shown:
+   these rules only apply when site.config.ts ape.practiceCopy is true.
+   --------------------------------------------------------------------- */
 /* The Cronulla block (dashboard copy) in APE clothing */
 .ape-page .ape-local h2{margin-bottom:18px;max-width:16ch}
 .ape-page .ape-local .ape-hook{font-size:1.15rem;font-weight:500;color:var(--navy);line-height:1.55;margin:0 0 1rem;max-width:58ch}
 .ape-page .ape-local .ape-hook strong{font-weight:500;color:var(--navy)}
 .ape-page .prose p,.ape-page .prose li{color:var(--ink-soft);font-size:1rem}
-.ape-page .prose a,.ape-page .ape-faq a{color:var(--teal);text-decoration:underline;text-decoration-color:rgba(186,156,126,.7);text-underline-offset:3px}
+.ape-page .prose a{color:var(--teal);text-decoration:underline;text-decoration-color:rgba(186,156,126,.7);text-underline-offset:3px}
 .ape-page .prose a:hover{color:var(--navy)}
-.ape-page strong{color:var(--navy)}
+.ape-page .ape-local strong{color:var(--navy)}
 .ape-page .ape-local .btn-row{margin-top:1.6rem}
 
-/* FAQs: a plain list of the APE questions, one open at a time via <details> */
-.ape-page .ape-faq{display:grid;gap:12px;max-width:860px;margin-left:auto;margin-right:auto}
-.ape-page .ape-faq details{background:var(--offwhite);border:1px solid rgba(231,223,212,.9);border-radius:22px;padding:0 clamp(20px,3vw,30px)}
-.ape-page .ape-faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 0;font-family:var(--serif);font-size:clamp(18px,1.5vw,22px);line-height:1.3;color:var(--ink)}
-.ape-page .ape-faq summary::-webkit-details-marker{display:none}
-.ape-page .ape-faq summary::after{content:'';flex:none;width:12px;height:12px;border-right:1.6px solid var(--taupe-deep);border-bottom:1.6px solid var(--taupe-deep);transform:rotate(45deg);transition:transform .3s ease;margin-right:4px}
-.ape-page .ape-faq details[open] summary::after{transform:rotate(225deg)}
-.ape-page .ape-faq summary:hover{color:var(--teal)}
-.ape-page .ape-faq summary:focus-visible{outline:2px solid var(--taupe);outline-offset:4px;border-radius:8px}
-.ape-page .ape-faq .ape-faq-a{padding:0 0 22px;color:var(--ink-soft);max-width:68ch}
-.ape-page .ape-faq .ape-faq-a p:last-child{margin-bottom:0}
-.ape-page .ape-faq-more{margin-top:clamp(28px,4vw,44px);max-width:860px;margin-left:auto;margin-right:auto}
-
-/* Single team member (Dr Lorna) */
-.ape-page .ape-member .ape-member-photo .ape-frame{max-width:460px}
-.ape-page .ape-member blockquote{margin-top:22px}
-.ape-page .ape-team-section{padding-top:0}
-
+.ape-page .ape-local .ape-local-wrap>div{max-width:780px}
 /* Site components used inside the page (numbered sections, booking strip, related treatments) */
 .ape-page .kicker{color:var(--taupe-ink);font-family:var(--sans);letter-spacing:.22em}
 .ape-page .h-display,.ape-page .section-head h2,.ape-page .cta-band h2{font-family:var(--serif);font-weight:400;color:var(--navy);letter-spacing:-.005em}
@@ -369,20 +474,3 @@
 .ape-page .card p{color:var(--ink-soft)}
 .ape-page .text-link{color:var(--navy);font-family:var(--sans)}
 .ape-page .text-link:hover{color:var(--teal)}
-
-/* Disclaimer strip (the APE footer line) */
-.ape-page .ape-disclaimer{background:var(--linen);padding:2.2rem 0;border-top:1px solid var(--line)}
-.ape-page .ape-disclaimer p{font-size:.84rem;line-height:1.7;color:var(--ink-soft);text-align:center;margin:0 auto;max-width:860px}
-
-/* v2.6.0: the Cronulla block has no photo now, so its text keeps a comfortable reading width. */
-.ape-page .ape-local .ape-local-wrap>div{max-width:780px}
-/* v2.6.0: "15 and over" line next to Book Now (Site Settings > APE promotion, off until approved). */
-.ape-page .ape-age-line{margin:18px 0 0;font-family:var(--sans);font-size:15px;line-height:1.55;color:var(--ink-soft);max-width:46ch}
-.ape-page .ape-ready-card p.ape-age-line{margin:22px auto 0;font-family:var(--sans);font-size:15px;line-height:1.55;color:rgba(252,252,246,.82);max-width:46ch}
-/* v2.6.2: where APE appointments are held, under the closing Book Now (APE's own wording) */
-.ape-page .ape-ready-card p.ape-clinic-line{margin:26px auto 0;font-family:var(--sans);font-size:15px;line-height:1.55;color:rgba(252,252,246,.82);max-width:46ch}
-.ape-page .ape-ready-card p.ape-clinic-line span{display:block}
-.ape-page .ape-ready-card p.ape-clinic-line span:first-child{color:var(--offwhite);font-weight:600}
-/* v2.6.0: the APE fonts are not preloaded, so give the hero's first button a fixed minimum width;
-   when Figtree arrives the button text changes width but the Book Now link beside it does not move. */
-@media (min-width:901px){.ape-page .ape-hero .ape-actions .ape-btn{min-width:17rem;justify-content:center}}

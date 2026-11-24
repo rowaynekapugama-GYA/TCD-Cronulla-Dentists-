@@ -1,6 +1,6 @@
 {
   "name": "the-cronulla-dentists",
-  "version": "2.6.2",
+  "version": "2.7.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,7 +15,8 @@
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "qa:banned": "node scripts/check-banned.mjs",
-    "qa:verification": "node scripts/check-verification.mjs"
+    "qa:verification": "node scripts/check-verification.mjs",
+    "qa:ape": "node scripts/ape/tools/check-ape-match.mjs .next/server/app/dental-anxiety.html --allow \"Dental Anxiety in Cronulla\""
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

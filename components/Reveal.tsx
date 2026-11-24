@@ -4,7 +4,8 @@ import { useEffect } from 'react';
 /** Adds the landing page's scroll-reveal to every `.reveal` element. */
 export default function Reveal() {
   useEffect(() => {
-    const els = document.querySelectorAll('.reveal');
+    // The APE page (/dental-anxiety/) runs the APE site's own reveal (components/ape/ApeBehaviour.tsx).
+    const els = Array.from(document.querySelectorAll('.reveal')).filter((el) => !el.closest('.ape-page'));
     if (!('IntersectionObserver' in window)) {
       els.forEach((el) => el.classList.add('in'));
       return;

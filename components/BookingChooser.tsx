@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import type { BookingLocation } from '@/lib/cta';
 import { inWindow, panelTail, promoHref, sydneyToday, trackPromoClick, type ApePromo } from '@/lib/apePromo';
 import { apePromoSans } from '@/components/ape/promoFont';
+import { img } from '@/lib/img';
 
 declare global {
   interface Window {
@@ -36,7 +37,7 @@ function ApePanel({ promo, onGo }: { promo: ApePromo; onGo: () => void }) {
   if (!promo.panelEnabled || !inWindow(promo, today)) return null;
   return (
     <aside className={`loc-ape ${apePromoSans.variable}`} aria-labelledby="loc-ape-title">
-      <img className="loc-ape-logo" src="/images/ape/ape-logo-rounded-for-light-backgrounds.webp" alt="" width={48} height={48} decoding="async" />
+      <img className="loc-ape-logo" src={img('/images/ape/ape-logo-rounded-for-light-backgrounds.webp')} alt="" width={48} height={48} decoding="async" />
       <div className="loc-ape-body">
         <h3 id="loc-ape-title" className="loc-ape-title">
           The Anxious Patient Experience

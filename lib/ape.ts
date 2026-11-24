@@ -14,4 +14,16 @@ export const APE_OLD_SLUG = 'dental-anxiety-cronulla';
 export const isApePage = (slug: string) => slug === APE_SLUG;
 
 /** The APE build's share image (1200 x 630), used as the page's OG image unless the dashboard sets one. */
-export const APE_OG_IMAGE = { src: '/images/ape/social-share-armchair.jpg', width: 1200, height: 630, alt: 'The Anxious Patient Experience at The Cronulla Dentists' };
+export const APE_OG_IMAGE = {
+  src: '/images/ape/social-share-armchair.jpg',
+  width: 1200,
+  height: 630,
+  alt: 'A soft cream armchair beside a small wooden table with a white vase of olive branches and a lit candle, in warm afternoon light',
+};
+
+/**
+ * The "15 and over" line (APE website v1.13.0, Book Now page). Shown on /dental-anxiety/ only when
+ * Site Settings > APE promotion > "Show the 15 and over line" is on. Off: Dr Lorna Gladwin has not
+ * approved it here, and the APE home page itself has no age line.
+ */
+export const APE_AGE_LINE = "The Anxious Patient Experience is for patients aged 15 and over. Patients under 18 need a parent or guardian's name to book.";

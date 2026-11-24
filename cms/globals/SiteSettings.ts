@@ -178,11 +178,18 @@ export const SiteSettings: GlobalConfig = {
                   ],
                 },
                 {
+                  name: 'teamEnabled',
+                  type: 'checkbox',
+                  label: 'Show Alex and Lauren on the APE page',
+                  defaultValue: true,
+                  admin: { description: 'On the dental anxiety page, Meet the team shows Dr Lorna Gladwin, Alex Loupos and Lauren Bright, as on the APE website. Untick to show Dr Lorna only.' },
+                },
+                {
                   name: 'ageLineEnabled',
                   type: 'checkbox',
                   label: 'Show the 15 and over line',
                   defaultValue: false,
-                  admin: { description: 'On the dental anxiety page, next to Book Now: "The Anxious Patient Experience is for patients aged 15 and over. Patients under 18 need a parent or guardian\'s name to book." Waiting for Dr Lorna Gladwin\'s approval.' },
+                  admin: { description: 'On the dental anxiety page, next to Book Now: "The Anxious Patient Experience is for patients aged 15 and over. Patients under 18 need a parent or guardian\'s name to book." Leave off: the APE home page has no age line, so turning this on makes the page differ from the APE website.' },
                 },
                 {
                   type: 'row',

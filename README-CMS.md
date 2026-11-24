@@ -161,18 +161,25 @@ Point `PUBLISH_HOOK_URL` (Production) at the `main` hook if you have not already
   Book online pop-up panel (on/off switches, start and end dates, APE opening date, link, wording).
   Both stop by themselves after the end date (checked in the visitor's browser, Sydney time). To stop
   one early: untick it, Save settings, then Publish website. Clicks reach GTM as `ape_promo_click`.
-  v2.6.0 adds "Show the 15 and over line" to the same tab (off): tick it, Save settings and Publish
-  website once Dr Lorna Gladwin approves the wording.
-- The Anxious Patient Experience page (/dental-anxiety/, v2.3.0) is a special case: the APE blocks
-  (wording in `content/ape.json`, styles in `app/ape.css`, photos in `public/images/ape/`) are fixed in
-  the repo because they are Dr Lorna Gladwin's trademarked programme. Only the Cronulla copy between them
-  (the "Dental Anxiety" page in the dashboard: eyebrow, heading, hook, body, photo and the numbered
-  sections) is editable. Update the APE wording from a new APE website build, not in the dashboard.
-  Since v2.6.2 (23 Nov 2026) the page matches the APE website exactly, at Dr Lorna Gladwin's request.
-  The Cronulla copy, the numbered "in detail" sections, the Cronulla booking strip and Related
-  treatments are no longer shown on it, so editing those fields of the Dental Anxiety page in the
-  dashboard changes nothing on the site. Its H1, SEO title and description are still used.
-  The Services page tile for it is APE's armchair photo (public/images/tiles/dental-anxiety.jpg).
+  v2.6.0 adds "Show the 15 and over line" to the same tab (off). Leave it off: the APE home page has
+  no age line, so turning it on makes /dental-anxiety/ differ from the APE website.
+  v2.7.0 adds "Show Alex and Lauren on the APE page" (on): untick it, Save settings and Publish website
+  to show Dr Lorna Gladwin only in Meet the team.
+- The Anxious Patient Experience page (/dental-anxiety/) is a special case. Since v2.7.0 (24 Nov 2026),
+  at Dr Lorna Gladwin's request, everything between this site's header and footer on that page is the
+  APE website's home page, section for section. None of it is edited in the dashboard:
+  - Wording: `content/ape.json`, which is the APE source pack's `ape-page.json` unchanged. To update it,
+    replace that file with the one from a new pack (the APE chat makes the pack).
+  - Photos: `public/images/ape/`, the pack's files and alt text. Styles: `app/ape.css`, ported from the
+    pack's stylesheet with `scripts/port-ape-css.py`. Behaviour (Read more, the FAQ viewer, reveals):
+    `components/ape/ApeBehaviour.tsx`.
+  - Check after any change: `npm run build` then `npm run qa:ape`. It must end with PASS.
+  - Still from the dashboard for this page: the H1 ("Dental Anxiety in Cronulla", shown as one small
+    line), the SEO title and description, and the share image if one is set.
+  - The practice's own dental anxiety copy (the Dental Anxiety page's eyebrow, heading, hook, body,
+    numbered sections and booking strip) stays in the dashboard but is not shown, so editing it changes
+    nothing on the site. `ape.practiceCopy` in `site.config.ts` would put it back on the page.
+  - The Services page tile for it is APE's armchair photo (`public/images/tiles/dental-anxiety.jpg`).
 
 ## What the current site and the brief disagreed on (decisions taken)
 

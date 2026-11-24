@@ -13,7 +13,7 @@ export interface NavLink {
 
 /** The Anxious Patient Experience (TM) link, shown in the top menu after Contact and first in the mobile menu. */
 const APE_LINK: NavLink = { label: 'The Anxious Patient Experience', href: APE_ROUTE, mobileFirst: true };
-const APE_CARD = { image: '/images/ape/ape-armchair-corner.webp', alt: 'A soft cream armchair beside a small wooden table with a white vase of olive branches and a lit candle, in warm afternoon light' };
+const APE_CARD = { image: '/images/ape/ape-armchair-corner-800.webp', alt: 'A soft cream armchair beside a small wooden table with a white vase of olive branches and a lit candle, in warm afternoon light' };
 export interface NavGroup {
   label: string;
   links: NavLink[];

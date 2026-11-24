@@ -158,12 +158,19 @@ const DEFAULTS = {
    * The APE website and its booking page. The /dental-anxiety/ page links out to
    * them ("Discover the Experience" and "Book Now"); the page's own copy lives in
    * content/ape.json. APE moved to its own domain on 11 Nov 2026 (apex primary,
-   * www redirects to it).
+   * www redirects to it). Since v2.7.0 the page is the APE home page itself: content/ape.json is
+   * the APE source pack's ape-page.json.
    */
   ape: {
     route: '/dental-anxiety/',
     url: 'https://theanxiouspatientexperience.com.au/',
     bookUrl: 'https://theanxiouspatientexperience.com.au/book-now/',
+    /**
+     * The practice's own dental anxiety copy on /dental-anxiety/ (the dashboard page's eyebrow, heading,
+     * hook, body, numbered sections and booking strip, plus Related treatments). Off since v2.7.0: the
+     * page holds only the APE website's sections. The copy stays in the dashboard for reuse elsewhere.
+     */
+    practiceCopy: false,
     teamUrl: 'https://theanxiouspatientexperience.com.au/meet-the-team/',
   },
   /**
@@ -179,6 +186,8 @@ const DEFAULTS = {
     panelEnabled: true,
     /** "15 and over" line on /dental-anxiety/ (v2.6.0). Off until Dr Lorna Gladwin approves the wording. */
     ageLineEnabled: false,
+    /** Alex Loupos and Lauren Bright in "Meet the team" on /dental-anxiety/, as on the APE website (v2.7.0). */
+    teamEnabled: true,
     startDate: '2026-11-18',
     endDate: '2026-12-16',
     /** The panel says "opening 2 December" before this date and "now available" from it. */

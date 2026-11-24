@@ -1,303 +1,506 @@
 {
-  "_note": "The Anxious Patient Experience(TM) copy, word for word from the APE website (theanxiouspatientexperience.com.au, checked section by section against the live site, v1.13.0, on 23 Nov 2026). It is Dr Lorna Gladwin's trademarked programme, so this wording is fixed in the repo rather than edited in the dashboard. Only the page's H1, title, description and schema come from the dashboard page. `clinic` is the APE site's own wording for where appointments are held (its footer and Book Now page).",
-  "hero": {
-    "eyebrow": "A GENTLER WAY TO BEGIN DENTAL CARE",
-    "line": "Does your body start to tense before you’ve even sat in the dental chair?",
-    "sub": "We’ve made an experience for you.",
-    "discover": "Discover the Experience",
-    "book": "Book Now"
-  },
-  "intro": {
-    "eyebrow": "A different starting point",
-    "h2": "The Anxious Patient Experience™ (APE)",
-    "line": "A nervous-system-aware approach to dental care."
-  },
-  "heart": {
-    "eyebrow": "The heart of the experience",
-    "h2": "This is not about curing anxiety or pushing through it.",
-    "lines": [
-      {
-        "pre": "It’s about ",
-        "em": "understanding",
-        "post": " why your body reacts."
-      },
-      {
-        "pre": "It’s about ",
-        "em": "learning practical ways",
-        "post": " to regulate that response."
-      },
-      {
-        "pre": "It’s about ",
-        "em": "creating a dental environment and care pathway",
-        "post": " that feels safe enough to attend, make decisions and receive treatment."
-      }
-    ],
-    "outcome": "Anxiety may still be present.",
-    "outcomeAccent": "Success means it’s no longer the barrier that stops you accessing care."
-  },
-  "quote1": {
-    "l1": "If the thought of booking your dental appointment makes your heart race,",
-    "l2": "this is for you."
-  },
-  "what": {
-    "eyebrow": "Understanding the experience",
-    "h2": "What is The Anxious Patient Experience™?",
-    "lead": {
-      "pre": "The Anxious Patient Experience™ begins with a dedicated ",
-      "strong": "70-minute Anxious New Patient Experience",
-      "post": "."
+  "meta": {
+    "source": "The Anxious Patient Experience website, repo version 1.14.0 (public pages unchanged since v1.13.0, live 20 Nov 2026)",
+    "sourceUrl": "https://theanxiouspatientexperience.com.au/",
+    "packDate": "2026-11-24",
+    "title": "The Anxious Patient Experience™ | Dental Care for Anxious Patients",
+    "description": "A nervous-system-aware approach to dental care. Understand why your body reacts, learn practical ways to regulate it and access care at your own pace.",
+    "shareImage": {
+      "file": "social-share-armchair.jpg",
+      "size": "1200 x 630",
+      "alt": "A soft cream armchair beside a small wooden table with a white vase of olive branches and a lit candle, in warm afternoon light"
     },
-    "paragraphs": [
-      "This first visit follows a consistent APE protocol and flow that is unique to the programme. Before you arrive, we learn about your anxiety, triggers, previous experiences, communication preferences and what helps you feel more comfortable and in control.",
-      "During your appointment, we take time to understand what helps you feel more at ease. We create a sense of predictability and control, communicate in the way that works best for you, and support you with practical ways to regulate your nervous system throughout your care.",
-      "Your visit may also include an examination, X-rays and other appropriate care (such as a clean) where you feel comfortable enough to proceed.",
-      "From there, you receive a personalised treatment plan and ongoing APE care pathway, so future treatment can be adapted around your individual needs, preferences and level of support."
-    ],
-    "aim": "The aim is not to promise that anxiety disappears or to ask you to push through it.",
-    "aimAccent": "It is to help you understand your response, give you practical tools to regulate it, and create a consistent care pathway that helps anxiety become less of a barrier to receiving dental treatment."
-  },
-  "first": {
-    "l1": "What if your dental care started with understanding your anxiety first?",
-    "l2": "Then built an experience around what you need."
-  },
-  "body": {
-    "eyebrow": "The nervous system",
-    "h2": "Dental anxiety often starts in the body.",
-    "lead": "Your nervous system is always checking whether you are safe. At the dentist, many things can tell it you are not:",
-    "triggers": [
-      "Unfamiliar environments",
-      "People you don’t know",
-      "Lack of control",
-      "Past experiences",
-      "Claustrophobia",
-      "Needles",
-      "Sounds and sensations",
-      "Embarrassment",
-      "Unpredictability"
-    ],
-    "feelH2": "What it can feel like",
-    "feelLead": "When your body feels unsafe, you might notice:",
-    "feelings": [
-      "A racing heart",
-      "Muscle tension",
-      "Changes in your breathing",
-      "Shaking",
-      "Nausea",
-      "Tears",
-      "Freezing",
-      "The urge to leave or cancel"
-    ],
-    "closing": "This is not always a conscious choice.",
-    "closingAccent": "It is your body trying to protect you."
-  },
-  "approach": {
-    "eyebrow": "Our approach",
-    "h2": "We don’t ask you to ignore that response.",
-    "h2Accent": "We work with it.",
-    "paragraphs": [
-      "Being told to “just relax” rarely helps. Instead, we help you understand what is happening and introduce practical, evidence-informed strategies drawn from established approaches to anxiety regulation. Alongside greater predictability, control and personalised support, these tools can help you regulate your response and make accessing dental care feel more manageable."
-    ]
-  },
-  "different": {
-    "eyebrow": "What we do differently",
-    "h2": "Care designed around how you feel.",
-    "cards": [
-      {
-        "icon": "person",
-        "title": "Understanding you before you arrive",
-        "text": "We learn about your history, concerns and preferences before your first visit."
-      },
-      {
-        "icon": "calendar",
-        "title": "Predictability",
-        "text": "You know what will happen, when it will happen and how long it will take."
-      },
-      {
-        "icon": "pause",
-        "title": "Control",
-        "text": "You set the pace and can ask to pause at any time."
-      },
-      {
-        "icon": "chat",
-        "title": "Communication tailored to you",
-        "text": "We explain as much or as little as you want, in the way that suits you."
-      },
-      {
-        "icon": "waves",
-        "title": "Nervous-system regulation",
-        "text": "Practical techniques to help your body settle before and during care."
-      },
-      {
-        "icon": "headphones",
-        "title": "Sensory support",
-        "text": "Options to help with sound, light and touch, including headphones and choosing what you watch or listen to."
-      }
-    ]
-  },
-  "who": {
-    "h2": "Who is The Anxious Patient Experience™ for?",
-    "paragraphs": [
-      "The Anxious Patient Experience™ is designed for people whose dental anxiety, fear or previous experiences make attending the dentist or receiving treatment more difficult.",
-      "You do not need to have severe dental phobia to benefit from the experience. You may simply notice that your heart races before an appointment, you feel tense in the waiting room, you avoid booking, feel embarrassed or overwhelmed, or wish dental care felt easier."
-    ],
-    "more": [
-      "The Anxious Patient Experience™ is not intended as a standalone pathway for patients with severe dental phobia who are unable to tolerate dental care without significant pharmacological support.",
-      "For some patients, inhalation sedation, such as nitrous oxide, intravenous sedation, or referral for treatment under general anaesthetic may be more appropriate.",
-      "Our role is to help identify the level of support that is right for you rather than asking you to force yourself through an approach that may not be appropriate."
-    ]
-  },
-  "quote2": {
-    "l1": "Imagine walking out of the dentist feeling proud of yourself.",
-    "l2": "That feeling is possible.",
-    "book": "Book Now"
-  },
-  "meet": {
-    "eyebrow": "Meet the team",
-    "h2": "You deserve to feel heard.",
-    "sub": "Your experience matters from the very beginning."
-  },
-  "lorna": {
-    "name": "Dr Lorna Gladwin",
-    "role": "Creator of The Anxious Patient Experience™",
-    "bio": [
-      "Lorna created The Anxious Patient Experience™ after seeing how often anxiety, rather than the dentistry itself, becomes the biggest barrier to someone receiving care.",
-      "Her approach has always centred around understanding the person before the teeth: what makes them anxious, what helps them feel in control, how they prefer to communicate, and what can make treatment feel more manageable.",
-      "Originally from northern England, Lorna graduated from the University of Sheffield in 2019 and has worked across NHS hospitals, private practice and referral settings in both the UK and Sydney. She now practises in the Sutherland Shire, with particular interests in restorative dentistry and endodontics.",
-      "The Anxious Patient Experience™ brings together the way she has naturally approached anxious patients throughout her career into a structured pathway designed to help more people access dental care with greater understanding, control and confidence."
-    ],
-    "quote": "“You don’t have to be brave here.",
-    "quoteAccent": "You can take it one gentle step at a time.”"
-  },
-  "faqs": {
-    "eyebrow": "Questions",
-    "h2": "Everything you might want to know before you begin.",
-    "items": [
-      {
-        "q": "Am I suitable for The Anxious Patient Experience™?",
-        "a": [
-          "If your body tenses, your heart races or you avoid the dentist because of how it makes you feel, this was created for you. It may not be sufficient on its own for everyone. More severe dental phobia or complex cases may need additional support, which we will discuss with you."
-        ]
-      },
-      {
-        "q": "What happens after I book?",
-        "a": [
-          "Once your appointment is confirmed, we’ll send you your Anxious Patient Experience new patient information pack.",
-          "This will include your pre-appointment questionnaire, contact information, where to park, how to plan your day and everything you need to know before your visit - helping remove as much uncertainty as possible before you arrive.",
-          "The information you share also gives your dental team time to understand your anxiety, triggers and preferences and prepare your experience around you."
-        ]
-      },
-      {
-        "q": "What if I haven’t been to the dentist for years?",
-        "a": [
-          "You are not alone, and there is no judgement here. We start from where you are today."
-        ]
-      },
-      {
-        "q": "What if I become overwhelmed or cry?",
-        "a": [
-          "That’s okay. It’s a natural response, not something to apologise for. We pause, give you time and only continue when you are ready."
-        ]
-      },
-      {
-        "q": "Do I have to have treatment at my first appointment?",
-        "a": [
-          "No. Your first appointment is about understanding you and what you need. Any treatment is discussed and planned with you, at your pace."
-        ]
-      },
-      {
-        "q": "Can I bring someone with me?",
-        "a": [
-          "Yes. You’re welcome to bring someone you trust."
-        ]
-      },
-      {
-        "q": "Can I use headphones or choose what I watch or listen to?",
-        "a": [
-          "Yes. We have sound-reducing headphones ready for APE patients, along with weighted blankets if these help you feel more comfortable.",
-          "We’ll also ask about your music and TV preferences before your appointment so the room can be prepared for you where possible."
-        ]
-      },
-      {
-        "q": "Is sedation available?",
-        "a": [
-          "Yes. Some patients find that additional support such as inhalation sedation, including nitrous oxide, or intravenous sedation makes dental care feel more manageable.",
-          "These options can be discussed with you where appropriate.",
-          "The aim is not to take support away from you. We also want to help you understand your anxiety and build practical ways to regulate your response, so you have more tools available to you when receiving dental care."
-        ]
-      },
-      {
-        "q": "What happens after my first appointment?",
-        "a": [
-          "We talk through what we learned together and agree on the next steps. You decide what happens next and when."
-        ]
-      },
-      {
-        "q": "How much does it cost?",
-        "a": [
-          "The New Patient Appointment is 70 minutes and costs $350. Health fund rebates are available. A $100 deposit is required to secure your booking."
-        ]
-      },
-      {
-        "q": "What is the cancellation and deposit policy?",
-        "a": [
-          "With 48 hours’ notice or more, your deposit can be transferred or refunded. With less than 48 hours’ notice or non-attendance, your deposit may be retained. If anxiety is making it hard to attend, please contact us rather than simply not attending."
-        ]
-      }
-    ],
-    "moreH3": "Still have a question?",
-    "moreP": "Alex, our APE Lead, is happy to talk it through with you.",
-    "moreBtn": "Reach out to Alex"
-  },
-  "ready": {
-    "eyebrow": "When you are ready",
-    "h2": "Your experience matters from the very beginning.",
-    "line": "You don’t have to be brave here. You can take it one gentle step at a time.",
-    "book": "Book Now"
-  },
-  "disclaimer": "The information on this website is general in nature and does not replace individual assessment or advice from a registered dental practitioner. Suitability for The Anxious Patient Experience™, and for any treatment or sedation options discussed, will be assessed individually with your dentist.",
-  "images": {
-    "hero": {
-      "src": "/images/ape/ape-armchair-corner.webp",
-      "alt": "A soft cream armchair beside a small wooden table with a white vase of olive branches and a lit candle, in warm afternoon light",
-      "w": 2400,
-      "h": 1340,
-      "pos": "34% 50%"
+    "bookNow": "https://theanxiouspatientexperience.com.au/book-now/",
+    "facts": {
+      "appointment": "New Patient Appointment, 70 minutes",
+      "price": "$350",
+      "deposit": "$100",
+      "rebates": "Health fund rebates are available.",
+      "where": "The Cronulla Dentists, 13 Cronulla Street, Cronulla NSW 2230",
+      "phone": "(02) 8599 9815",
+      "apeEmail": "theanxiouspatientexperience@gmail.com",
+      "opens": "APE opens at The Cronulla Dentists on 2 December 2026"
     },
-    "heart": {
-      "src": "/images/ape/ape-candle-book.webp",
-      "alt": "A lit candle in a glass resting on a plain white book, beside a stone vase of dried flowers",
-      "w": 1400,
-      "h": 781,
-      "pos": "52% 50%"
+    "markup": {
+      "*text*": "italic (em)",
+      "**text**": "bold (strong)",
+      "[[text]]": "the second tone (taupe accent colour); in a quote band it is the second line, after a short rule"
     },
-    "approach": {
-      "src": "/images/ape/ape-textured-napkin.webp",
-      "alt": "A textured cream napkin with a small tooth outline, resting on soft draped fabric",
-      "w": 1400,
-      "h": 781,
-      "pos": "50% 62%"
-    },
-    "who": {
-      "src": "/images/ape/ape-toothbrushes-eucalyptus.webp",
-      "alt": "Bamboo toothbrushes in a glass jar beside a sprig of eucalyptus and folded white towels",
-      "w": 2400,
-      "h": 1340,
-      "pos": "24% 50%"
-    },
-    "lorna": {
-      "src": "/images/ape/team-lorna-gladwin.webp",
-      "alt": "Dr Lorna Gladwin, creator of The Anxious Patient Experience",
-      "w": 1086,
-      "h": 1448,
-      "pos": "50% 22%"
-    },
-    "logoLight": {
-      "src": "/images/ape/ape-logo-rounded-for-light-backgrounds.webp",
-      "alt": "The Anxious Patient Experience™",
-      "w": 256,
-      "h": 256
+    "linkTargets": {
+      "BOOK_NOW": "The APE Book Now page with this site's tracking tags, in a new tab",
+      "APE_CONTACT": "#ape-contact, the \"How to reach APE\" block (section 16) on the same page"
     }
   },
-  "ageLine": "The Anxious Patient Experience is for patients aged 15 and over. Patients under 18 need a parent or guardian's name to book.",
-  "clinic": { "name": "The Cronulla Dentists", "address": "13 Cronulla Street, Cronulla NSW 2230" }
+  "sections": [
+    {
+      "n": 1,
+      "id": "hero",
+      "name": "Hero",
+      "background": "cream #F7F4EF",
+      "layout": "Text on the left, armchair photo on the right (rounded 32px). Photo above the text on phones.",
+      "eyebrow": "A GENTLER WAY TO BEGIN DENTAL CARE",
+      "heading": "Does your body start to tense before you’ve even sat in the dental chair?",
+      "headingLevel": "h1 on the APE site (see the prompt for the H1 rule on this site)",
+      "paragraphs": [
+        "We’ve made an experience for you."
+      ],
+      "buttons": [
+        {
+          "label": "Discover the Experience",
+          "style": "sand button with a down arrow",
+          "goes": "#intro (the next section on this page)"
+        },
+        {
+          "label": "Book Now",
+          "style": "text link with a right arrow",
+          "goes": "BOOK_NOW"
+        }
+      ],
+      "image": {
+        "file": "ape-armchair-corner.jpg",
+        "files": [
+          "ape-armchair-corner-800.webp",
+          "ape-armchair-corner-1400.webp",
+          "ape-armchair-corner-2400.webp",
+          "ape-armchair-corner.jpg"
+        ],
+        "alt": "A soft cream armchair beside a small wooden table with a white vase of olive branches and a lit candle, in warm afternoon light",
+        "note": "loads first (eager), 2400 x 1340 original, shown portrait in a rounded frame"
+      },
+      "leaveOut": "The small \"Opening special\" ribbon link under the buttons. It is switched on by the APE booking system and is not copied to this site."
+    },
+    {
+      "n": 2,
+      "id": "intro",
+      "name": "Intro band",
+      "background": "linen #F3EEE7",
+      "layout": "Centred.",
+      "eyebrow": "A different starting point",
+      "heading": "The Anxious Patient Experience™ (APE)",
+      "paragraphs": [
+        "A nervous-system-aware approach to dental care."
+      ]
+    },
+    {
+      "n": 3,
+      "id": "heart",
+      "name": "The heart of the experience",
+      "background": "blush #F0E8E0",
+      "layout": "Left: small heading, heading, then the candle photo under it. Right: an off-white card holding the four lines, with a thin rule before the last one.",
+      "eyebrow": "The heart of the experience",
+      "heading": "This is not about curing anxiety or pushing through it.",
+      "paragraphs": [
+        "It’s about *understanding* why your body reacts.",
+        "It’s about *learning practical ways* to regulate that response.",
+        "It’s about *creating a dental environment and care pathway* that feels safe enough to attend, make decisions and receive treatment.",
+        "Anxiety may still be present. [[Success means it’s no longer the barrier that stops you accessing care.]]"
+      ],
+      "image": {
+        "file": "ape-candle-book.jpg",
+        "files": [
+          "ape-candle-book-800.webp",
+          "ape-candle-book-1400.webp",
+          "ape-candle-book-2400.webp",
+          "ape-candle-book.jpg"
+        ],
+        "alt": "A lit candle in a glass resting on a plain white book, beside a stone vase of dried flowers",
+        "note": ""
+      }
+    },
+    {
+      "n": 4,
+      "id": "quote-1",
+      "name": "Quote band",
+      "background": "cream #F7F4EF",
+      "layout": "Centred two-tone line: navy first line, a short taupe rule, taupe second line. No photo.",
+      "quote": "If the thought of booking your dental appointment makes your heart race, [[this is for you.]]"
+    },
+    {
+      "n": 5,
+      "id": "understanding",
+      "name": "What is The Anxious Patient Experience™?",
+      "background": "linen #F3EEE7",
+      "layout": "Heading, then seven paragraphs. No photo.",
+      "eyebrow": "Understanding the experience",
+      "heading": "What is The Anxious Patient Experience™?",
+      "paragraphs": [
+        "The Anxious Patient Experience™ begins with a dedicated **70-minute Anxious New Patient Experience**.",
+        "This first visit follows a consistent APE protocol and flow that is unique to the programme. Before you arrive, we learn about your anxiety, triggers, previous experiences, communication preferences and what helps you feel more comfortable and in control.",
+        "During your appointment, we take time to understand what helps you feel more at ease. We create a sense of predictability and control, communicate in the way that works best for you, and support you with practical ways to regulate your nervous system throughout your care.",
+        "Your visit may also include an examination, X-rays and other appropriate care (such as a clean) where you feel comfortable enough to proceed.",
+        "From there, you receive a personalised treatment plan and ongoing APE care pathway, so future treatment can be adapted around your individual needs, preferences and level of support.",
+        "The aim is not to promise that anxiety disappears or to ask you to push through it.",
+        "[[It is to help you understand your response, give you practical tools to regulate it, and create a consistent care pathway that helps anxiety become less of a barrier to receiving dental treatment.]]"
+      ]
+    },
+    {
+      "n": 6,
+      "id": "quote-2",
+      "name": "Bridge quote",
+      "background": "cream #F7F4EF",
+      "layout": "Centred two-tone heading (h2): navy first line, a short taupe rule, taupe second line. No photo.",
+      "quote": "What if your dental care started with understanding your anxiety first? [[Then built an experience around what you need.]]"
+    },
+    {
+      "n": 7,
+      "id": "nervous-system",
+      "name": "The nervous system",
+      "background": "blush #F0E8E0",
+      "layout": "Left: heading, one sentence, then the nine items as rounded off-white chips. Right: an off-white card with \"What it can feel like\", its eight items as a two-column dotted list, a thin rule, then the closing two-tone line.",
+      "eyebrow": "The nervous system",
+      "heading": "Dental anxiety often starts in the body.",
+      "paragraphs": [
+        "Your nervous system is always checking whether you are safe. At the dentist, many things can tell it you are not:"
+      ],
+      "list": [
+        "Unfamiliar environments",
+        "People you don’t know",
+        "Lack of control",
+        "Past experiences",
+        "Claustrophobia",
+        "Needles",
+        "Sounds and sensations",
+        "Embarrassment",
+        "Unpredictability"
+      ],
+      "heading2": "What it can feel like",
+      "paragraphs2": [
+        "When your body feels unsafe, you might notice:"
+      ],
+      "list2": [
+        "A racing heart",
+        "Muscle tension",
+        "Changes in your breathing",
+        "Shaking",
+        "Nausea",
+        "Tears",
+        "Freezing",
+        "The urge to leave or cancel"
+      ],
+      "closing": "This is not always a conscious choice. [[It is your body trying to protect you.]]"
+    },
+    {
+      "n": 8,
+      "id": "approach",
+      "name": "Our approach",
+      "background": "cream #F7F4EF",
+      "layout": "Text on the left, napkin photo on the right.",
+      "eyebrow": "Our approach",
+      "heading": "We don’t ask you to ignore that response. [[We work with it.]]",
+      "paragraphs": [
+        "Being told to “just relax” rarely helps. Instead, we help you understand what is happening and introduce practical, evidence-informed strategies drawn from established approaches to anxiety regulation. Alongside greater predictability, control and personalised support, these tools can help you regulate your response and make accessing dental care feel more manageable."
+      ],
+      "image": {
+        "file": "ape-textured-napkin.jpg",
+        "files": [
+          "ape-textured-napkin-800.webp",
+          "ape-textured-napkin-1400.webp",
+          "ape-textured-napkin-2400.webp",
+          "ape-textured-napkin.jpg"
+        ],
+        "alt": "A textured cream napkin with a small tooth outline, resting on soft draped fabric",
+        "note": ""
+      }
+    },
+    {
+      "n": 9,
+      "id": "what-we-do-differently",
+      "name": "What we do differently",
+      "background": "linen #F3EEE7",
+      "layout": "Six off-white cards (28px corners), each with a small round icon, three across on desktop and one per row on phones.",
+      "eyebrow": "What we do differently",
+      "heading": "Care designed around how you feel.",
+      "cards": [
+        {
+          "heading": "Understanding you before you arrive",
+          "text": "We learn about your history, concerns and preferences before your first visit."
+        },
+        {
+          "heading": "Predictability",
+          "text": "You know what will happen, when it will happen and how long it will take."
+        },
+        {
+          "heading": "Control",
+          "text": "You set the pace and can ask to pause at any time."
+        },
+        {
+          "heading": "Communication tailored to you",
+          "text": "We explain as much or as little as you want, in the way that suits you."
+        },
+        {
+          "heading": "Nervous-system regulation",
+          "text": "Practical techniques to help your body settle before and during care."
+        },
+        {
+          "heading": "Sensory support",
+          "text": "Options to help with sound, light and touch, including headphones and choosing what you watch or listen to."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "id": "who-is-it-for",
+      "name": "Who is it for",
+      "background": "cream #F7F4EF",
+      "layout": "Toothbrushes photo on the left, text on the right.",
+      "heading": "Who is The Anxious Patient Experience™ for?",
+      "paragraphs": [
+        "The Anxious Patient Experience™ is designed for people whose dental anxiety, fear or previous experiences make attending the dentist or receiving treatment more difficult.",
+        "You do not need to have severe dental phobia to benefit from the experience. You may simply notice that your heart races before an appointment, you feel tense in the waiting room, you avoid booking, feel embarrassed or overwhelmed, or wish dental care felt easier.",
+        "The Anxious Patient Experience™ is not intended as a standalone pathway for patients with severe dental phobia who are unable to tolerate dental care without significant pharmacological support.",
+        "For some patients, inhalation sedation, such as nitrous oxide, intravenous sedation, or referral for treatment under general anaesthetic may be more appropriate.",
+        "Our role is to help identify the level of support that is right for you rather than asking you to force yourself through an approach that may not be appropriate."
+      ],
+      "image": {
+        "file": "ape-toothbrushes-eucalyptus.jpg",
+        "files": [
+          "ape-toothbrushes-eucalyptus-800.webp",
+          "ape-toothbrushes-eucalyptus-1400.webp",
+          "ape-toothbrushes-eucalyptus-2400.webp",
+          "ape-toothbrushes-eucalyptus.jpg"
+        ],
+        "alt": "Bamboo toothbrushes in a glass jar beside a sprig of eucalyptus and folded white towels",
+        "note": ""
+      }
+    },
+    {
+      "n": 11,
+      "id": "quote-3",
+      "name": "Closing quote",
+      "background": "blush #F0E8E0",
+      "layout": "Centred two-tone line (navy, short taupe rule, taupe), then one button.",
+      "quote": "Imagine walking out of the dentist feeling proud of yourself. [[That feeling is possible.]]",
+      "buttons": [
+        {
+          "label": "Book Now",
+          "style": "sand button",
+          "goes": "BOOK_NOW"
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "id": "meet-the-team",
+      "name": "Meet the team (intro)",
+      "background": "cream #F7F4EF",
+      "layout": "Centred.",
+      "eyebrow": "Meet the team",
+      "heading": "You deserve to feel heard.",
+      "paragraphs": [
+        "Your experience matters from the very beginning."
+      ]
+    },
+    {
+      "n": 13,
+      "id": "team",
+      "name": "Team",
+      "background": "cream #F7F4EF",
+      "layout": "Three people side by side on desktop, stacked on phones. Each shows the photo, name, role and first paragraph, with \"Read more\" opening the rest (\"Read less\" closes it).",
+      "members": [
+        {
+          "name": "Dr Lorna Gladwin",
+          "role": "Creator of The Anxious Patient Experience™",
+          "bio": [
+            "Lorna created The Anxious Patient Experience™ after seeing how often anxiety, rather than the dentistry itself, becomes the biggest barrier to someone receiving care.",
+            "Her approach has always centred around understanding the person before the teeth: what makes them anxious, what helps them feel in control, how they prefer to communicate, and what can make treatment feel more manageable.",
+            "Originally from northern England, Lorna graduated from the University of Sheffield in 2019 and has worked across NHS hospitals, private practice and referral settings in both the UK and Sydney. She now practises in the Sutherland Shire, with particular interests in restorative dentistry and endodontics.",
+            "The Anxious Patient Experience™ brings together the way she has naturally approached anxious patients throughout her career into a structured pathway designed to help more people access dental care with greater understanding, control and confidence."
+          ],
+          "quote": "“You don’t have to be brave here. [[You can take it one gentle step at a time.”]]",
+          "image": {
+            "file": "team-lorna-gladwin-2026-10-26.webp",
+            "files": [
+              "team-lorna-gladwin-2026-10-26.webp"
+            ],
+            "alt": "Dr Lorna Gladwin, creator of The Anxious Patient Experience",
+            "note": "1086 x 1448, object-position 50% 22%"
+          }
+        },
+        {
+          "name": "Alex Loupos",
+          "role": "APE Lead | Patient Care & Support",
+          "bio": [
+            "As your first point of contact for The Anxious Patient Experience™, Alex is here to make you feel welcomed, supported and understood from the very beginning.",
+            "With a background in dentistry and a genuine passion for patient care, Alex understands just how overwhelming a visit to the dentist can feel. Her warm, compassionate nature helps create a safe, judgement-free space where you can share your worries, ask questions and feel truly heard.",
+            "What Alex loves most about her role is the opportunity to make a genuine difference in someone’s experience. Whether it’s offering a little reassurance, taking the time to listen or simply being a friendly, familiar face, Alex wants every patient to feel cared for, comfortable and confident taking the next step.",
+            "For Alex, it’s about more than just an appointment. It’s about making sure you feel like a person, not just another patient."
+          ],
+          "buttons": [
+            {
+              "label": "Reach out to Alex",
+              "style": "outline button",
+              "goes": "APE_CONTACT"
+            }
+          ],
+          "image": {
+            "file": "team-alex-loupos-2026-11-03.jpg",
+            "files": [
+              "team-alex-loupos-2026-11-03.webp",
+              "team-alex-loupos-2026-11-03.jpg"
+            ],
+            "alt": "Alex Loupos, APE Lead",
+            "note": "987 x 1593, object-position 50% 16%"
+          }
+        },
+        {
+          "name": "Lauren Bright",
+          "role": "APE Dental Assistant | Patient Care & Support",
+          "bio": [
+            "With a background in hairdressing before moving into dentistry, Lauren has always loved connecting with people and making them feel comfortable and cared for.",
+            "Known for her kind, calm and attentive nature, Lauren plays an important role in creating a reassuring environment throughout your experience. Whether it’s a comforting conversation, a gentle word of encouragement or simply holding your hand when you need a little extra support, Lauren is there to make sure you never feel alone in the chair.",
+            "Outside of dentistry, Lauren is currently studying emergency medicine, a subject she’s incredibly passionate about. In her spare time, she loves spending time with family and friends, enjoying the beach, keeping active and discovering new places to eat.",
+            "For Lauren, it’s the little things that make the biggest difference, and she takes pride in helping every patient feel genuinely cared for."
+          ],
+          "image": {
+            "file": "team-lauren-bright-2026-11-09.jpg",
+            "files": [
+              "team-lauren-bright-2026-11-09-800.webp",
+              "team-lauren-bright-2026-11-09.webp",
+              "team-lauren-bright-2026-11-09.jpg"
+            ],
+            "alt": "Lauren Bright, APE Dental Assistant",
+            "note": "1086 x 1448, object-position 45% 22%"
+          }
+        }
+      ]
+    },
+    {
+      "n": 14,
+      "id": "faqs",
+      "name": "FAQs",
+      "background": "linen #F3EEE7",
+      "layout": "Numbered question list (01 to 11) on the left, the open answer in a card on the right with previous / next arrows and a \"1 / 11\" counter. On phones the answer card sits under the list. Then the \"Still have a question?\" card.",
+      "eyebrow": "Questions",
+      "heading": "Everything you might want to know before you begin.",
+      "faqs": [
+        {
+          "question": "Am I suitable for The Anxious Patient Experience™?",
+          "answer": [
+            "If your body tenses, your heart races or you avoid the dentist because of how it makes you feel, this was created for you. It may not be sufficient on its own for everyone. More severe dental phobia or complex cases may need additional support, which we will discuss with you."
+          ]
+        },
+        {
+          "question": "What happens after I book?",
+          "answer": [
+            "Once your appointment is confirmed, we’ll send you your Anxious Patient Experience new patient information pack.",
+            "This will include your pre-appointment questionnaire, contact information, where to park, how to plan your day and everything you need to know before your visit - helping remove as much uncertainty as possible before you arrive.",
+            "The information you share also gives your dental team time to understand your anxiety, triggers and preferences and prepare your experience around you."
+          ]
+        },
+        {
+          "question": "What if I haven’t been to the dentist for years?",
+          "answer": [
+            "You are not alone, and there is no judgement here. We start from where you are today."
+          ]
+        },
+        {
+          "question": "What if I become overwhelmed or cry?",
+          "answer": [
+            "That’s okay. It’s a natural response, not something to apologise for. We pause, give you time and only continue when you are ready."
+          ]
+        },
+        {
+          "question": "Do I have to have treatment at my first appointment?",
+          "answer": [
+            "No. Your first appointment is about understanding you and what you need. Any treatment is discussed and planned with you, at your pace."
+          ]
+        },
+        {
+          "question": "Can I bring someone with me?",
+          "answer": [
+            "Yes. You’re welcome to bring someone you trust."
+          ]
+        },
+        {
+          "question": "Can I use headphones or choose what I watch or listen to?",
+          "answer": [
+            "Yes. We have sound-reducing headphones ready for APE patients, along with weighted blankets if these help you feel more comfortable.",
+            "We’ll also ask about your music and TV preferences before your appointment so the room can be prepared for you where possible."
+          ]
+        },
+        {
+          "question": "Is sedation available?",
+          "answer": [
+            "Yes. Some patients find that additional support such as inhalation sedation, including nitrous oxide, or intravenous sedation makes dental care feel more manageable.",
+            "These options can be discussed with you where appropriate.",
+            "The aim is not to take support away from you. We also want to help you understand your anxiety and build practical ways to regulate your response, so you have more tools available to you when receiving dental care."
+          ]
+        },
+        {
+          "question": "What happens after my first appointment?",
+          "answer": [
+            "We talk through what we learned together and agree on the next steps. You decide what happens next and when."
+          ]
+        },
+        {
+          "question": "How much does it cost?",
+          "answer": [
+            "The New Patient Appointment is 70 minutes and costs $350. Health fund rebates are available. A $100 deposit is required to secure your booking."
+          ]
+        },
+        {
+          "question": "What is the cancellation and deposit policy?",
+          "answer": [
+            "With 48 hours’ notice or more, your deposit can be transferred or refunded. With less than 48 hours’ notice or non-attendance, your deposit may be retained. If anxiety is making it hard to attend, please contact us rather than simply not attending."
+          ]
+        }
+      ],
+      "card": {
+        "heading": "Still have a question?",
+        "text": "Alex, our APE Lead, is happy to talk it through with you.",
+        "buttons": [
+          {
+            "label": "Reach out to Alex",
+            "style": "outline button",
+            "goes": "APE_CONTACT"
+          }
+        ]
+      }
+    },
+    {
+      "n": 15,
+      "id": "book",
+      "name": "When you are ready",
+      "background": "cream page, with a navy-deep #2A3C4E rounded panel (36px corners)",
+      "layout": "Centred in the panel: taupe small heading, off-white heading, taupe serif line, sand button. A faint circle outline sits in the top right corner of the panel.",
+      "eyebrow": "When you are ready",
+      "heading": "Your experience matters from the very beginning.",
+      "paragraphs": [
+        "You don’t have to be brave here. You can take it one gentle step at a time."
+      ],
+      "buttons": [
+        {
+          "label": "Book Now",
+          "style": "sand button",
+          "goes": "BOOK_NOW"
+        }
+      ]
+    },
+    {
+      "n": 16,
+      "id": "ape-contact",
+      "name": "How to reach APE (the APE website footer details)",
+      "background": "cream #F7F4EF",
+      "layout": "On the APE site this is the footer. On the practice site it is a small block at the end of the APE sections, id=\"ape-contact\", so the two \"Reach out to Alex\" buttons have somewhere to land.",
+      "contact": {
+        "place": "The Cronulla Dentists",
+        "address": "13 Cronulla Street, Cronulla NSW 2230",
+        "addressLink": "https://www.google.com/maps/search/?api=1&query=The%20Cronulla%20Dentists%2C%2013%20Cronulla%20Street%2C%20Cronulla%20NSW%202230",
+        "addressLinkNote": "opens Google Maps in a new tab; screen-reader text \"(opens Google Maps)\"",
+        "phone": "(02) 8599 9815",
+        "phoneLink": "tel:+61285999815",
+        "labels": [
+          {
+            "label": "APE enquiries",
+            "email": "theanxiouspatientexperience@gmail.com"
+          },
+          {
+            "label": "General practice enquiries",
+            "email": "reception@thecronulladentists.com.au"
+          }
+        ]
+      },
+      "disclaimer": "The information on this website is general in nature and does not replace individual assessment or advice from a registered dental practitioner. Suitability for The Anxious Patient Experience™, and for any treatment or sedation options discussed, will be assessed individually with your dentist."
+    }
+  ]
 }

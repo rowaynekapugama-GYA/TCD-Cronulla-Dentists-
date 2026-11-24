@@ -59,6 +59,7 @@ const ALLOWED = [
   /is not guaranteed/i, // DentiCare approval / root canal outcome disclaimers (the opposite of a guarantee claim)
   /cannot guarantee it/i,
   /emergency contact and, where relevant/i, // Privacy policy, a data category, not an availability claim
+  /studying emergency medicine/i, // APE page, Lauren Bright's bio (APE website wording): her studies, not an emergency dentistry claim
 ];
 
 function walk(dir) {

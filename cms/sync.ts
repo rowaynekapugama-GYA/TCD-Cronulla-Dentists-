@@ -345,6 +345,7 @@ function apePromoFromDoc(p: any): Record<string, unknown> | undefined {
   if (typeof p.bannerEnabled === 'boolean') out.bannerEnabled = p.bannerEnabled;
   if (typeof p.panelEnabled === 'boolean') out.panelEnabled = p.panelEnabled;
   if (typeof p.ageLineEnabled === 'boolean') out.ageLineEnabled = p.ageLineEnabled;
+  if (typeof p.teamEnabled === 'boolean') out.teamEnabled = p.teamEnabled;
   // A date cleared in the dashboard means "no limit on that side", so it is passed on as ''.
   for (const k of APE_PROMO_DATES) if (k in p) out[k] = typeof p[k] === 'string' ? p[k].trim() : '';
   // Empty wording falls back to the wording in site.config.ts.
