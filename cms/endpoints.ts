@@ -56,7 +56,7 @@ const importFromFiles: Endpoint = {
   },
 };
 
-/** GET /api/site-status — for the dashboard panel. */
+/** GET /api/site-status, for the dashboard panel. */
 const siteStatus: Endpoint = {
   path: '/site-status',
   method: 'get',
@@ -67,7 +67,7 @@ const siteStatus: Endpoint = {
   },
 };
 
-/** GET /api/enquiries-export.csv — every enquiry as a spreadsheet for the practice. */
+/** GET /api/enquiries-export.csv, every enquiry as a spreadsheet for the practice. */
 const enquiriesCsv: Endpoint = {
   path: '/enquiries-export.csv',
   method: 'get',

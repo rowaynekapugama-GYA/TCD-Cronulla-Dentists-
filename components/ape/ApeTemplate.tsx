@@ -3,36 +3,35 @@ import Link from 'next/link';
 import type { ServicePage } from '@/content/types';
 import ape from '@/content/ape.json';
 import { SITE_CONFIG } from '@/site.config';
-import { Inline, Nodes, sectionVisible } from '@/components/Inline';
-import { CtaButtons, CtaBand } from '@/components/Cta';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { JsonLd } from '@/components/JsonLd';
 import { breadcrumbSchema, serviceSchema } from '@/lib/schema';
-import { DetailSections } from '@/components/DetailSections';
-import { RelatedServices } from '@/components/RelatedServices';
 import { apeFontClass } from './fonts';
+import { promoHref } from '@/lib/apePromo';
 
 /**
  * /dental-anxiety/ : The Anxious Patient Experience (TM) at The Cronulla Dentists.
  *
- * The page is the APE website's homepage (build v1.2.5, 15 Oct 2026) rebuilt
- * inside the Cronulla site: same sections in the same order, same wording
- * (content/ape.json), same stylesheet ported with an `ape-` prefix (app/ape.css)
- * and the same photos (public/images/ape/). Two Cronulla blocks sit between the
- * APE "Book Now" quote band and "Meet the team": the practice's own dental
- * anxiety copy from the dashboard (eyebrow, heading, hook, body, photo) and the
- * numbered "in detail" sections, so the practice edits that part exactly like
- * any other service page.
+ * The page is the APE website's homepage rebuilt inside the Cronulla site: same
+ * sections in the same order, same wording (content/ape.json), the APE stylesheet
+ * ported with an `ape-` prefix (app/ape.css) and APE's own photos at APE's crops
+ * (public/images/ape/). Matched to the live APE site (v1.13.0) on 23 Nov 2026
+ * (v2.6.2), at Dr Lorna Gladwin's request: the Cronulla-only blocks that used to
+ * sit on this page (the practice's own dental anxiety copy, the numbered "in detail"
+ * sections, the Cronulla booking strip and Related treatments) are no longer shown.
+ * The page's H1, title, description, URL, canonical and schema stay for search, and
+ * the dashboard still edits those. One line under the closing Book Now says where
+ * APE appointments are held, in the APE site's own wording.
  *
- * Differences from the APE build, on purpose:
- * - The APE header, footer, booking form and JS (FAQ carousel, read-more) are not
- *   used; the Cronulla header and footer wrap the page, the FAQ list is a plain
- *   accordion and Dr Lorna's full bio is shown in one piece.
- * - Only Dr Lorna Gladwin is listed under "Meet the team". The build's other two
- *   cards are marked TODO (no photo, "Bio coming soon"), so they are left out
- *   until the client supplies them.
- * - "Book Now" opens the APE website's booking page (site.config `ape.bookUrl`).
- *   "Talk to Alex" goes to the practice contact page.
+ * Differences from the APE site, on purpose:
+ * - The APE header, footer, booking form, "Opening special" ribbon and pop-up (they
+ *   come from the APE booking system) and JS (FAQ carousel, read-more) are not used; the Cronulla header and footer wrap the page,
+ *   the FAQ list is a plain accordion and Dr Lorna's full bio is shown in one piece.
+ * - Only Dr Lorna Gladwin is listed under "Meet the team" (this site shows photos of
+ *   dentists only).
+ * - "Book Now" opens the APE website's booking page in a new tab, tagged
+ *   utm_content=ape-page. "Reach out to Alex" goes to the practice contact page.
+ * - The "15 and over" line (Site Settings > APE promotion) is off until Lorna approves it.
  *
  * Styling note: everything sits in .ape-page, which carries the APE palette and
  * fonts. Nothing outside this page is affected.
@@ -122,9 +121,12 @@ function apeFaqSchema() {
 
 export function ApeTemplate({ page }: { page: ServicePage }) {
   const crumbs = page.breadcrumb.map((c, i) => ({ name: c, href: i === page.breadcrumb.length - 1 ? page.meta.route : crumbHref[c] || '/' }));
-  const details = page.details.filter(sectionVisible);
   const im = ape.images;
-  const bookUrl = SITE_CONFIG.ape.bookUrl;
+  // Every Book Now on this page goes to the APE booking page, tagged so APE can see it came from here.
+  const bookUrl = promoHref(SITE_CONFIG.ape.bookUrl, 'ape-page');
+  // "15 and over" line: waiting for Lorna's approval, so it only shows when switched on in
+  // Site Settings > APE promotion.
+  const ageLine = SITE_CONFIG.apePromo.ageLineEnabled ? <p className="ape-age-line">{ape.ageLine}</p> : null;
 
   return (
     <div className={`ape-page ape-home ${apeFontClass}`}>
@@ -149,6 +151,7 @@ export function ApeTemplate({ page }: { page: ServicePage }) {
                 <IconArrowRight />
               </a>
             </div>
+            {ageLine}
           </div>
           <div className="ape-hero-media reveal">
             <Frame shape="ape-arch ape-portrait" img={im.hero} sizes="(max-width: 900px) 100vw, 50vw" priority />
@@ -235,18 +238,14 @@ export function ApeTemplate({ page }: { page: ServicePage }) {
         </div>
       </section>
 
-      {/* What if your dental care started with understanding your anxiety first */}
-      <section className="ape-section ape-understand-intro" aria-labelledby="ape-first-heading">
-        <div className="ape-wrap ape-grid">
-          <div>
-            <h2 id="ape-first-heading" className="reveal">
-              {ape.first.h2}
-            </h2>
-            <p className="ape-sub reveal">{ape.first.sub}</p>
-          </div>
-          <div className="ape-hero-media reveal">
-            <Frame shape="ape-landscape" img={im.first} sizes="(max-width: 900px) 100vw, 50vw" />
-          </div>
+      {/* What if your dental care started with understanding your anxiety first (a two-tone quote band, as on the APE site) */}
+      <section className="ape-quote-band ape-two-tone ape-bridge-quote" aria-labelledby="ape-first-heading">
+        <div className="ape-wrap">
+          <h2 id="ape-first-heading" className="ape-two-tone-lines">
+            <span className="ape-l1 reveal">{ape.first.l1}</span>
+            <span className="ape-rule reveal" aria-hidden="true" />
+            <span className="ape-l2 reveal">{ape.first.l2}</span>
+          </h2>
         </div>
       </section>
 
@@ -365,31 +364,6 @@ export function ApeTemplate({ page }: { page: ServicePage }) {
         </div>
       </section>
 
-      {/* The Cronulla copy (dashboard content: eyebrow, heading, hook, body, photo) */}
-      <section className="ape-section ape-bg-linen ape-local" aria-labelledby="ape-local-heading" id="cronulla">
-        <div className="ape-wrap ape-two-col" style={{ alignItems: 'center' }}>
-          <div>
-            <p className="ape-eyebrow">{page.eyebrow}</p>
-            <h2 id="ape-local-heading" className="reveal">
-              {page.h2}
-            </h2>
-            <p className="ape-hook reveal">
-              <Inline text={page.hook} />
-            </p>
-            <div className="prose reveal">
-              <Nodes nodes={page.body} />
-            </div>
-            <CtaButtons />
-          </div>
-          <div className="reveal">
-            <Frame shape="ape-landscape" img={page.image} sizes="(max-width: 900px) 100vw, 50vw" />
-          </div>
-        </div>
-      </section>
-
-      {/* The numbered Cronulla sections (dashboard content) */}
-      <DetailSections sections={details} title={`${page.h2}: in detail`} />
-
       {/* Meet the team */}
       <section className="ape-hero-simple ape-center ape-meet-intro" id="meet-the-team" aria-labelledby="ape-meet-heading">
         <div className="ape-wrap">
@@ -472,14 +446,14 @@ export function ApeTemplate({ page }: { page: ServicePage }) {
                 {ape.ready.book}
               </a>
             </div>
+            {ageLine}
+            {/* Where APE appointments are held, worded as on the APE site (footer and Book Now). */}
+            <p className="ape-clinic-line">
+              <span>{ape.clinic.name}</span> <span>{ape.clinic.address}</span>
+            </p>
           </div>
         </div>
       </section>
-
-      {/* The Cronulla booking strip (adapts to pre-opening / open mode like every other page) */}
-      <CtaBand text={page.ctaBand} address />
-
-      <RelatedServices current={page} />
 
       {/* APE disclaimer */}
       <section className="ape-disclaimer" aria-label="Disclaimer">

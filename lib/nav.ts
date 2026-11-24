@@ -13,7 +13,7 @@ export interface NavLink {
 
 /** The Anxious Patient Experience (TM) link, shown in the top menu after Contact and first in the mobile menu. */
 const APE_LINK: NavLink = { label: 'The Anxious Patient Experience', href: APE_ROUTE, mobileFirst: true };
-const APE_CARD = { image: '/images/ape/home-hero-calm-smile.webp', alt: 'A woman with long dark hair smiling warmly at home' };
+const APE_CARD = { image: '/images/ape/ape-armchair-corner.webp', alt: 'A soft cream armchair beside a small wooden table with a white vase of olive branches and a lit candle, in warm afternoon light' };
 export interface NavGroup {
   label: string;
   links: NavLink[];
@@ -46,7 +46,7 @@ export function serviceGroups(): NavGroup[] {
 
 /**
  * The image cards across the top of the Services mega-menu.
- * Order matters — edit this list to change what is featured.
+ * Order matters, edit this list to change what is featured.
  * Any slug whose feature flag is off is dropped automatically.
  *
  * `image` overrides the card thumbnail only; the service page keeps its own
@@ -71,7 +71,7 @@ export function featuredServices(): FeaturedService[] {
 
 /**
  * Drives the mega-menu footer line. Uses the client's own service list from the
- * Services Hub copy (15 items) rather than the page count — several pages cover
+ * Services Hub copy (15 items) rather than the page count, several pages cover
  * one service (the gum-health cluster) and some are not treatments at all
  * (Dental Anxiety), so the page count would overstate it.
  */
@@ -96,7 +96,7 @@ export function primaryNav(): NavLink[] {
   return links;
 }
 
-/** Image cards in the About panel — same treatment as the Services panel. */
+/** Image cards in the About panel, same treatment as the Services panel. */
 export function aboutFeatured(): FeaturedService[] {
   const cards: FeaturedService[] = [
     { label: 'The practice', href: '/about/', image: '/images/menu-practice.jpg', alt: imageAlt('/images/menu-practice.jpg') },

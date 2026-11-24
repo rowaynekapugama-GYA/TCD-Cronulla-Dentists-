@@ -1,5 +1,5 @@
 /**
- * Writes lib/image-manifest.json — every file under public/images/ mapped to a
+ * Writes lib/image-manifest.json, every file under public/images/ mapped to a
  * short hash of its contents.
  *
  * lib/img.ts turns that hash into `?v=…` on each image URL so that replacing a
@@ -34,4 +34,4 @@ const manifest = {};
 // Sorted so the file has a stable diff when only one image changes.
 const sorted = Object.fromEntries(Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b)));
 fs.writeFileSync(out, JSON.stringify(sorted, null, 2) + '\n');
-console.log(`✓ lib/image-manifest.json — ${Object.keys(sorted).length} images hashed`);
+console.log(`✓ lib/image-manifest.json, ${Object.keys(sorted).length} images hashed`);

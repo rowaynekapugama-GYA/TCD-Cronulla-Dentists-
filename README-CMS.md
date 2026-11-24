@@ -161,11 +161,18 @@ Point `PUBLISH_HOOK_URL` (Production) at the `main` hook if you have not already
   Book online pop-up panel (on/off switches, start and end dates, APE opening date, link, wording).
   Both stop by themselves after the end date (checked in the visitor's browser, Sydney time). To stop
   one early: untick it, Save settings, then Publish website. Clicks reach GTM as `ape_promo_click`.
+  v2.6.0 adds "Show the 15 and over line" to the same tab (off): tick it, Save settings and Publish
+  website once Dr Lorna Gladwin approves the wording.
 - The Anxious Patient Experience page (/dental-anxiety/, v2.3.0) is a special case: the APE blocks
   (wording in `content/ape.json`, styles in `app/ape.css`, photos in `public/images/ape/`) are fixed in
   the repo because they are Dr Lorna Gladwin's trademarked programme. Only the Cronulla copy between them
   (the "Dental Anxiety" page in the dashboard: eyebrow, heading, hook, body, photo and the numbered
   sections) is editable. Update the APE wording from a new APE website build, not in the dashboard.
+  Since v2.6.2 (23 Nov 2026) the page matches the APE website exactly, at Dr Lorna Gladwin's request.
+  The Cronulla copy, the numbered "in detail" sections, the Cronulla booking strip and Related
+  treatments are no longer shown on it, so editing those fields of the Dental Anxiety page in the
+  dashboard changes nothing on the site. Its H1, SEO title and description are still used.
+  The Services page tile for it is APE's armchair photo (public/images/tiles/dental-anxiety.jpg).
 
 ## What the current site and the brief disagreed on (decisions taken)
 

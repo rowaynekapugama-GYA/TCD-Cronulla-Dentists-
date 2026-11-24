@@ -3,7 +3,7 @@ import type { PageMeta } from '@/content/types';
 import { resolvedMeta, canonical } from '@/lib/content';
 import { SITE_CONFIG } from '@/site.config';
 
-/** Share card generated from the client's logo — see scripts/make-brand-assets.py. */
+/** Share card generated from the client's logo, see scripts/make-brand-assets.py. */
 export const OG_IMAGE = {
   url: '/images/og-default.jpg',
   width: 1200,

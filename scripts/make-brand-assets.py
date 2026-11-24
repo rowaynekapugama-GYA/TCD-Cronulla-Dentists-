@@ -37,13 +37,13 @@ NAVY = (14, 53, 102)
 CYAN = (38, 184, 219)
 GREY = (74, 88, 102)
 
-# Kept in step with site.config.ts — update here when the site config changes.
+# Kept in step with site.config.ts, update here when the site config changes.
 ADDRESS = "13 Cronulla Street, Cronulla NSW 2230"
 OPENING = "Opening late November 2026"  # in 'open' mode use "Now taking new patients"
 HOOKS = "Open until 7pm Mondays  ·  Early appointments from 7am Fridays"
 
 if not os.path.exists(SRC):
-    sys.exit(f"{SRC} not found — put the master logo there first.")
+    sys.exit(f"{SRC} not found, put the master logo there first.")
 
 im = Image.open(SRC).convert("RGB")
 w, h = im.size

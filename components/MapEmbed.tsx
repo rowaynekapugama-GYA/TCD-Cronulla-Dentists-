@@ -3,7 +3,7 @@ import { SITE_CONFIG, fullAddress } from '@/site.config';
 const APPLE_MAPS = 'https://maps.apple.com/?q=' + encodeURIComponent(`The Cronulla Dentists, ${'13 Cronulla Street, Cronulla NSW 2230'}`);
 
 /**
- * Map panel — the practice's Google listing as an embedded map, with
+ * Map panel, the practice's Google listing as an embedded map, with
  * click-to-map links for both Google and Apple Maps beneath it (SEO Doc 02,
  * launch checklist #23). Falls back to a styled address panel if the embed URL
  * is ever cleared.

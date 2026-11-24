@@ -20,6 +20,12 @@
  * 23 Nov 2026: Dr Lorna Gladwin is an Associate Dentist at Cronulla, not a principal (Alex). The site
  * said Principal Dentist on her Team record and "led by Dr Ram Nathwani and Dr Lorna Gladwin" on the
  * homepage and About page. applyLornaAssociate() corrects both once; later dashboard edits are kept.
+ *
+ * 23 Nov 2026 (v2.6.2): /dental-anxiety/ matches the APE website, so its photos are APE's own.
+ * applyApePhotos() swaps the old photos still stored in the dashboard, once: the page photo
+ * (services/dental-anxiety-cronulla.jpg) and any tile or card that links to /dental-anxiety/ with an
+ * old built-in photo (the Services page tile). A photo uploaded in the dashboard is never replaced;
+ * it is reported in the build log instead.
  */
 import type { Payload } from 'payload';
 import { APE_OLD_SLUG, APE_ROUTE, APE_SLUG } from '../lib/ape';
@@ -154,6 +160,75 @@ async function applyLornaAssociate(payload: Payload, context: Record<string, unk
   return changed;
 }
 
+const APE_ARMCHAIR_ALT =
+  'A soft cream armchair beside a small wooden table with a white vase of olive branches and a lit candle, in warm afternoon light';
+const APE_PAGE_PHOTO = { path: '/images/ape/ape-armchair-corner.webp', alt: APE_ARMCHAIR_ALT };
+const APE_TILE_PHOTO = { path: '/images/tiles/dental-anxiety.jpg', alt: APE_ARMCHAIR_ALT };
+/** Photos of people (stock or client-supplied) used before the APE page matched the APE site. These files are gone. */
+const RETIRED_PHOTOS = new Set(['/images/services/dental-anxiety-cronulla.jpg', '/images/tiles/dental-anxiety-cronulla.jpg', '/images/ape/home-hero-calm-smile.webp']);
+/** tiles/dental-anxiety.jpg is now the armchair; only its old alt text marks it as not yet updated. */
+const OLD_TILE_ALTS = new Set(['', 'A woman with long dark hair smiling warmly at home']);
+const hasUpload = (img: any) => img && img.upload != null && img.upload !== '';
+const isOldPhoto = (img: any, _target: { path: string; alt: string }) => {
+  if (!img || hasUpload(img)) return false;
+  const path = img.path || '';
+  if (RETIRED_PHOTOS.has(path)) return true;
+  return path === APE_TILE_PHOTO.path && OLD_TILE_ALTS.has(img.alt || '');
+};
+
+/** Swap old photos on cards that link to the APE page; returns the new value, or the same object when unchanged. */
+function apeCards(value: any, notes: string[], path: string): any {
+  if (Array.isArray(value)) {
+    let changed = false;
+    const out = value.map((v, i) => {
+      const r = apeCards(v, notes, `${path}.${i}`);
+      if (r !== v) changed = true;
+      return r;
+    });
+    return changed ? out : value;
+  }
+  if (value && typeof value === 'object') {
+    if (value.href === APE_ROUTE && value.image && typeof value.image === 'object') {
+      if (isOldPhoto(value.image, APE_TILE_PHOTO)) return { ...value, image: { ...value.image, upload: null, ...APE_TILE_PHOTO } };
+      if (hasUpload(value.image)) notes.push(`${path}: a photo uploaded in the dashboard, left as it is`);
+      return value;
+    }
+    let changed = false;
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(value)) {
+      const r = SKIP_KEYS.has(k) ? v : apeCards(v, notes, `${path}.${k}`);
+      if (r !== v) changed = true;
+      out[k] = r;
+    }
+    return changed ? out : value;
+  }
+  return value;
+}
+
+async function applyApePhotos(payload: Payload, context: Record<string, unknown>): Promise<number> {
+  let changed = 0;
+  const notes: string[] = [];
+  const pages = await payload.find({ collection: 'pages', limit: 500, depth: 0, overrideAccess: true });
+  for (const doc of pages.docs as any[]) {
+    const patch: Record<string, unknown> = {};
+    if (doc.slug === APE_SLUG && doc.image) {
+      if (isOldPhoto(doc.image, APE_PAGE_PHOTO)) patch.image = { ...doc.image, upload: null, ...APE_PAGE_PHOTO };
+      else if (hasUpload(doc.image)) notes.push(`pages/${doc.slug}.image: a photo uploaded in the dashboard, left as it is`);
+    }
+    for (const [k, v] of Object.entries(doc)) {
+      if (SKIP_KEYS.has(k) || k === 'image') continue;
+      const r = apeCards(v, notes, `pages/${doc.slug}.${k}`);
+      if (r !== v) patch[k] = r;
+    }
+    if (!Object.keys(patch).length) continue;
+    await payload.update({ collection: 'pages', id: doc.id, data: { ...patch, _status: 'published' } as any, depth: 0, overrideAccess: true, context });
+    console.log(`[content-fixes] APE photo used on "${doc.slug}" (${Object.keys(patch).join(', ')})`);
+    changed++;
+  }
+  if (notes.length) console.warn(`[content-fixes] WARNING: check these photos for the APE page by hand:\n  ${notes.join('\n  ')}`);
+  return changed;
+}
+
 /** Sentence-level removals; everything else in each sentence is kept word for word. */
 const NIB_RULES: Rule[] = [
   [/We are an nib preferred provider\.\s*We also use HICAPS/gi, 'We use HICAPS'],
@@ -203,6 +278,7 @@ export async function applyContentFixes(payload: Payload): Promise<void> {
   let changed = await applyApeRename(payload, context);
   changed += await applyGtmContainer(payload, context);
   changed += await applyLornaAssociate(payload, context);
+  changed += await applyApePhotos(payload, context);
   const pages = await payload.find({ collection: 'pages', limit: 500, depth: 0, overrideAccess: true });
   for (const doc of pages.docs as any[]) {
     const patch = changedFields(doc);

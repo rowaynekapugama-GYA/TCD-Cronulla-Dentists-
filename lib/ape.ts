@@ -14,4 +14,4 @@ export const APE_OLD_SLUG = 'dental-anxiety-cronulla';
 export const isApePage = (slug: string) => slug === APE_SLUG;
 
 /** The APE build's share image (1200 x 630), used as the page's OG image unless the dashboard sets one. */
-export const APE_OG_IMAGE = { src: '/images/ape/social-share.jpg', width: 1200, height: 630, alt: 'The Anxious Patient Experience at The Cronulla Dentists' };
+export const APE_OG_IMAGE = { src: '/images/ape/social-share-armchair.jpg', width: 1200, height: 630, alt: 'The Anxious Patient Experience at The Cronulla Dentists' };

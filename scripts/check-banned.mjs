@@ -13,7 +13,7 @@ const ROOT = path.resolve('.next/server/app');
 
 /**
  * "gap free", "no gap" and "bulk bill" were banned outright until the practice
- * confirmed it bulk bills under the Child Dental Benefits Schedule — the same
+ * confirmed it bulk bills under the Child Dental Benefits Schedule, the same
  * condition the `cdbs` feature flag waits on. They are now tied to that flag:
  * allowed while it is ON (the kids no-gap offer is live), banned again the moment
  * it is switched OFF, so a stray "no gap" can never survive the offer being
@@ -54,11 +54,11 @@ const BANNED = [
   'nib',
 ];
 const ALLOWED = [
-  /fitted on the same day teeth are extracted/i, // Dentures — describes a procedure
-  /most of the change happens the same day/i, // Whitening — describes a procedure
+  /fitted on the same day teeth are extracted/i, // Dentures, describes a procedure
+  /most of the change happens the same day/i, // Whitening, describes a procedure
   /is not guaranteed/i, // DentiCare approval / root canal outcome disclaimers (the opposite of a guarantee claim)
   /cannot guarantee it/i,
-  /emergency contact and, where relevant/i, // Privacy policy — a data category, not an availability claim
+  /emergency contact and, where relevant/i, // Privacy policy, a data category, not an availability claim
 ];
 
 function walk(dir) {

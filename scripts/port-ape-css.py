@@ -16,7 +16,8 @@ out_path = sys.argv[2]
 DROP = ['.site-header', '.nav', '.burger', '.mobile-menu', '.scroll-progress', '.site-footer', '.appt-card',
         '#booking', '.chosen-clinic', '.slot-err', '.notice-24h', '.confirm', '.faq-', '.read-more', '.bio-more',
         '.plain-page', '.logo', '.__className', '.__variable', '.sr-only', '.reveal', '.js ', 'html:not', '.path',
-        '.disclaimer', '#contact', '.tagline', '.legal', '.foot', '.hero-banner', '.ph-label', '.bio-soon']
+        '.disclaimer', '#contact', '.tagline', '.legal', '.foot', '.hero-banner', '.ph-label', '.bio-soon',
+        '.special-', '.questionnaire', '.q-', '.pay-', '.policy', '.age-', '.booking', '.skip-link', 'dialog']
 
 def parse(block):
     """Return a list of (prelude, body_or_children). Minified CSS, so whitespace is light."""

@@ -44,7 +44,7 @@ export function dentistSchema() {
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.domain + '/',
     description:
-      'The Cronulla Dentists — a new dental practice at 13 Cronulla Street. Gentle, unhurried care for Cronulla, Woolooware, Burraneer, Greenhills Beach and the wider Sutherland Shire.',
+      'The Cronulla Dentists, a new dental practice at 13 Cronulla Street. Gentle, unhurried care for Cronulla, Woolooware, Burraneer, Greenhills Beach and the wider Sutherland Shire.',
     telephone: SITE_CONFIG.phoneE164,
     email: SITE_CONFIG.email,
     image: `${SITE_CONFIG.domain}/images/og-default.jpg`,

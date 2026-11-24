@@ -3,7 +3,7 @@ import { Inline, Nodes, nodeVisible, slugify } from '@/components/Inline';
 import { I, type IconName } from '@/components/Icons';
 
 /**
- * BLOCK 10 on every service page — the copy's detail sections.
+ * BLOCK 10 on every service page, the copy's detail sections.
  *
  * Rendered section by section down the page rather than as an accordion, so
  * nothing the client wrote is hidden behind a click (and so search engines see
@@ -14,7 +14,7 @@ import { I, type IconName } from '@/components/Icons';
  * short intro, then a run of paragraphs that each open with a bold lead-in
  * ("**We look, properly.** An examination of…"), then a closing line. A run of
  * two or more of those becomes a grid of icon cards; everything else stays as
- * prose. Nothing is reworded — only laid out.
+ * prose. Nothing is reworded, only laid out.
  */
 
 /** "**Lead-in.** rest of the sentence" → ["Lead-in.", "rest of the sentence"] */
@@ -37,7 +37,7 @@ function toBlocks(nodes: Node[]): Block[] {
     prose = [];
   };
   const flushRun = () => {
-    // A single bold lead-in is just an emphasised sentence — leave it in the prose.
+    // A single bold lead-in is just an emphasised sentence, leave it in the prose.
     if (run.length >= 2) {
       flushProse();
       out.push({ kind: 'cards', items: run });

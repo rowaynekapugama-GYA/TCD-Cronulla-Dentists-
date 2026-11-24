@@ -174,6 +174,12 @@ export function SettingsForm({ initial, isAdmin }: { initial: any; isAdmin: bool
               <Check label="Show the homepage banner" checked={doc.apePromo.bannerEnabled !== false} onChange={(bannerEnabled) => upIn('apePromo', { bannerEnabled })} help="Visitors can also hide it themselves for 7 days." />
               <Check label="Show the panel in the Book online pop-up" checked={doc.apePromo.panelEnabled !== false} onChange={(panelEnabled) => upIn('apePromo', { panelEnabled })} help="Normal booking is not affected." />
             </div>
+            <Check
+              label="Show the 15 and over line"
+              checked={doc.apePromo.ageLineEnabled === true}
+              onChange={(ageLineEnabled) => upIn('apePromo', { ageLineEnabled })}
+              help="On the dental anxiety page, next to Book Now: The Anxious Patient Experience is for patients aged 15 and over. Patients under 18 need a parent or guardian's name to book. Leave off until Dr Lorna Gladwin approves it."
+            />
             <div className="d-row">
               <TextInput label="Start date" type="date" value={doc.apePromo.startDate || ''} onChange={(startDate) => upIn('apePromo', { startDate })} help="Empty = from now." />
               <TextInput label="End date (last day shown)" type="date" value={doc.apePromo.endDate || ''} onChange={(endDate) => upIn('apePromo', { endDate })} help="Empty = no end date." />

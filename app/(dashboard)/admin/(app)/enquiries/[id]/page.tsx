@@ -37,9 +37,9 @@ export default async function EnquiryDetail({ params }: { params: Promise<{ id: 
               <a href={`mailto:${e.email}`}>{e.email}</a>
             </dd>
             <dt>Phone</dt>
-            <dd>{e.phone ? <a href={`tel:${e.phone}`}>{e.phone}</a> : '—'}</dd>
+            <dd>{e.phone ? <a href={`tel:${e.phone}`}>{e.phone}</a> : '-'}</dd>
             <dt>Message</dt>
-            <dd style={{ whiteSpace: 'pre-wrap' }}>{e.message || '—'}</dd>
+            <dd style={{ whiteSpace: 'pre-wrap' }}>{e.message || '-'}</dd>
             <dt>Page</dt>
             <dd>{e.source}</dd>
             <dt>Email notification</dt>

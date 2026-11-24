@@ -8,11 +8,11 @@ import path from 'node:path';
  *
  * Each card renders the supplied logo file when one is present in
  * `public/images/providers/`, and falls back to the styled wordmark when it is
- * not — so the layout is correct either way and dropping the files in needs no
+ * not, so the layout is correct either way and dropping the files in needs no
  * code change. Accepted extensions, in order of preference: svg, png, webp, jpg.
  *
  * Only use official logo files supplied by (or licensed from) DentiCare
- * and HICAPS — see IMAGES-NEEDED.md §6.
+ * and HICAPS, see IMAGES-NEEDED.md §6.
  */
 export interface ProviderCard {
   name: string;
@@ -42,6 +42,6 @@ export function providerCards(): ProviderCard[] {
     name: c.name,
     tagline: c.tagline,
     logo: findLogo(c.file),
-    alt: `${c.name} — ${c.tagline}`,
+    alt: `${c.name}: ${c.tagline}`,
   }));
 }

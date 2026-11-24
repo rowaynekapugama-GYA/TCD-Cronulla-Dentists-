@@ -195,7 +195,7 @@ export default function Nav({ primary, groups, featured, aboutCards, serviceCoun
       {/*
         Closing on `pathname` alone is not enough: tapping the link for the page
         you are already on (Home from the home page, "Our services" from
-        /services/) does not change the pathname, so the effect never re-runs —
+        /services/) does not change the pathname, so the effect never re-runs,
         the drawer stays open over the page AND `body { overflow: hidden }` keeps
         the scroll locked, with only the burger to get out of it. Closing on any
         tap inside the drawer covers the same-route case, plus in-page # links.

@@ -146,7 +146,7 @@ for (const [kind, list] of Object.entries(byKind).sort((a, b) => b[1].length - a
     if (seen.has(key)) continue;
     seen.add(key);
     const also = list.filter(x => x.detail === i.detail).length;
-    console.log(`   ${i.detail}${also > 1 ? `   [${also} pages]` : `   — ${i.page}${i.vp !== '-' ? ' @' + i.vp : ''}`}`);
+    console.log(`   ${i.detail}${also > 1 ? `   [${also} pages]` : `   on ${i.page}${i.vp !== '-' ? ' @' + i.vp : ''}`}`);
   }
 }
 fs.writeFileSync('audit-report.json', JSON.stringify(issues, null, 1));

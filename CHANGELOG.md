@@ -1,5 +1,32 @@
 # Changelog: The Cronulla Dentists website
 
+## 2.6.2 – 23 Nov 2026: /dental-anxiety/ matches the APE website
+
+Dr Lorna Gladwin (phone, 23 Nov 2026): the Cronulla APE page mentions things that are not on the APE
+website and its images are old. Every section was compared with the live APE site (v1.13.0).
+
+- The APE sections were already word for word and photo for photo with the APE site (v2.6.0/2.6.1).
+  One crop corrected: the "Our approach" photo (textured napkin) now sits at 50% 62%, as on the APE site.
+- Removed from the page (Cronulla only, not on the APE site): the "You are not alone in this" Cronulla
+  copy, the five numbered "in detail" sections, the Cronulla booking strip ("Opening late November 2026.
+  Book online now or give us a call", address, hours, Book online and Call buttons) and Related
+  treatments. The page's own H1, title, description, URL, canonical and schema stay. The APE site's
+  closing section ("When you are ready", Book Now to the APE booking page, utm_content=ape-page) is the
+  last section, as on the APE site. Book online and Call stay in the header and footer.
+- One line under that closing Book Now says where APE appointments are held, in the APE site's own
+  wording: "The Cronulla Dentists, 13 Cronulla Street, Cronulla NSW 2230".
+- Services page tile for the APE page: APE's armchair photo (tiles/dental-anxiety.jpg, 4:3 crop) with
+  the APE site's alt text, instead of the old stock photo. The page photo field is also the armchair.
+  Deleted: services/dental-anxiety-cronulla.jpg and tiles/dental-anxiety-cronulla.jpg (no longer used).
+- Dashboard: cms/contentFixes.ts (applyApePhotos) swaps the old tile and page photos stored in the
+  dashboard on the next build, once; a photo uploaded in the dashboard is left alone and reported.
+- "Opening late November 2026" elsewhere on the site is unchanged (waiting for the opening date).
+
+## 2.6.1 – 23 Nov 2026: v2.6.0 plus Dr Lorna Gladwin shown as Associate Dentist
+
+The APE update (2.6.0, below) together with the 2.5.1 correction, so it can go up after 2.5.1 or on
+its own in place of both.
+
 ## 2.5.1 – 23 Nov 2026: Dr Lorna Gladwin shown as Associate Dentist
 
 Alex (23 Nov 2026): Dr Lorna is an associate dentist at The Cronulla Dentists, not a principal
@@ -14,6 +41,38 @@ alongside Dr Ram.
   makes the same corrections there on the next build: her Team role, if it still says Principal, and
   the two sentences, if they still read as before. It runs once; later dashboard edits are kept, and
   any other wording that still puts her as a principal is reported in the build log.
+
+## 2.6.0 – 19 Nov 2026: APE sections in the current APE style
+
+Dr Lorna Gladwin's email of 19 Nov 2026: "update the APE bits ... as they are the old style". The APE
+parts of this site were built from the APE website as it was on 15 Oct (v1.2.5); they now match the
+current APE website (v1.12.0 content plus the v1.13.0 changes).
+
+- /dental-anxiety/ APE sections: stylesheet re-ported from the current APE site (app/ape.css, only the
+  rules this page uses), copy brought up to date word for word (content/ape.json): intro heading
+  "The Anxious Patient Experience™ (APE)", two more nervous-system items ("People you don’t know",
+  "Lack of control"), the approach text as one paragraph, "Health fund rebates are available." in the
+  cost answer, "Alex, our APE Lead, is happy to talk it through with you." / "Reach out to Alex". The
+  "What if your dental care..." band is now a two-tone quote with no photo, as on the APE site.
+- Photos: only APE's own four (armchair corner, candle and book, textured napkin, toothbrushes and
+  eucalyptus) plus Dr Lorna's current portrait. Removed the stock photos of faces and the old images:
+  home-hero-calm-smile, home-heart-aligner-smile, toothpaste-smile, understanding-approach-braces-smile,
+  brushing-demo, social-share.jpg, ape-logo.webp. The hands photo the APE site dropped is not used.
+  The Cronulla block on the page no longer shows a photo. Share image: APE's armchair image.
+- Book Now buttons on /dental-anxiety/ now carry utm_content=ape-page (still open the APE booking page
+  in a new tab). The About menu's APE card uses the armchair photo.
+- APE fonts (Playfair Display, Figtree) are no longer preloaded, like the launch banner's Figtree.
+- Book online pop-up: the APE panel's logo is now the rounded APE logo at 48 px. Wording, dates,
+  switches and tracking unchanged; the banner is unchanged.
+- New switch "Show the 15 and over line" (Site Settings > APE promotion, off): shows "The Anxious
+  Patient Experience is for patients aged 15 and over. Patients under 18 need a parent or guardian's
+  name to book." next to the first and last Book Now on /dental-anxiety/. Waiting for Lorna's approval.
+  Migration 20261119_070119_ape_age_line (additive, off by default, safe to run twice).
+- House rule, no em dashes: the 106 left in the repo (code comments, IMAGES-NEEDED.md, the dashboard's
+  empty-field placeholder) are now commas, colons or hyphens. Two of them reached the pages: the
+  DentiCare and HICAPS logo alt text ("DentiCare: Payment plans", "HICAPS: Claim on the spot") and the
+  schema description ("The Cronulla Dentists, a new dental practice at 13 Cronulla Street..."). Nothing
+  else on the site changes.
 
 ## 2.5.0 – 18 Nov 2026: APE launch banner and Book Now panel
 

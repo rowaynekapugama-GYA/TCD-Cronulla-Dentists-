@@ -10,7 +10,7 @@
 import { SITE_CONFIG } from '@/site.config';
 
 export type ApePromo = typeof SITE_CONFIG.apePromo;
-export type PromoPlacement = 'banner' | 'book-now-tab';
+export type PromoPlacement = 'banner' | 'book-now-tab' | 'ape-page' | 'homepage-link';
 
 /** localStorage key: the time (ms) until which the dismissed banner stays hidden. */
 export const DISMISS_KEY = 'tcd-ape-banner-hidden-until';

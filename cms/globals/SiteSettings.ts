@@ -178,6 +178,13 @@ export const SiteSettings: GlobalConfig = {
                   ],
                 },
                 {
+                  name: 'ageLineEnabled',
+                  type: 'checkbox',
+                  label: 'Show the 15 and over line',
+                  defaultValue: false,
+                  admin: { description: 'On the dental anxiety page, next to Book Now: "The Anxious Patient Experience is for patients aged 15 and over. Patients under 18 need a parent or guardian\'s name to book." Waiting for Dr Lorna Gladwin\'s approval.' },
+                },
+                {
                   type: 'row',
                   fields: [
                     { name: 'startDate', type: 'text', label: 'Start date', validate: apeDate, admin: { placeholder: '2026-11-18', description: 'YYYY-MM-DD. Empty = from now.' } },

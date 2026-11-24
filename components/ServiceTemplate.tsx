@@ -11,7 +11,7 @@ import { RelatedServices } from '@/components/RelatedServices';
 import { DetailSections } from '@/components/DetailSections';
 
 function cyanSpan(h2: string) {
-  // One word gets the cyan span treatment — the location word where present.
+  // One word gets the cyan span treatment, the location word where present.
   const words = h2.split(' ');
   const idx = words.findIndex((w) => /^cronulla$/i.test(w.replace(/[^a-z]/gi, '')));
   const i = idx >= 0 ? idx : words.length - 1;

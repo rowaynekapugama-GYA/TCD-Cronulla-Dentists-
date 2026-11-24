@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { livePages, canonical, posts, postRoute, BLOG_ROUTE } from '@/lib/content';
 import { bookingOpen } from '@/lib/cta';
 
-/** Live pages only — gated pages are excluded while their flag is OFF. */
+/** Live pages only, gated pages are excluded while their flag is OFF. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const pages = livePages()

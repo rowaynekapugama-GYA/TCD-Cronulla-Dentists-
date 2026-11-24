@@ -62,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           GA4 inlined deliberately rather than imported from components/Gtm.tsx.
           The three-file chain (layout -> Gtm -> site.config) meant a partial
           upload could leave layout.tsx importing an export that did not exist
-          yet, which fails the build — and a failed build keeps serving the
+          yet, which fails the build, and a failed build keeps serving the
           previous deployment, so the site looked unchanged rather than broken.
           This version needs nothing but SITE_CONFIG.ga4Id. Renders only when
           that is set, and exactly once: a second copy of gtag.js on the page

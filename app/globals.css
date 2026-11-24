@@ -1,5 +1,5 @@
 /* =====================================================================
-   The Cronulla Dentists — design system
+   The Cronulla Dentists: design system
    Extracted from the approved landing page (cronulladentistslanding.html)
    Fonts are loaded via next/font and exposed as --display / --body.
    ===================================================================== */
@@ -13,7 +13,7 @@
   --sand:#F7F5F1;
   --white:#ffffff;
   --grey:#5C6B7A;
-  --grey-text:#4A5866; /* darkened body grey — passes AA on sand at small sizes */
+  --grey-text:#4A5866; /* darkened body grey, passes AA on sand at small sizes */
   --radius-card:26px;
   --radius-photo:24px;
   --shadow-photo:0 28px 60px rgba(14,53,102,0.22);
@@ -101,7 +101,7 @@ h3.h-display{font-size:clamp(1.25rem,2vw,1.55rem);letter-spacing:-0.01em}
   color:var(--navy);text-decoration:none;transition:color 0.3s;white-space:nowrap;
   display:inline-flex;align-items:center;gap:0.35rem;
 }
-/* button reset for the two dropdown triggers only — keep it off .nav-cta,
+/* button reset for the two dropdown triggers only, keep it off .nav-cta,
    whose cyan fill would otherwise be overridden on specificity */
 .nav-trigger{background:none;border:0;cursor:pointer;padding:0}
 .nav-links a:hover,.nav-trigger:hover,.nav-trigger.open{color:var(--cyan)}
@@ -113,7 +113,7 @@ h3.h-display{font-size:clamp(1.25rem,2vw,1.55rem);letter-spacing:-0.01em}
   box-shadow:0 6px 18px rgba(38,184,219,0.35);transition:background 0.3s, transform 0.3s;
 }
 .nav-links a.nav-cta:hover{background:var(--navy);color:var(--white);transform:translateY(-2px)}
-/* Phone number beside the Book online pill (desktop only — hidden with the other
+/* Phone number beside the Book online pill (desktop only, hidden with the other
    plain links at ≤1060px, where the fixed bottom bar carries Call instead). */
 .nav-links a.nav-call{gap:0.45rem;font-weight:600;letter-spacing:0.02em}
 .nav-links a.nav-call svg{width:15px;height:15px;stroke:var(--cyan);flex-shrink:0}
@@ -123,7 +123,7 @@ h3.h-display{font-size:clamp(1.25rem,2vw,1.55rem);letter-spacing:-0.01em}
 
 /* ---- dropdown panel (image cards) ---- */
 /* Positioned with left:0 rather than left:50% + translateX(-50%). The panel is
-   already the full width of the nav, so the result is identical — but the open
+   already the full width of the nav, so the result is identical, but the open
    animation (fadeUp) sets `transform`, and an animation's transform REPLACES the
    element's own for its whole duration. With the translateX version the panel
    dropped its centring for 0.26s on every open, rendering ~570px to the right,
@@ -196,7 +196,7 @@ h3.h-display{font-size:clamp(1.25rem,2vw,1.55rem);letter-spacing:-0.01em}
 .mnav .mnav-call{margin-top:0.7rem;background:transparent;color:var(--navy);border:1.5px solid rgba(14,53,102,0.2)}
 .mnav .mnav-meta{margin-top:1.6rem;font-size:0.84rem;color:var(--grey-text);line-height:1.9}
 /* Phone and email are the two things a visitor most often opens this menu to
-   tap. As plain inline links they were 19px tall — technically exempt from the
+   tap. As plain inline links they were 19px tall, technically exempt from the
    WCAG target-size rule as inline text, but a poor thumb target all the same.
    inline-block plus vertical padding takes them past 44px without changing how
    the block reads. */
@@ -688,7 +688,7 @@ a.practice:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(14,53,10
   .detail-nav a{min-height:48px}
 }
 
-/* map embed — iframe fills the rounded panel; links sit beneath */
+/* map embed, iframe fills the rounded panel; links sit beneath */
 .map iframe{width:100%;height:100%;border:0;display:block;position:absolute;inset:0}
 .map-block .map{position:relative}
 .map-links{margin-top:0.8rem;font-family:var(--display);font-size:0.82rem;font-weight:500;text-align:center}
@@ -700,7 +700,7 @@ a.practice:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(14,53,10
    Always on screen in the mobile layout (same ≤1060px breakpoint as the burger
    nav). The body gets matching bottom padding so the bar never sits over the last
    lines of the footer. Sits below the drawer (999) and nav (1000), so opening the
-   menu covers it rather than the other way round — the drawer has its own
+   menu covers it rather than the other way round, the drawer has its own
    Book online and Call buttons. */
 .mobile-bar{display:none}
 @media (max-width:1060px){
@@ -793,10 +793,10 @@ html[data-ape-promo-leaving] .ape-promo{opacity:0;transition:opacity 0.2s ease}
 @media (prefers-reduced-motion:reduce){html[data-ape-promo="on"] .ape-promo{animation:none}html[data-ape-promo-leaving] .ape-promo{transition:none}}
 
 .loc-ape{margin-top:1.4rem;display:flex;gap:0.95rem;align-items:flex-start;background:#F7F4EF;border:1px solid #E7DFD4;border-radius:16px;padding:1.05rem 1.15rem;color:#284858;font-family:var(--ape-promo-sans),-apple-system,'Segoe UI',sans-serif}
-.loc-ape-logo{width:44px;height:44px;border-radius:10px;flex-shrink:0;display:block}
+.loc-ape-logo{width:48px;height:48px;border-radius:12px;flex-shrink:0;display:block}
 .loc-ape-title{margin:0 0 0.3rem;font-size:0.98rem;font-weight:600;color:#284858;line-height:1.3}
 .loc-ape-text{margin:0 0 0.8rem;font-size:0.88rem;line-height:1.55;color:#4E5F6A}
 .loc-ape-btn{display:inline-flex;align-items:center;background:#D2B490;color:#284858;border-radius:100px;padding:0.55rem 1.15rem;font-size:0.86rem;font-weight:600;text-decoration:none;transition:background 0.2s ease}
 .loc-ape-btn:hover{background:#C7A783}
 .loc-ape-btn:focus-visible{outline:2px solid #284858;outline-offset:2px}
-@media (max-width:560px){.loc-ape{padding:0.95rem;gap:0.75rem}.loc-ape-logo{width:36px;height:36px}}
+@media (max-width:560px){.loc-ape{padding:0.95rem;gap:0.75rem}}

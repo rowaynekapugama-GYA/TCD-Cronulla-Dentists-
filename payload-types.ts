@@ -1694,6 +1694,10 @@ export interface SiteSetting {
     bannerEnabled?: boolean | null;
     panelEnabled?: boolean | null;
     /**
+     * On the dental anxiety page, next to Book Now: "The Anxious Patient Experience is for patients aged 15 and over. Patients under 18 need a parent or guardian's name to book." Waiting for Dr Lorna Gladwin's approval.
+     */
+    ageLineEnabled?: boolean | null;
+    /**
      * YYYY-MM-DD. Empty = from now.
      */
     startDate?: string | null;
@@ -1870,6 +1874,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         bannerEnabled?: T;
         panelEnabled?: T;
+        ageLineEnabled?: T;
         startDate?: T;
         endDate?: T;
         openDate?: T;

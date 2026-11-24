@@ -6,7 +6,7 @@ import manifest from './image-manifest.json';
  * Why this exists. On Vercel every <Image> is served through the image
  * optimizer as `/_next/image?url=<source>&w=…&q=…`, and the optimized result is
  * cached against that key. The key contains the SOURCE PATH, not the source
- * bytes — so replacing `public/images/services/x.jpg` with a different photo at
+ * bytes, so replacing `public/images/services/x.jpg` with a different photo at
  * the same filename leaves the key unchanged, and the CDN keeps serving the old
  * picture after the redeploy. Browsers do the same thing one layer up. That is
  * exactly the "I replaced the image but the site still shows the old one"
@@ -15,7 +15,7 @@ import manifest from './image-manifest.json';
  *
  * Hashing the file contents into the query string makes the key move whenever
  * the picture moves, so a swap invalidates itself. An unchanged file keeps its
- * hash and therefore keeps its cache — no cost to the pages we did not touch.
+ * hash and therefore keeps its cache, no cost to the pages we did not touch.
  *
  * The hashes come from a generated manifest rather than reading the filesystem
  * here, so this module works unchanged in client components (Nav) as well as

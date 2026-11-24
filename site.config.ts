@@ -20,7 +20,7 @@ const DEFAULTS = {
 
   /** 'pre-opening' → EOI/register CTAs + countdown. 'open' → Book/Call CTAs. */
   mode: 'pre-opening' as SiteMode,
-  /** Partial ISO date while only the month is confirmed — restore the full
+  /** Partial ISO date while only the month is confirmed, restore the full
    *  YYYY-MM-DD (and openingDateTime, which re-enables the countdown) once the
    *  client locks the exact day. */
   openingDate: '2026-11',
@@ -43,7 +43,7 @@ const DEFAULTS = {
   /**
    * Logo lockup, used by the nav, the footer and the Dentist schema.
    * `src` is the file in /public; `width`/`height` are its intrinsic pixel size,
-   * used for the aspect ratio only — update both if you swap in a differently
+   * used for the aspect ratio only, update both if you swap in a differently
    * proportioned file. Rendered heights live in app/globals.css
    * (`.nav-brand img` / `.footer-logo img`) because they change per breakpoint.
    */
@@ -58,7 +58,7 @@ const DEFAULTS = {
   // ---- TODO values (swap when supplied) ----
   /**
    * Core Practice online booking. Setting this is what switches every CTA on the
-   * site from "Register your interest" to "Book online" + "Call" — see lib/cta.ts.
+   * site from "Register your interest" to "Book online" + "Call", see lib/cta.ts.
    * Clear it to go back to the expression-of-interest flow.
    */
   bookingUrl: 'https://www.corepractice.is/practices/tcd/the-cronulla-dentists#/',
@@ -91,7 +91,7 @@ const DEFAULTS = {
     '&output=embed',
   /** The practice's Google Business Profile share link (from the client). */
   gbpShareUrl: 'https://share.google/SLFCaIODkAf6DOcKH',
-  /** Parking section on /parking-information/ — fill from the client's own knowledge of the site. Empty → section hidden. */
+  /** Parking section on /parking-information/, fill from the client's own knowledge of the site. Empty → section hidden. */
   parkingNotes: [] as string[],
   /** Shown at the top of the privacy policy once the client publishes it. Empty → hidden. */
   privacyLastUpdated: '',
@@ -129,7 +129,7 @@ const DEFAULTS = {
       familyName: 'Gladwin',
       title: 'Associate Dentist', // Alex, 23 Nov 2026: Dr Lorna is an associate dentist at Cronulla, not a principal
       image: '/images/team-lorna.jpg',
-      sameAs: '', // none supplied — omitted from the schema when empty
+      sameAs: '', // none supplied, omitted from the schema when empty
       alumniOf: 'University of Sheffield',
       credentials: ['Bachelor of Dental Surgery, University of Sheffield (2019)'],
       knowsAbout: ['Restorative Dentistry', 'Endodontics', 'Root Canal Therapy', 'General Dentistry', 'Dental Anxiety Care'],
@@ -177,6 +177,8 @@ const DEFAULTS = {
   apePromo: {
     bannerEnabled: true,
     panelEnabled: true,
+    /** "15 and over" line on /dental-anxiety/ (v2.6.0). Off until Dr Lorna Gladwin approves the wording. */
+    ageLineEnabled: false,
     startDate: '2026-11-18',
     endDate: '2026-12-16',
     /** The panel says "opening 2 December" before this date and "now available" from it. */

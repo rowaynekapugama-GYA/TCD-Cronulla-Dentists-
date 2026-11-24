@@ -104,7 +104,7 @@ function AboutPage({ page, crumbs }: { page: ProsePage; crumbs: { name: string; 
         </div>
       </section>
 
-      {/* Family / Our practices — approved landing-page copy */}
+      {/* Family / Our practices, approved landing-page copy */}
       <section className="section band-dark" id="family" aria-labelledby="family-heading">
         <div className="section-head">
           <span className="kicker">One family, two practices</span>
